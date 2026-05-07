@@ -679,35 +679,33 @@
       <!-- Other article pills (shown when current Q is one of the AI-generated pills) -->
       <div id="ai-other-pills" class="hidden flex-col gap-2"></div>
 
-      <!-- Input section (Figma: 370:7583 gradient rounded-100px p=12) -->
-      <div class="w-full rounded-[100px] p-3 flex flex-col"
-        style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%)">
-        <div class="flex gap-2 items-stretch w-full">
-          <!-- Input field (Figma: 370:7585 bg-white border-#2eb76b rounded-40px px=24 py=4) -->
-          <div class="flex-1 flex items-center">
-            <input id="ai-input" type="text"
-              placeholder="換你問 Manager AI..."
-              class="w-full bg-white border border-[#2eb76b] rounded-[40px] px-6 py-1.5 text-[16px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.8)] focus:outline-none focus:border-mt-bd transition-colors"
-              onkeydown="if(event.key==='Enter') submitAI()" />
-          </div>
-          <!-- Send btn (Figma: 370:7587 bg-#217446 rounded-40px px=28 py=8) -->
-          <button onclick="submitAI()"
-            class="bg-[#217446] text-white font-semibold text-[16px] tracking-[0.64px] px-7 py-2 rounded-[40px] whitespace-nowrap cursor-pointer hover:bg-[#1a5e38] transition-colors shrink-0">
-            送出
-          </button>
-        </div>
-      </div>
-
-      <!-- Quota hint — updated by updateQuotaHint() -->
-      <p id="ai-quota-hint" class="text-[13px] text-center w-full text-gray-400"></p>
-
-      <!-- Disclaimer (Figma: 370:7590 #6b6b6b 14px center) -->
-      <p class="text-[#6b6b6b] text-[14px] leading-none text-center w-full">
-        ⚠️ 內容由 AI 生成，內容請勿輸入機密資料，資料具時效性限制，請自行判斷資訊準確性。
-      </p>
+      <!-- Bottom spacer — prevents content from hiding behind the sticky input bar -->
+      <div class="h-36"></div>
 
     </div><!-- /main content -->
   </div><!-- /page body -->
+
+  <!-- ── Sticky bottom input bar ── -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 bg-[#f1f5f9] border-t border-gray-200 px-6 py-4 flex flex-col items-center gap-1.5">
+    <div class="w-full max-w-[720px] rounded-[100px] p-3"
+      style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%)">
+      <div class="flex gap-2 items-center w-full">
+        <input id="ai-input" type="text"
+          placeholder="換你問 Manager AI..."
+          class="flex-1 bg-white border border-[#2eb76b] rounded-[40px] px-6 py-1.5 text-[16px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.8)] focus:outline-none focus:border-mt-bd transition-colors"
+          onkeydown="if(event.key==='Enter') submitAI()"
+          onfocus="this.select()" />
+        <button onclick="submitAI()"
+          class="bg-[#217446] text-white font-semibold text-[16px] tracking-[0.64px] px-7 py-2 rounded-[40px] whitespace-nowrap cursor-pointer hover:bg-[#1a5e38] transition-colors shrink-0">
+          送出
+        </button>
+      </div>
+    </div>
+    <p id="ai-quota-hint" class="text-[13px] text-center text-gray-400"></p>
+    <p class="text-[#6b6b6b] text-[12px] text-center">
+      ⚠️ 內容由 AI 生成，請勿輸入機密資料，資料具時效性，請自行判斷準確性。
+    </p>
+  </div>
 </div><!-- /pg-ai -->
 
 
