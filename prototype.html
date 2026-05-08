@@ -1126,32 +1126,53 @@ function renderSidebar() {
 
 
 /* ══════════════════════════════════════
-   QUOTA HINT (below input area)
+   QUOTA HINT (dot indicators)
 ══════════════════════════════════════ */
+function quotaDotsHTML(total, remain) {
+  /* isWarning only when member is down to last dot (guest only has 1 total, not a warning state) */
+  const isWarning = remain === 1 && total > 1;
+  let html = '<span class="inline-flex items-center gap-[5px]">';
+  for (let i = 0; i < total; i++) {
+    const filled = i < remain;
+    const cls = !filled
+      ? 'bg-gray-300'
+      : isWarning ? 'bg-red-400' : 'bg-[#217446]';
+    html += `<span class="inline-block w-[10px] h-[10px] rounded-full ${cls} transition-colors duration-300"></span>`;
+  }
+  html += '</span>';
+  return html;
+}
+
 function updateQuotaHint() {
   const el = document.getElementById('ai-quota-hint');
   if (!el) return;
 
-  if (isLoggedIn) {
-    const remain = Math.max(0, MAX_MEMBER - memberCount);
-    el.innerHTML = remain > 0
-      ? `<span class="text-[#217446]">今日剩餘 <strong>${remain}</strong> 次提問機會</span>`
-      : `<span class="text-red-400">今日次數已用完，明日重置</span>`;
+  const total    = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
+  const used     = isLoggedIn ? memberCount : guestCount;
+  const remain   = Math.max(0, total - used);
+  const exhausted = remain === 0;
+  const isWarning = remain === 1 && total > 1;
+  const dots     = quotaDotsHTML(total, remain);
+
+  let label = '';
+  if (exhausted) {
+    label = `<span class="text-gray-400">今日已用完，明日重置</span>`;
+  } else if (isWarning) {
+    const loginHint = !isLoggedIn
+      ? ` · <button onclick="openLoginModal()" class="text-[#217446] underline cursor-pointer">登入解鎖更多</button>`
+      : '';
+    label = `<span class="text-red-400 font-medium">最後 1 次${loginHint}</span>`;
+  } else if (!isLoggedIn && used === 0) {
+    label = `<span class="text-gray-400">訪客每日 ${MAX_GUEST} 次免費提問</span>`;
   } else {
-    const remain = Math.max(0, MAX_GUEST - guestCount);
-    const colour = remain <= 1 ? 'text-red-400' : 'text-gray-400';
-    if (guestCount === 0) {
-      el.innerHTML = `<span class="text-gray-400">訪客每日 ${MAX_GUEST} 次免費提問</span>`;
-    } else {
-      el.innerHTML = `<span class="${colour}">剩餘 <strong>${remain}</strong> 次訪客提問機會 ·
-        <button onclick="openLoginModal()" class="text-[#217446] underline cursor-pointer">登入解鎖更多</button></span>`;
-    }
+    label = `<span class="${isLoggedIn ? 'text-[#217446]' : 'text-gray-500'}">今日剩餘 <strong>${remain}</strong> 次</span>`;
   }
 
-  // Disable input when quota is 0
+  el.innerHTML = `<span class="inline-flex items-center gap-2">${dots}${label}</span>`;
+
+  /* Disable input when exhausted */
   const inp = document.getElementById('ai-input');
   const btn = document.querySelector('#pg-ai button[onclick="submitAI()"]');
-  const exhausted = (!isLoggedIn && guestCount >= MAX_GUEST) || (isLoggedIn && memberCount >= MAX_MEMBER);
   if (inp) {
     inp.disabled = exhausted;
     inp.placeholder = exhausted ? '今日提問次數已達上限' : '換你問 Manager AI...';
