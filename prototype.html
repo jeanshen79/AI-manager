@@ -668,7 +668,7 @@
         </button>
 
         <!-- Sources (Figma: 369:7526 border-t #217446 py=12 gap=8) -->
-        <div class="border-t border-[#217446] pt-3 flex flex-col gap-2 w-full">
+        <div id="ai-sources-wrapper" class="border-t border-[#217446] pt-3 flex flex-col gap-2 w-full">
           <p class="font-semibold text-[16px] text-black leading-[2] whitespace-nowrap">參考來源</p>
           <div id="ai-sources" class="flex flex-col gap-2">
             <!-- Populated by JS -->
@@ -686,17 +686,20 @@
   </div><!-- /page body -->
 
   <!-- ── Sticky bottom input bar ── -->
-  <div class="fixed bottom-0 left-0 right-0 z-40 bg-[#f1f5f9] border-t border-gray-200 px-6 py-4 flex flex-col items-center gap-1.5">
-    <div class="w-full max-w-[720px] rounded-[100px] p-3"
+  <div id="ai-sticky-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-[#f1f5f9] border-t border-gray-200 px-6 py-3 flex flex-col items-center gap-1.5 translate-y-full transition-transform duration-300 ease-in-out">
+<div class="w-full max-w-[720px] rounded-[100px] p-3"
       style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%)">
-      <div class="flex gap-2 items-center w-full">
+      <div class="flex gap-2 items-center w-full bg-white border border-[#2eb76b] rounded-[40px] pl-3 pr-2 py-1">
+        <span class="flex items-center gap-1 text-[12px] text-[#217446] font-medium bg-[#e5f5eb] px-3 py-1 rounded-full whitespace-nowrap shrink-0 select-none">
+          📚 全站文章庫
+        </span>
         <input id="ai-input" type="text"
-          placeholder="換你問 Manager AI..."
-          class="flex-1 bg-white border border-[#2eb76b] rounded-[40px] px-6 py-1.5 text-[16px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.8)] focus:outline-none focus:border-mt-bd transition-colors"
+          placeholder="輸入任何管理或職涯問題..."
+          class="flex-1 bg-transparent text-[15px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.6)] focus:outline-none"
           onkeydown="if(event.key==='Enter') submitAI()"
           onfocus="this.select()" />
         <button onclick="submitAI()"
-          class="bg-[#217446] text-white font-semibold text-[16px] tracking-[0.64px] px-7 py-2 rounded-[40px] whitespace-nowrap cursor-pointer hover:bg-[#1a5e38] transition-colors shrink-0">
+          class="bg-[#217446] text-white font-semibold text-[15px] tracking-[0.64px] px-6 py-2 rounded-[40px] whitespace-nowrap cursor-pointer hover:bg-[#1a5e38] transition-colors shrink-0">
           送出
         </button>
       </div>
@@ -998,6 +1001,7 @@ let historyItems = [
   '為什麼領導者需要擁抱不確定性？有哪些具體做法？',
 ];
 let activeIdx = 0;
+let _stickyScrollFn = null;
 
 
 /* ══════════════════════════════════════
@@ -1175,7 +1179,7 @@ function updateQuotaHint() {
   const btn = document.querySelector('#pg-ai button[onclick="submitAI()"]');
   if (inp) {
     inp.disabled = exhausted;
-    inp.placeholder = exhausted ? '今日提問次數已達上限' : '換你問 Manager AI...';
+    inp.placeholder = exhausted ? '今日提問次數已達上限' : '輸入任何管理或職涯問題...';
     inp.style.opacity = exhausted ? '0.5' : '1';
   }
   if (btn) { btn.disabled = exhausted; btn.style.opacity = exhausted ? '0.5' : '1'; }
@@ -1229,6 +1233,23 @@ function showPage(id) {
 
 function goArticle() { showPage('pg-article'); }
 
+function initStickyBarScroll() {
+  const bar = document.getElementById('ai-sticky-bar');
+  const sentinel = document.getElementById('ai-sources-wrapper');
+  if (!bar || !sentinel) return;
+
+  if (_stickyScrollFn) window.removeEventListener('scroll', _stickyScrollFn);
+
+  bar.classList.add('translate-y-full');
+
+  _stickyScrollFn = function() {
+    const rect = sentinel.getBoundingClientRect();
+    bar.classList.toggle('translate-y-full', rect.bottom >= window.innerHeight);
+  };
+
+  window.addEventListener('scroll', _stickyScrollFn, { passive: true });
+}
+
 function goAI(q) {
   const question = q || '為什麼領導者需要擁抱不確定性？有哪些具體做法？';
   pushHistory(question);
@@ -1236,6 +1257,7 @@ function goAI(q) {
   renderSidebar();
   updateQuotaHint();
   showPage('pg-ai');
+  initStickyBarScroll();
 }
 
 function pushHistory(q) {
@@ -1328,8 +1350,8 @@ function submitAI() {
     loadAnswer(q);
     inp.disabled = false;
     inp.focus();
-    /* Re-check quota after answer loads */
     updateQuotaHint();
+    initStickyBarScroll();
   }, 1600);
 }
 
