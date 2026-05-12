@@ -1,0 +1,430 @@
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   經理人 × 八分生活 Design Token System
+   ============================================================ */
+
+:root {
+  /* ── Base Font Size ── */
+  --font-size: 16px;
+
+  /* ── Shadcn / Radix UI compatibility ── */
+  --background: #ffffff;
+  --foreground: #1d1b1b;
+  --card: #ffffff;
+  --card-foreground: #1d1b1b;
+  --popover: #ffffff;
+  --popover-foreground: #1d1b1b;
+  --primary: #217446;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f0f0;
+  --secondary-foreground: #1d1b1b;
+  --muted: #f5f5f5;
+  --muted-foreground: #717171;
+  --accent: #e8dccf;
+  --accent-foreground: #a78662;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: #e8e8e8;
+  --input: transparent;
+  --input-background: #f5f5f5;
+  --switch-background: #cbced4;
+  --ring: #217446;
+  --radius: 0.5rem;
+
+  /* ── Chart Colors ── */
+  --chart-1: #217446;
+  --chart-2: #3ca9e3;
+  --chart-3: #a78662;
+  --chart-4: #73ffb2;
+  --chart-5: #cab27c;
+
+  /* ── Sidebar ── */
+  --sidebar: #f8f8f6;
+  --sidebar-foreground: #1d1b1b;
+  --sidebar-primary: #217446;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #e8dccf;
+  --sidebar-accent-foreground: #a78662;
+  --sidebar-border: #e8e8e8;
+  --sidebar-ring: #217446;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     COLOR TOKENS — Brand Palette
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* 經理人 主綠 (MT Green) */
+  --color-mt-green-50:  #edf7f1;
+  --color-mt-green-100: #d0ecdc;
+  --color-mt-green-200: #a3d9bc;
+  --color-mt-green-300: #6ec29a;
+  --color-mt-green-400: #3ea97a;
+  --color-mt-green-500: #217446;   /* 主色 Brand Primary */
+  --color-mt-green-600: #1a5c37;
+  --color-mt-green-700: #144529;
+  --color-mt-green-800: #0d2e1b;
+  --color-mt-green-900: #07170e;
+
+  /* 深色主題螢光綠 (Neon Green) */
+  --color-neon-green:   #73ffb2;
+  --color-neon-green-dim: rgba(115, 255, 178, 0.15);
+
+  /* 八分生活 棕色 (8min Brown) */
+  --color-8m-brown-50:  #f9f5ef;
+  --color-8m-brown-100: #f0e8d9;
+  --color-8m-brown-200: #e0d0b4;
+  --color-8m-brown-300: #cab27c;
+  --color-8m-brown-400: #b89468;
+  --color-8m-brown-500: #a78662;   /* 八分主棕 Brand Secondary A */
+  --color-8m-brown-600: #866952;
+  --color-8m-brown-700: #644e3c;
+  --color-8m-brown-800: #433428;
+  --color-8m-brown-900: #221a14;
+
+  /* 八分生活 藍色 (8min Blue) */
+  --color-8m-blue-50:  #eaf6fd;
+  --color-8m-blue-100: #c9eaf9;
+  --color-8m-blue-200: #94d5f3;
+  --color-8m-blue-300: #5dbfec;
+  --color-8m-blue-400: #3ca9e3;   /* 八分主藍 Brand Secondary B */
+  --color-8m-blue-500: #2490cc;
+  --color-8m-blue-600: #1b72a3;
+  --color-8m-blue-700: #13547a;
+  --color-8m-blue-800: #0c3752;
+  --color-8m-blue-900: #061b29;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     COLOR TOKENS — Neutral Scale
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --color-neutral-0:   #ffffff;
+  --color-neutral-50:  #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #eeeeee;
+  --color-neutral-300: #e8e8e8;
+  --color-neutral-400: #cccccc;
+  --color-neutral-500: #afafaf;
+  --color-neutral-600: #717171;
+  --color-neutral-700: #4a4a4a;
+  --color-neutral-800: #2e2e2e;
+  --color-neutral-900: #1d1b1b;   /* 主文字色 */
+  --color-neutral-950: #111111;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     COLOR TOKENS — Semantic
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --color-text-primary:   #1d1b1b;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted:     #717171;
+  --color-text-disabled:  #afafaf;
+  --color-text-inverse:   #ffffff;
+  --color-text-brand:     #217446;
+  --color-text-8m-brown:  #a78662;
+  --color-text-8m-blue:   #3ca9e3;
+
+  --color-surface-page:   #ffffff;
+  --color-surface-card:   #ffffff;
+  --color-surface-subtle: #f5f5f5;
+  --color-surface-hover:  #f0f0f0;
+
+  --color-border-default: #e8e8e8;
+  --color-border-strong:  #cccccc;
+  --color-border-brand:   #217446;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     DARK THEME — 深色主題 (深底 + 螢光綠)
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --color-dark-bg-900:  #0d1a13;  /* 最深底色 */
+  --color-dark-bg-800:  #122019;
+  --color-dark-bg-700:  #172a1f;
+  --color-dark-bg-600:  #1e3829;
+  --color-dark-bg-500:  #264833;
+  --color-dark-surface: #1a2820;  /* 深色卡片/區塊底色 */
+  --color-dark-border:  rgba(115, 255, 178, 0.2);
+  --color-dark-text:    #ffffff;
+  --color-dark-text-dim: rgba(255, 255, 255, 0.65);
+  --color-dark-accent:  #73ffb2;  /* 螢光綠強調色 */
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TYPOGRAPHY — Font Families
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --font-family-body:    'Noto Sans TC', 'Inter', sans-serif;
+  --font-family-latin:   'Inter', 'Noto Sans TC', sans-serif;
+  --font-family-numeric: 'Fira Sans Condensed', 'Inter', sans-serif;
+
+  /* Font Weight */
+  --font-weight-light:    300;
+  --font-weight-normal:   400;
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
+
+  /* Font Scale */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.8125rem; /* 13px */
+  --text-base: 1rem;      /* 16px */
+  --text-md:   1.0625rem; /* 17px */
+  --text-lg:   1.125rem;  /* 18px */
+  --text-xl:   1.25rem;   /* 20px */
+  --text-2xl:  1.375rem;  /* 22px */
+  --text-3xl:  1.5rem;    /* 24px */
+  --text-4xl:  1.75rem;   /* 28px */
+  --text-5xl:  2rem;      /* 32px */
+  --text-6xl:  2.5rem;    /* 40px */
+
+  /* Line Height */
+  --leading-tight:  1.3;
+  --leading-snug:   1.4;
+  --leading-normal: 1.5;
+  --leading-relaxed:1.6;
+  --leading-loose:  1.8;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SPACING
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --space-0:   0px;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-7:   28px;
+  --space-8:   32px;
+  --space-9:   36px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-14:  56px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+
+  /* Section Padding */
+  --section-padding-mobile:  16px;
+  --section-padding-tablet:  24px;
+  --section-padding-desktop: 40px;
+  --section-gap-mobile:  24px;
+  --section-gap-tablet:  40px;
+  --section-gap-desktop: 64px;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BORDER RADIUS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --radius-none: 0px;
+  --radius-xs:   2px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
+  --radius-xl:   12px;
+  --radius-2xl:  16px;
+  --radius-3xl:  24px;
+  --radius-full: 9999px;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SHADOWS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --shadow-xs:  0 1px 2px rgba(0,0,0,0.06);
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
+  --shadow-md:  0 2px 8px rgba(0,0,0,0.10);
+  --shadow-lg:  0 4px 16px rgba(0,0,0,0.12);
+  --shadow-xl:  0 8px 32px rgba(0,0,0,0.14);
+  --shadow-2xl: 0 16px 48px rgba(0,0,0,0.18);
+  --shadow-brand: 0 4px 16px rgba(33,116,70,0.20);
+  --shadow-neon:  0 0 20px rgba(115,255,178,0.30);
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BORDERS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --border-width-thin:   1px;
+  --border-width-base:   1px;
+  --border-width-medium: 2px;
+  --border-width-thick:  3px;
+  --border-color-default: #e8e8e8;
+  --border-color-strong:  #cccccc;
+  --border-color-brand:   #217446;
+  --border-color-8m:      #a78662;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     Z-INDEX
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --z-below:    -1;
+  --z-base:      0;
+  --z-raised:    10;
+  --z-dropdown:  100;
+  --z-sticky:    200;
+  --z-overlay:   300;
+  --z-modal:     400;
+  --z-popover:   500;
+  --z-toast:     600;
+  --z-tooltip:   700;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     LAYOUT / BREAKPOINTS
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --breakpoint-mobile:  375px;
+  --breakpoint-tablet:  768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide:    1280px;
+  --breakpoint-full:    1440px;
+
+  --container-max-mobile:  100%;
+  --container-max-tablet:  720px;
+  --container-max-desktop: 960px;
+  --container-max-wide:    1200px;
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TRANSITION
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Tailwind v4 @theme inline mapping
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@theme inline {
+  /* Shadcn compat */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Brand Colors */
+  --color-mt-green-50:  var(--color-mt-green-50);
+  --color-mt-green-100: var(--color-mt-green-100);
+  --color-mt-green-200: var(--color-mt-green-200);
+  --color-mt-green-300: var(--color-mt-green-300);
+  --color-mt-green-400: var(--color-mt-green-400);
+  --color-mt-green-500: var(--color-mt-green-500);
+  --color-mt-green-600: var(--color-mt-green-600);
+  --color-mt-green-700: var(--color-mt-green-700);
+  --color-mt-green-800: var(--color-mt-green-800);
+  --color-mt-green-900: var(--color-mt-green-900);
+  --color-neon-green:   var(--color-neon-green);
+  --color-8m-brown-50:  var(--color-8m-brown-50);
+  --color-8m-brown-100: var(--color-8m-brown-100);
+  --color-8m-brown-200: var(--color-8m-brown-200);
+  --color-8m-brown-300: var(--color-8m-brown-300);
+  --color-8m-brown-400: var(--color-8m-brown-400);
+  --color-8m-brown-500: var(--color-8m-brown-500);
+  --color-8m-brown-600: var(--color-8m-brown-600);
+  --color-8m-brown-700: var(--color-8m-brown-700);
+  --color-8m-blue-50:   var(--color-8m-blue-50);
+  --color-8m-blue-100:  var(--color-8m-blue-100);
+  --color-8m-blue-200:  var(--color-8m-blue-200);
+  --color-8m-blue-300:  var(--color-8m-blue-300);
+  --color-8m-blue-400:  var(--color-8m-blue-400);
+  --color-8m-blue-500:  var(--color-8m-blue-500);
+  --color-8m-blue-600:  var(--color-8m-blue-600);
+
+  /* Dark Theme */
+  --color-dark-bg-900:   var(--color-dark-bg-900);
+  --color-dark-bg-800:   var(--color-dark-bg-800);
+  --color-dark-bg-700:   var(--color-dark-bg-700);
+  --color-dark-surface:  var(--color-dark-surface);
+  --color-dark-accent:   var(--color-dark-accent);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Base Layer
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family-body);
+  }
+
+  html {
+    font-size: var(--font-size);
+  }
+
+  h1 {
+    font-size: var(--text-5xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-tight);
+    font-family: var(--font-family-body);
+  }
+
+  h2 {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-tight);
+  }
+
+  h3 {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--leading-snug);
+  }
+
+  h4 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-snug);
+  }
+
+  label {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-normal);
+  }
+
+  button {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--leading-normal);
+    font-family: var(--font-family-body);
+  }
+
+  input {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: var(--leading-normal);
+  }
+
+  p {
+    line-height: var(--leading-relaxed);
+  }
+}

@@ -1,0 +1,1393 @@
+{
+  "_meta": {
+    "description": "Manager Today Design System — Figma Variables",
+    "version": "1.1.0",
+    "updatedAt": "2026-05-12",
+    "tokenArchitecture": "MD3 三層繼承架構: Primitive → Semantic → Component",
+    "namingConvention": "--{namespace}-{tier}-{component}-{state?}-{slot}-{property}",
+    "collections": [
+      "Font size (原始 Figma Variables，保留不變)",
+      "Primitive / Color (Ref 原始色票)",
+      "Semantic / Color (Sys 語義色彩角色)",
+      "Primitive / Spacing & Shape (Ref 間距、圓角、狀態)",
+      "Component / btn-primary (實心主按鈕 Component Tokens)",
+      "Component / btn-outline (空心框線按鈕 Component Tokens，源自 Figma CtaBtn 設計稿)"
+    ]
+  },
+  "collections": [
+
+    {
+      "_comment": "─────────────────────────────────────────────────────────\n  COLLECTION 1: Font size（原始 Figma Variables，保留不變）\n─────────────────────────────────────────────────────────",
+      "id": "VariableCollectionId:900:5939",
+      "name": "Font size",
+      "modes": { "900:0": "Mode 1" },
+      "variableIds": [
+        "VariableID:900:5956", "VariableID:900:5954", "VariableID:900:5949",
+        "VariableID:900:5947", "VariableID:900:5946", "VariableID:900:5952",
+        "VariableID:900:5943", "VariableID:900:5945", "VariableID:900:5955",
+        "VariableID:900:5942", "VariableID:900:5944", "VariableID:900:5951",
+        "VariableID:900:5953", "VariableID:900:5940"
+      ],
+      "variables": [
+        {
+          "id": "VariableID:900:5940", "name": "text-base", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 16 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 16, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5942", "name": "text-sm", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 12 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 12, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5943", "name": "text-xs", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 14 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 14, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5944", "name": "text-lg", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 18 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 18, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5945", "name": "text-xl", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 20 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 20, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5946", "name": "text-2xl", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 24 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 24, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5947", "name": "text-3xl", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 28 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 28, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5949", "name": "text-4xl", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 32 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 32, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5951", "name": "h1", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 40 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 40, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5952", "name": "h2", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 32 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 32, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5953", "name": "h3", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 24 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 24, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5954", "name": "h4", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 20 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 20, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5955", "name": "h5", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 18 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 18, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        },
+        {
+          "id": "VariableID:900:5956", "name": "h6", "description": "",
+          "type": "FLOAT",
+          "valuesByMode": { "900:0": 16 },
+          "resolvedValuesByMode": { "900:0": { "resolvedValue": 16, "alias": null } },
+          "scopes": ["ALL_SCOPES"]
+        }
+      ]
+    },
+
+    {
+      "_comment": "─────────────────────────────────────────────────────────\n  COLLECTION 2: Primitive / Color\n  對應 CSS: --mt-ref-palette-*\n  規則：只存硬編碼原始色值，不帶任何語意，不引用其他 token\n─────────────────────────────────────────────────────────",
+      "id": "VariableCollectionId:901:1",
+      "name": "Primitive / Color",
+      "modes": { "901:0": "Default" },
+      "variableIds": [
+        "VariableID:901:1",  "VariableID:901:2",  "VariableID:901:3",
+        "VariableID:901:4",  "VariableID:901:5",  "VariableID:901:6",
+        "VariableID:901:7",  "VariableID:901:8",  "VariableID:901:9",
+        "VariableID:901:10", "VariableID:901:11"
+      ],
+      "variables": [
+        {
+          "id": "VariableID:901:1",
+          "name": "color/primary-10",
+          "description": "最深綠 (--mt-ref-palette-primary10)，高對比文字用",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.0275, "g": 0.0902, "b": 0.0549, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.0275, "g": 0.0902, "b": 0.0549, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:2",
+          "name": "color/primary-20",
+          "description": "Pressed 狀態底色 #0d2e1b (--mt-ref-palette-primary20)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.051, "g": 0.1804, "b": 0.1059, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.051, "g": 0.1804, "b": 0.1059, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:3",
+          "name": "color/primary-30",
+          "description": "Hover 狀態底色 #144529 (--mt-ref-palette-primary30)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.0784, "g": 0.2706, "b": 0.1608, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.0784, "g": 0.2706, "b": 0.1608, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:4",
+          "name": "color/primary-40",
+          "description": "★ 品牌主色 Brand Primary #217446 (--mt-ref-palette-primary40)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:5",
+          "name": "color/primary-50",
+          "description": "淺一階主綠 #3ea97a (--mt-ref-palette-primary50)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.2431, "g": 0.6627, "b": 0.4784, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.2431, "g": 0.6627, "b": 0.4784, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:6",
+          "name": "color/primary-80",
+          "description": "State layer tint #a3d9bc (--mt-ref-palette-primary80)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.6392, "g": 0.851, "b": 0.7373, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.6392, "g": 0.851, "b": 0.7373, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:7",
+          "name": "color/neon-50",
+          "description": "深色主題螢光強調 #73ffb2 (--mt-ref-palette-neon50)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.451, "g": 1.0, "b": 0.698, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.451, "g": 1.0, "b": 0.698, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:8",
+          "name": "color/neon-hover",
+          "description": "深色 Hover 螢光綠深一階 #52e89a",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.3216, "g": 0.9098, "b": 0.6039, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.3216, "g": 0.9098, "b": 0.6039, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:9",
+          "name": "color/neutral-10",
+          "description": "主文字色 #1d1b1b (--mt-ref-palette-neutral10)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0.1137, "g": 0.1059, "b": 0.1059, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0.1137, "g": 0.1059, "b": 0.1059, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:10",
+          "name": "color/neutral-100",
+          "description": "純白 On-Primary 文字 #ffffff (--mt-ref-palette-neutral100)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 1, "g": 1, "b": 1, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 1, "g": 1, "b": 1, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:901:11",
+          "name": "color/black-12",
+          "description": "Disabled 表面遮罩 rgba(0,0,0,0.12)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "901:0": { "r": 0, "g": 0, "b": 0, "a": 0.12 }
+          },
+          "resolvedValuesByMode": {
+            "901:0": { "resolvedValue": { "r": 0, "g": 0, "b": 0, "a": 0.12 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        }
+      ]
+    },
+
+    {
+      "_comment": "─────────────────────────────────────────────────────────\n  COLLECTION 3: Semantic / Color\n  對應 CSS: --mt-sys-color-*\n  規則：從 Primitive/Color 繼承，賦予語意角色。\n  主題切換（淺色↔深色）只需在此層重新映射。\n─────────────────────────────────────────────────────────",
+      "id": "VariableCollectionId:902:1",
+      "name": "Semantic / Color",
+      "modes": { "902:0": "Light" },
+      "variableIds": [
+        "VariableID:902:1",  "VariableID:902:2",  "VariableID:902:3",
+        "VariableID:902:4",  "VariableID:902:5",  "VariableID:902:6",
+        "VariableID:902:7",  "VariableID:902:8",  "VariableID:902:9",
+        "VariableID:902:10", "VariableID:902:11"
+      ],
+      "variables": [
+        {
+          "id": "VariableID:902:1",
+          "name": "color/primary",
+          "description": "主要互動色，按鈕容器底色 (--mt-sys-color-primary → #217446)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:4" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:901:4" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:902:2",
+          "name": "color/primary-hover",
+          "description": "Hover 狀態底色，深一階 (--mt-sys-color-primary-hover → #144529)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:3" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.0784, "g": 0.2706, "b": 0.1608, "a": 1 }, "alias": "VariableID:901:3" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:902:3",
+          "name": "color/primary-pressed",
+          "description": "Pressed 狀態底色，最深階 (--mt-sys-color-primary-pressed → #0d2e1b)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:2" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.051, "g": 0.1804, "b": 0.1059, "a": 1 }, "alias": "VariableID:901:2" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:902:4",
+          "name": "color/on-primary",
+          "description": "Primary 容器上的文字/圖示色 (--mt-sys-color-on-primary → #ffffff)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:10" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 1, "g": 1, "b": 1, "a": 1 }, "alias": "VariableID:901:10" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:902:5",
+          "name": "color/outline",
+          "description": "Focus ring 顏色，與主色一致 (--mt-sys-color-outline → #217446)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:4" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:901:4" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:902:6",
+          "name": "color/surface-tint",
+          "description": "Surface 染色層 (--mt-sys-color-surface-tint → #a3d9bc)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:6" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.6392, "g": 0.851, "b": 0.7373, "a": 1 }, "alias": "VariableID:901:6" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:902:7",
+          "name": "color/surface-disabled",
+          "description": "Disabled 容器色 (--mt-sys-color-surface-disabled → rgba(0,0,0,0.12))",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:11" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0, "g": 0, "b": 0, "a": 0.12 }, "alias": "VariableID:901:11" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:902:8",
+          "name": "color/dark/primary",
+          "description": "深色主題主色（螢光綠 #73ffb2，用於 Dark CTA 底色）",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:7" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.451, "g": 1.0, "b": 0.698, "a": 1 }, "alias": "VariableID:901:7" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR", "EFFECT_COLOR"]
+        },
+        {
+          "id": "VariableID:902:9",
+          "name": "color/dark/on-primary",
+          "description": "深色主題 On-Primary（深底 #0d1a13，確保對比度）",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "r": 0.051, "g": 0.102, "b": 0.0745, "a": 1 }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.051, "g": 0.102, "b": 0.0745, "a": 1 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:902:10",
+          "name": "color/dark/primary-hover",
+          "description": "深色主題 Hover（螢光綠深一階 #52e89a）",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:8" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.3216, "g": 0.9098, "b": 0.6039, "a": 1 }, "alias": "VariableID:901:8" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:902:11",
+          "name": "color/on-surface",
+          "description": "主文字色（--mt-ref-palette-neutral10 → #1d1b1b）",
+          "type": "COLOR",
+          "valuesByMode": {
+            "902:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:901:9" }
+          },
+          "resolvedValuesByMode": {
+            "902:0": { "resolvedValue": { "r": 0.1137, "g": 0.1059, "b": 0.1059, "a": 1 }, "alias": "VariableID:901:9" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        }
+      ]
+    },
+
+    {
+      "_comment": "─────────────────────────────────────────────────────────\n  COLLECTION 4: Primitive / Spacing & Shape\n  對應 CSS: --mt-ref-spacing-* / --mt-ref-shape-* / --mt-ref-state-*\n  規則：只存硬編碼數值，不含語意。\n─────────────────────────────────────────────────────────",
+      "id": "VariableCollectionId:903:1",
+      "name": "Primitive / Spacing & Shape",
+      "modes": { "903:0": "Default" },
+      "variableIds": [
+        "VariableID:903:1",  "VariableID:903:2",  "VariableID:903:3",
+        "VariableID:903:4",  "VariableID:903:5",  "VariableID:903:6",
+        "VariableID:903:7",  "VariableID:903:8",  "VariableID:903:9",
+        "VariableID:903:10", "VariableID:903:11", "VariableID:903:12",
+        "VariableID:903:13", "VariableID:903:14", "VariableID:903:15",
+        "VariableID:903:16", "VariableID:903:17", "VariableID:903:18"
+      ],
+      "variables": [
+        {
+          "id": "VariableID:903:1",
+          "name": "shape/corner-xs",
+          "description": "極小圓角 2px (--mt-ref-shape-corner-xs)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 2 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 2, "alias": null } },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "id": "VariableID:903:2",
+          "name": "shape/corner-sm",
+          "description": "★ 按鈕預設圓角 4px (--mt-ref-shape-corner-sm)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 4 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 4, "alias": null } },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "id": "VariableID:903:3",
+          "name": "shape/corner-md",
+          "description": "Hero box 圓角 8px (--mt-ref-shape-corner-md)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 8 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 8, "alias": null } },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "id": "VariableID:903:4",
+          "name": "spacing/4",
+          "description": "基礎間距 1x = 4px (--mt-ref-spacing-4)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 4 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 4, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:5",
+          "name": "spacing/8",
+          "description": "基礎間距 2x = 8px，Outline btn 上下 padding (--mt-ref-spacing-8)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 8 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 8, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:6",
+          "name": "spacing/12",
+          "description": "基礎間距 3x = 12px (--mt-ref-spacing-12)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 12 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 12, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:7",
+          "name": "spacing/14",
+          "description": "SM 按鈕水平 padding = 14px",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 14 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 14, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:8",
+          "name": "spacing/16",
+          "description": "Icon-Label 間距來源 16px (--mt-ref-spacing-16)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 16 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 16, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:9",
+          "name": "spacing/24",
+          "description": "Button 水平 padding 來源 24px (--mt-ref-spacing-24)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 24 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 24, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:10",
+          "name": "spacing/32",
+          "description": "Button LG padding 來源 32px (--mt-ref-spacing-32)",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 32 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 32, "alias": null } },
+          "scopes": ["GAP", "WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:11",
+          "name": "btn-height/sm",
+          "description": "按鈕高度 SM = 32px",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 32 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 32, "alias": null } },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:12",
+          "name": "btn-height/md",
+          "description": "按鈕高度 MD = 40px（預設）",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 40 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 40, "alias": null } },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:13",
+          "name": "btn-height/lg",
+          "description": "按鈕高度 LG = 48px",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 48 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 48, "alias": null } },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:14",
+          "name": "icon-size/sm",
+          "description": "圖示大小 SM = 14px",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 14 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 14, "alias": null } },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:15",
+          "name": "icon-size/md",
+          "description": "圖示大小 MD = 18px（預設）",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 18 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 18, "alias": null } },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:16",
+          "name": "icon-size/lg",
+          "description": "圖示大小 LG = 20px",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 20 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 20, "alias": null } },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:903:17",
+          "name": "outline-width/focus",
+          "description": "Focus ring 寬度 = 3px",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 3 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 3, "alias": null } },
+          "scopes": ["STROKE_FLOAT"]
+        },
+        {
+          "id": "VariableID:903:18",
+          "name": "border-width/default",
+          "description": "預設邊框寬度 = 1px（Outline 按鈕）",
+          "type": "FLOAT",
+          "valuesByMode": { "903:0": 1 },
+          "resolvedValuesByMode": { "903:0": { "resolvedValue": 1, "alias": null } },
+          "scopes": ["STROKE_FLOAT"]
+        }
+      ]
+    },
+
+    {
+      "_comment": "─────────────────────────────────────────────────────────\n  COLLECTION 5: Component / btn-primary\n  對應 CSS: --mt-comp-btn-primary-*\n  規則：從 Semantic/Color 與 Primitive/Spacing 繼承，\n        為 Primary Button 每個 slot / state 建立獨立入口。\n        Tier 03 → 最終被工程師使用的 token 層。\n─────────────────────────────────────────────────────────",
+      "id": "VariableCollectionId:904:1",
+      "name": "Component / btn-primary",
+      "modes": { "904:0": "Default" },
+      "variableIds": [
+        "VariableID:904:1",  "VariableID:904:2",  "VariableID:904:3",
+        "VariableID:904:4",  "VariableID:904:5",  "VariableID:904:6",
+        "VariableID:904:7",  "VariableID:904:8",  "VariableID:904:9",
+        "VariableID:904:10", "VariableID:904:11", "VariableID:904:12",
+        "VariableID:904:13", "VariableID:904:14", "VariableID:904:15",
+        "VariableID:904:16", "VariableID:904:17", "VariableID:904:18",
+        "VariableID:904:19", "VariableID:904:20", "VariableID:904:21",
+        "VariableID:904:22", "VariableID:904:23", "VariableID:904:24",
+        "VariableID:904:25", "VariableID:904:26", "VariableID:904:27",
+        "VariableID:904:28", "VariableID:904:29", "VariableID:904:30",
+        "VariableID:904:31", "VariableID:904:32", "VariableID:904:33",
+        "VariableID:904:34", "VariableID:904:35"
+      ],
+      "variables": [
+
+        {
+          "id": "VariableID:904:1",
+          "name": "container/color",
+          "description": "預設底色 (--mt-comp-btn-primary-container-color → #217446)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:2",
+          "name": "container/height",
+          "description": "MD 尺寸高度 40px (--mt-comp-btn-primary-container-height)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:12" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 40, "alias": "VariableID:903:12" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:3",
+          "name": "container/shape",
+          "description": "圓角半徑 4px (--mt-comp-btn-primary-container-shape)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:2" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 4, "alias": "VariableID:903:2" }
+          },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "id": "VariableID:904:4",
+          "name": "label/color",
+          "description": "文字顏色 #ffffff (--mt-comp-btn-primary-label-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:4" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 1, "g": 1, "b": 1, "a": 1 }, "alias": "VariableID:902:4" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:5",
+          "name": "label/size",
+          "description": "字級 MD 15px (--mt-comp-btn-primary-label-size)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 15 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 15, "alias": null } },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "id": "VariableID:904:6",
+          "name": "label/weight",
+          "description": "字重 Medium 500 (--mt-comp-btn-primary-label-weight)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 500 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 500, "alias": null } },
+          "scopes": ["FONT_WEIGHT"]
+        },
+        {
+          "id": "VariableID:904:7",
+          "name": "label/tracking",
+          "description": "字距 0.01em (--mt-comp-btn-primary-label-tracking)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 0.01 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 0.01, "alias": null } },
+          "scopes": ["LETTER_SPACING"]
+        },
+        {
+          "id": "VariableID:904:8",
+          "name": "label/line-height",
+          "description": "行高 1.4 (--mt-comp-btn-primary-label-line-height)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 1.4 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 1.4, "alias": null } },
+          "scopes": ["LINE_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:9",
+          "name": "icon/color",
+          "description": "圖示顏色 #ffffff (--mt-comp-btn-primary-icon-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:4" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 1, "g": 1, "b": 1, "a": 1 }, "alias": "VariableID:902:4" }
+          },
+          "scopes": ["ALL_FILLS", "STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:904:10",
+          "name": "icon/size",
+          "description": "圖示大小 MD 18px (--mt-comp-btn-primary-icon-size)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:15" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 18, "alias": "VariableID:903:15" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:11",
+          "name": "spacing/leading",
+          "description": "無 icon 時左側 padding 24px (--mt-comp-btn-primary-leading-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:9" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 24, "alias": "VariableID:903:9" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:904:12",
+          "name": "spacing/trailing",
+          "description": "右側 padding 24px (--mt-comp-btn-primary-trailing-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:9" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 24, "alias": "VariableID:903:9" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:904:13",
+          "name": "spacing/with-icon-leading",
+          "description": "有 icon 時左側 padding 16px (--mt-comp-btn-primary-with-icon-leading-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:8" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 16, "alias": "VariableID:903:8" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:904:14",
+          "name": "spacing/icon-label-gap",
+          "description": "Icon 與 Label 間距 8px (--mt-comp-btn-primary-icon-label-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:5" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 8, "alias": "VariableID:903:5" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:904:15",
+          "name": "size-sm/height",
+          "description": "SM 高度 32px (--mt-comp-btn-primary-sm-height)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:11" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 32, "alias": "VariableID:903:11" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:16",
+          "name": "size-sm/label-size",
+          "description": "SM 字級 13px (--mt-comp-btn-primary-sm-label-size)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 13 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 13, "alias": null } },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "id": "VariableID:904:17",
+          "name": "size-sm/leading-space",
+          "description": "SM 水平 padding 14px (--mt-comp-btn-primary-sm-leading-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:7" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 14, "alias": "VariableID:903:7" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:904:18",
+          "name": "size-sm/icon-size",
+          "description": "SM 圖示大小 14px",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:14" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 14, "alias": "VariableID:903:14" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:19",
+          "name": "size-lg/height",
+          "description": "LG 高度 48px (--mt-comp-btn-primary-lg-height)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:13" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 48, "alias": "VariableID:903:13" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:20",
+          "name": "size-lg/label-size",
+          "description": "LG 字級 17px (--mt-comp-btn-primary-lg-label-size)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 17 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 17, "alias": null } },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "id": "VariableID:904:21",
+          "name": "size-lg/leading-space",
+          "description": "LG 水平 padding 32px (--mt-comp-btn-primary-lg-leading-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:10" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 32, "alias": "VariableID:903:10" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:904:22",
+          "name": "size-lg/icon-size",
+          "description": "LG 圖示大小 20px",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:16" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 20, "alias": "VariableID:903:16" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:904:23",
+          "name": "state-hover/container-color",
+          "description": "Hover 底色，深一階 #144529 (--mt-comp-btn-primary-hover-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:2" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.0784, "g": 0.2706, "b": 0.1608, "a": 1 }, "alias": "VariableID:902:2" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:24",
+          "name": "state-hover/state-layer-opacity",
+          "description": "Hover state layer 透明度 0.08 (--mt-sys-state-hover-opacity)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 0.08 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 0.08, "alias": null } },
+          "scopes": ["OPACITY"]
+        },
+        {
+          "id": "VariableID:904:25",
+          "name": "state-focus/container-color",
+          "description": "Focus 底色不變，仍為主色 (--mt-comp-btn-primary-focus-container-color → #217446)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:26",
+          "name": "state-focus/outline-color",
+          "description": "Focus ring 顏色 #217446 (--mt-comp-btn-primary-focus-outline-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:5" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:5" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:904:27",
+          "name": "state-focus/outline-width",
+          "description": "Focus ring 寬度 3px (--mt-comp-btn-primary-focus-outline-width)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:17" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": 3, "alias": "VariableID:903:17" }
+          },
+          "scopes": ["STROKE_FLOAT"]
+        },
+        {
+          "id": "VariableID:904:28",
+          "name": "state-focus/state-layer-opacity",
+          "description": "Focus state layer 透明度 0.12",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 0.12 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 0.12, "alias": null } },
+          "scopes": ["OPACITY"]
+        },
+        {
+          "id": "VariableID:904:29",
+          "name": "state-pressed/container-color",
+          "description": "Pressed 底色最深階 #0d2e1b (--mt-comp-btn-primary-pressed-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:3" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.051, "g": 0.1804, "b": 0.1059, "a": 1 }, "alias": "VariableID:902:3" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:30",
+          "name": "state-pressed/state-layer-opacity",
+          "description": "Pressed state layer 透明度 0.16",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 0.16 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 0.16, "alias": null } },
+          "scopes": ["OPACITY"]
+        },
+        {
+          "id": "VariableID:904:31",
+          "name": "state-disabled/container-color",
+          "description": "Disabled 容器色 rgba(0,0,0,0.12) (--mt-comp-btn-primary-disabled-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:7" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0, "g": 0, "b": 0, "a": 0.12 }, "alias": "VariableID:902:7" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:32",
+          "name": "state-disabled/label-opacity",
+          "description": "Disabled 文字透明度 0.38 (--mt-comp-btn-primary-disabled-label-opacity)",
+          "type": "FLOAT",
+          "valuesByMode": { "904:0": 0.38 },
+          "resolvedValuesByMode": { "904:0": { "resolvedValue": 0.38, "alias": null } },
+          "scopes": ["OPACITY"]
+        },
+        {
+          "id": "VariableID:904:33",
+          "name": "dark/container-color",
+          "description": "深色主題底色螢光綠 #73ffb2 (--mt-comp-btn-primary-dark-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:8" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.451, "g": 1.0, "b": 0.698, "a": 1 }, "alias": "VariableID:902:8" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:34",
+          "name": "dark/label-color",
+          "description": "深色主題文字深底色 #0d1a13 (--mt-comp-btn-primary-dark-label-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:9" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.051, "g": 0.102, "b": 0.0745, "a": 1 }, "alias": "VariableID:902:9" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:904:35",
+          "name": "dark/state-hover-container-color",
+          "description": "深色 Hover 螢光綠深一階 #52e89a (--mt-comp-btn-primary-dark-hover-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "904:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:10" }
+          },
+          "resolvedValuesByMode": {
+            "904:0": { "resolvedValue": { "r": 0.3216, "g": 0.9098, "b": 0.6039, "a": 1 }, "alias": "VariableID:902:10" }
+          },
+          "scopes": ["ALL_FILLS"]
+        }
+      ]
+    },
+
+    {
+      "_comment": "─────────────────────────────────────────────────────────\n  COLLECTION 6: Component / btn-outline\n  對應 CSS: --mt-comp-btn-outline-*\n  來源：Figma CtaBtn 設計稿（白底 + 主綠框線 + 主綠文字）\n  差異於 btn-primary：透明底、框線替代陰影、字重 600、\n  hover/pressed 以主色 tint 染底而非深底色。\n─────────────────────────────────────────────────────────",
+      "id": "VariableCollectionId:905:1",
+      "name": "Component / btn-outline",
+      "modes": { "905:0": "Default" },
+      "variableIds": [
+        "VariableID:905:1",  "VariableID:905:2",  "VariableID:905:3",
+        "VariableID:905:4",  "VariableID:905:5",  "VariableID:905:6",
+        "VariableID:905:7",  "VariableID:905:8",  "VariableID:905:9",
+        "VariableID:905:10", "VariableID:905:11", "VariableID:905:12",
+        "VariableID:905:13", "VariableID:905:14", "VariableID:905:15",
+        "VariableID:905:16", "VariableID:905:17", "VariableID:905:18",
+        "VariableID:905:19", "VariableID:905:20", "VariableID:905:21",
+        "VariableID:905:22", "VariableID:905:23", "VariableID:905:24",
+        "VariableID:905:25"
+      ],
+      "variables": [
+        {
+          "id": "VariableID:905:1",
+          "name": "container/color",
+          "description": "預設底色透明 (--mt-comp-btn-outline-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "r": 0, "g": 0, "b": 0, "a": 0 }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0, "g": 0, "b": 0, "a": 0 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:2",
+          "name": "container/border-color",
+          "description": "邊框色 = 主色 #217446 (--mt-comp-btn-outline-container-border-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:905:3",
+          "name": "container/border-width",
+          "description": "邊框寬度 1px (--mt-comp-btn-outline-container-border-width)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:18" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": 1, "alias": "VariableID:903:18" }
+          },
+          "scopes": ["STROKE_FLOAT"]
+        },
+        {
+          "id": "VariableID:905:4",
+          "name": "container/shape",
+          "description": "圓角半徑 4px，與 Primary 一致 (--mt-comp-btn-outline-container-shape)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:2" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": 4, "alias": "VariableID:903:2" }
+          },
+          "scopes": ["CORNER_RADIUS"]
+        },
+        {
+          "id": "VariableID:905:5",
+          "name": "container/height",
+          "description": "MD 高度 40px (--mt-comp-btn-outline-container-height)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:12" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": 40, "alias": "VariableID:903:12" }
+          },
+          "scopes": ["WIDTH_HEIGHT"]
+        },
+        {
+          "id": "VariableID:905:6",
+          "name": "label/color",
+          "description": "文字色 = 主色 #217446 (--mt-comp-btn-outline-label-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:7",
+          "name": "label/size",
+          "description": "字級 14px，Figma 設計稿規格 (--mt-comp-btn-outline-label-size)",
+          "type": "FLOAT",
+          "valuesByMode": { "905:0": 14 },
+          "resolvedValuesByMode": { "905:0": { "resolvedValue": 14, "alias": null } },
+          "scopes": ["FONT_SIZE"]
+        },
+        {
+          "id": "VariableID:905:8",
+          "name": "label/weight",
+          "description": "字重 Semi Bold 600，比 Primary 重一階 (--mt-comp-btn-outline-label-weight)",
+          "type": "FLOAT",
+          "valuesByMode": { "905:0": 600 },
+          "resolvedValuesByMode": { "905:0": { "resolvedValue": 600, "alias": null } },
+          "scopes": ["FONT_WEIGHT"]
+        },
+        {
+          "id": "VariableID:905:9",
+          "name": "label/tracking",
+          "description": "字距 0.01em (--mt-comp-btn-outline-label-tracking)",
+          "type": "FLOAT",
+          "valuesByMode": { "905:0": 0.01 },
+          "resolvedValuesByMode": { "905:0": { "resolvedValue": 0.01, "alias": null } },
+          "scopes": ["LETTER_SPACING"]
+        },
+        {
+          "id": "VariableID:905:10",
+          "name": "spacing/horizontal",
+          "description": "左右 padding 24px (--mt-comp-btn-outline-leading-space / trailing-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:9" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": 24, "alias": "VariableID:903:9" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:905:11",
+          "name": "spacing/vertical",
+          "description": "上下 padding 8px，緊湊型設計 (--mt-comp-btn-outline-vertical-space)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:5" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": 8, "alias": "VariableID:903:5" }
+          },
+          "scopes": ["GAP"]
+        },
+        {
+          "id": "VariableID:905:12",
+          "name": "state-hover/container-color",
+          "description": "Hover 底色主色 6% tint rgba(33,116,70,0.06) (--mt-comp-btn-outline-hover-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 0.06 }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 0.06 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:13",
+          "name": "state-hover/border-color",
+          "description": "Hover 邊框色不變 #217446 (--mt-comp-btn-outline-hover-container-border-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:905:14",
+          "name": "state-hover/label-color",
+          "description": "Hover 文字色不變 #217446 (--mt-comp-btn-outline-hover-label-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:15",
+          "name": "state-hover/state-layer-opacity",
+          "description": "Hover state layer 透明度 0.08 (--mt-comp-btn-outline-hover-state-layer-opacity)",
+          "type": "FLOAT",
+          "valuesByMode": { "905:0": 0.08 },
+          "resolvedValuesByMode": { "905:0": { "resolvedValue": 0.08, "alias": null } },
+          "scopes": ["OPACITY"]
+        },
+        {
+          "id": "VariableID:905:16",
+          "name": "state-focus/container-color",
+          "description": "Focus 底色主色 8% tint rgba(33,116,70,0.08) (--mt-comp-btn-outline-focus-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 0.08 }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 0.08 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:17",
+          "name": "state-focus/outline-color",
+          "description": "Focus ring 顏色 #217446 (--mt-comp-btn-outline-focus-outline-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:5" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:5" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:905:18",
+          "name": "state-focus/outline-width",
+          "description": "Focus ring 寬度 3px (--mt-comp-btn-outline-focus-outline-width)",
+          "type": "FLOAT",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:903:17" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": 3, "alias": "VariableID:903:17" }
+          },
+          "scopes": ["STROKE_FLOAT"]
+        },
+        {
+          "id": "VariableID:905:19",
+          "name": "state-pressed/container-color",
+          "description": "Pressed 底色主色 12% tint rgba(33,116,70,0.12) (--mt-comp-btn-outline-pressed-container-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 0.12 }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 0.12 }, "alias": null }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:20",
+          "name": "state-pressed/label-color",
+          "description": "Pressed 文字色深一階 #144529 (--mt-comp-btn-outline-pressed-label-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:2" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.0784, "g": 0.2706, "b": 0.1608, "a": 1 }, "alias": "VariableID:902:2" }
+          },
+          "scopes": ["ALL_FILLS"]
+        },
+        {
+          "id": "VariableID:905:21",
+          "name": "state-pressed/border-color",
+          "description": "Pressed 邊框色不變 #217446 (--mt-comp-btn-outline-pressed-container-border-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:1" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.1294, "g": 0.4549, "b": 0.2745, "a": 1 }, "alias": "VariableID:902:1" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:905:22",
+          "name": "state-disabled/border-color",
+          "description": "Disabled 邊框色 rgba(0,0,0,0.12) (--mt-comp-btn-outline-disabled-container-border-color)",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "r": 0, "g": 0, "b": 0, "a": 0.12 }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0, "g": 0, "b": 0, "a": 0.12 }, "alias": null }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:905:23",
+          "name": "state-disabled/label-opacity",
+          "description": "Disabled 文字透明度 0.38 (--mt-comp-btn-outline-disabled-label-opacity)",
+          "type": "FLOAT",
+          "valuesByMode": { "905:0": 0.38 },
+          "resolvedValuesByMode": { "905:0": { "resolvedValue": 0.38, "alias": null } },
+          "scopes": ["OPACITY"]
+        },
+        {
+          "id": "VariableID:905:24",
+          "name": "dark/border-color",
+          "description": "深色主題邊框色螢光綠 #73ffb2",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:8" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.451, "g": 1.0, "b": 0.698, "a": 1 }, "alias": "VariableID:902:8" }
+          },
+          "scopes": ["STROKE_COLOR"]
+        },
+        {
+          "id": "VariableID:905:25",
+          "name": "dark/label-color",
+          "description": "深色主題文字色螢光綠 #73ffb2",
+          "type": "COLOR",
+          "valuesByMode": {
+            "905:0": { "type": "VARIABLE_ALIAS", "id": "VariableID:902:8" }
+          },
+          "resolvedValuesByMode": {
+            "905:0": { "resolvedValue": { "r": 0.451, "g": 1.0, "b": 0.698, "a": 1 }, "alias": "VariableID:902:8" }
+          },
+          "scopes": ["ALL_FILLS"]
+        }
+      ]
+    }
+
+  ]
+}
