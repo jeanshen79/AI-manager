@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -6,7 +7,7 @@
   <title>經理人 Manager Today — AI 問答</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Fira+Sans+Condensed:wght@700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Fira+Sans+Condensed:wght@700&display=swap" rel="stylesheet" />
   <script>
     tailwind.config = {
       theme: {
@@ -14,7 +15,7 @@
           colors: {
             /* Figma brand tokens */
             mt:       '#217446',   /* primary green from Figma #217446 */
-            'mt-h':   '#1a5e38',   /* hover state */
+            'mt-h':   '#144529',   /* hover state */
             'mt-lt':  '#e5f5eb',   /* light green bg (back btn, powered-by badge) */
             'mt-bd':  '#2eb76b',   /* input border green */
             'mt-mid': '#c6ecd5',   /* gradient mid-stop */
@@ -113,7 +114,7 @@
 <div id="pg-article" class="page active">
 
   <!-- ── Navigation (Figma: 369:7147 header h=56px) ── -->
-  <nav class="sticky top-0 z-50 bg-white border-b border-[#e8e8e8]">
+  <nav class="sticky top-0 z-[200] bg-white border-b border-[#e8e8e8]">
     <div class="max-w-[1280px] mx-auto px-14 h-14 flex items-center justify-between">
       <!-- Left: hamburger + logo + category nav -->
       <div class="flex items-center gap-4">
@@ -174,7 +175,7 @@
           </div>
           <div class="text-[13px] font-medium text-gray-800">張明輝</div>
         </div>
-        <button class="w-full border border-[#217446] text-[#217446] text-[12px] font-medium py-1.5 rounded-lg hover:bg-[#e5f5eb] transition-colors cursor-pointer">
+        <button class="w-full border border-[#217446] text-[#217446] text-[12px] font-medium py-1.5 rounded-sm hover:bg-[#e5f5eb] transition-colors cursor-pointer">
           + 追蹤
         </button>
       </div>
@@ -262,23 +263,23 @@
           <!-- Ranking list: 八分生活 (hidden by default) -->
           <div id="rank-list-8f" class="divide-y divide-gray-50 hidden">
             <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer">
-              <span class="rank-num text-[36px] leading-none" style="color:#217446;min-width:32px">1</span>
+              <span class="rank-num text-[36px] leading-none" style="color:#a78662;min-width:32px">1</span>
               <p class="text-[13px] text-gray-700 leading-snug pt-1">不只是「休息」，專家教你如何真正讓身心恢復能量</p>
             </a>
             <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer">
-              <span class="rank-num text-[36px] leading-none" style="color:#217446;min-width:32px">2</span>
+              <span class="rank-num text-[36px] leading-none" style="color:#a78662;min-width:32px">2</span>
               <p class="text-[13px] text-gray-700 leading-snug pt-1">週末充電指南：5 種活動讓你星期一精力滿滿</p>
             </a>
             <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer">
-              <span class="rank-num text-[36px] leading-none" style="color:#217446;min-width:32px">3</span>
+              <span class="rank-num text-[36px] leading-none" style="color:#a78662;min-width:32px">3</span>
               <p class="text-[13px] text-gray-700 leading-snug pt-1">睡眠品質決定工作效率，改善睡眠的 6 個科學方法</p>
             </a>
             <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer">
-              <span class="rank-num text-[36px] leading-none" style="color:#217446;min-width:32px">4</span>
+              <span class="rank-num text-[36px] leading-none" style="color:#a78662;min-width:32px">4</span>
               <p class="text-[13px] text-gray-700 leading-snug pt-1">職場焦慮自我檢測：你是「正常擔憂」還是「過度焦慮」？</p>
             </a>
             <a href="#" class="flex items-start gap-3 px-4 py-3 hover:bg-gray-50 transition-colors cursor-pointer">
-              <span class="rank-num text-[36px] leading-none" style="color:#217446;min-width:32px">5</span>
+              <span class="rank-num text-[36px] leading-none" style="color:#a78662;min-width:32px">5</span>
               <p class="text-[13px] text-gray-700 leading-snug pt-1">數位排毒的第一步：如何減少手機使用時間，找回生活節奏</p>
             </a>
           </div>
@@ -333,13 +334,13 @@
       <div class="flex-1 min-w-0">
 
         <!-- Article body text (Figma: 18px #333 leading=1.8) -->
-        <div class="space-y-6 leading-[1.8] text-[18px]" style="color:#333">
+        <div class="space-y-6 leading-[1.8] text-[18px]" style="color:#1d1b1b">
           <p>在每天快速變化的商業環境中，領導者面臨著前所未有的挑戰。企業面臨的不確定性已成為新常態，在每一位有抱負的管理者看來，有必要考慮如何應對這種不確定性，帶領團隊前行。本文將為你提供三個關鍵思維，幫助你在不確定的時代中突破困境。</p>
-          <h2 class="font-semibold text-gray-900 pt-2" style="font-size:23px">一、擁抱不確定，建立創新文化</h2>
+          <h2 class="font-semibold text-gray-900 pt-2" style="font-size:24px">一、擁抱不確定，建立創新文化</h2>
           <p>成功的領導者不會把不確定性視為威脅，而是將其視為創新的機遇。建立一個鼓勵快速迭代與容錯的組織文化，讓每一位成員都能在安全的環境中探索、犯錯、學習。當代領導力需要從追求精準控制轉變為追求系統適應，培養組織的整體韌性。</p>
-          <h2 class="font-semibold text-gray-900 pt-2" style="font-size:23px">二、數據驅動決策，但不忘人性</h2>
+          <h2 class="font-semibold text-gray-900 pt-2" style="font-size:24px">二、數據驅動決策，但不忘人性</h2>
           <p>在 AI 和數據的時代，數據分析可以幫助決策者做出更精準的判斷，但過度依賴數據可能忽略人性化考量。優秀的領導者懂得在數據與直覺之間取得平衡，確保決策既符合數字邏輯，又關照到人的需求與感受。</p>
-          <h2 class="font-semibold text-gray-900 pt-2" style="font-size:23px">三、持續學習，保持初心</h2>
+          <h2 class="font-semibold text-gray-900 pt-2" style="font-size:24px">三、持續學習，保持初心</h2>
           <p>面對快速變化的環境，持續學習是保持競爭力的關鍵。領導者不僅要自身不斷進修，還要為團隊成員創造學習機會，建立學習型組織。始終保持初心，堅守價值觀，才能在複雜環境中做出正確判斷。</p>
         </div>
 
@@ -392,12 +393,12 @@
               <label for="art-input" class="sr-only">輸入問題</label>
               <input id="art-input" type="text"
                 placeholder="請輸入你想了解的問題…"
-                class="flex-1 bg-white text-[14px] text-gray-700 px-4 py-2.5 focus:outline-none transition-colors"
-                style="border:1px solid #95d9b3; border-radius:12px; letter-spacing:-0.28px;"
+                class="flex-1 bg-white text-[14px] text-gray-700 px-4 py-2.5 focus:outline-none focus:ring focus:ring-[#217446] transition-colors"
+                style="border:1px solid #a3d9bc; border-radius:12px; letter-spacing:-0.28px;"
                 onkeydown="if(event.key==='Enter') submitArtQ()" />
               <button onclick="submitArtQ()"
                 class="text-white text-[14px] font-semibold px-5 py-2.5 cursor-pointer hover:opacity-90 transition-opacity whitespace-nowrap"
-                style="background:#217446; border-radius:12px">
+                style="background:#217446; border-radius:4px">
                 送出
               </button>
             </div>
@@ -440,7 +441,7 @@
         </div>
 
         <!-- AI CTA banner -->
-        <div class="mt-10 rounded-2xl p-7 text-center text-white" style="background:linear-gradient(90deg,#217446,#2eb76b)">
+        <div class="mt-10 rounded-2xl p-7 text-center text-white" style="background:linear-gradient(90deg,#217446,#3ea97a)">
           <div class="text-[18px] font-bold mb-1">Hi，還有哪些問題想問 AI 經理人？</div>
           <div class="text-[14px] opacity-75 mb-5">讓 AI 為你解答管理、職場各種難題</div>
           <button onclick="goAI('如何在不確定時代做出更好的決策？')"
@@ -544,7 +545,7 @@
 
   <!-- Floating AI button -->
   <button onclick="goAI('')" aria-label="AI 問答"
-    class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-mt rounded-full shadow-xl flex flex-col items-center justify-center hover:bg-mt-h transition-colors cursor-pointer group">
+    class="fixed bottom-6 right-6 z-[100] w-14 h-14 bg-mt rounded-full shadow-xl flex flex-col items-center justify-center hover:bg-mt-h transition-colors cursor-pointer group">
     <span class="text-white text-sm font-bold leading-none">AI</span>
     <span class="text-white text-[9px] opacity-70 leading-none">問答</span>
     <div class="absolute right-16 bg-gray-900 text-white text-xs px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
@@ -562,7 +563,7 @@
 <div id="pg-ai" class="page bg-[#f1f5f9]">
 
   <!-- ── Header Nav (Figma: 369:7436 h=56px) ── -->
-  <nav class="shrink-0 bg-white border-b border-[#e8e8e8] z-50 sticky top-0">
+  <nav class="shrink-0 bg-white border-b border-[#e8e8e8] z-[200] sticky top-0">
     <div class="max-w-[1280px] mx-auto px-14 h-14 flex items-center justify-between">
       <!-- navLeft: hamburger + logo + "AI 問答" -->
       <div class="flex items-center gap-4">
@@ -670,7 +671,10 @@
 
         <!-- Sources (Figma: 369:7526 border-t #217446 py=12 gap=8) -->
         <div id="ai-sources-wrapper" class="border-t border-[#217446] pt-3 flex flex-col gap-2 w-full">
-          <p class="font-semibold text-[16px] text-black leading-[2] whitespace-nowrap">參考來源</p>
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#217446] shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <p class="font-semibold text-[16px] text-black leading-[2] whitespace-nowrap">搜尋來源</p>
+          </div>
           <div id="ai-sources" class="flex flex-col gap-2">
             <!-- Populated by JS -->
           </div>
@@ -687,7 +691,7 @@
   </div><!-- /page body -->
 
   <!-- ── Sticky bottom input bar ── -->
-  <div id="ai-sticky-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-[#f1f5f9] border-t border-gray-200 px-6 py-3 flex flex-col items-center gap-1.5 translate-y-full transition-transform duration-300 ease-in-out">
+  <div id="ai-sticky-bar" class="fixed bottom-0 left-0 right-0 z-[200] bg-[#f1f5f9] border-t border-gray-200 px-6 py-3 flex flex-col items-center gap-1.5 translate-y-full transition-transform duration-300 ease-in-out">
 <div class="w-full max-w-[720px] rounded-[100px] p-3"
       style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%)">
       <div class="flex gap-2 items-center w-full bg-white border border-[#2eb76b] rounded-[40px] pl-3 pr-2 py-1">
@@ -697,16 +701,16 @@
         <label for="ai-input" class="sr-only">輸入問題</label>
         <input id="ai-input" type="text"
           placeholder="輸入任何管理或職涯問題..."
-          class="flex-1 bg-transparent text-[15px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.6)] focus:outline-none"
+          class="flex-1 bg-transparent text-[15px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.6)] focus:outline-none focus:ring focus:ring-[#217446]"
           onkeydown="if(event.key==='Enter') submitAI()"
           onfocus="this.select()" />
         <button onclick="submitAI()"
-          class="bg-[#217446] text-white font-semibold text-[15px] tracking-[0.64px] px-6 py-2 rounded-[40px] whitespace-nowrap cursor-pointer hover:bg-[#1a5e38] transition-colors shrink-0">
+          class="bg-[#217446] text-white font-semibold text-[15px] tracking-[0.01em] px-6 py-2 rounded-[40px] whitespace-nowrap cursor-pointer hover:bg-[#144529] transition-colors shrink-0">
           送出
         </button>
       </div>
     </div>
-    <p id="ai-quota-hint" class="text-[13px] text-center text-gray-400"></p>
+    <div id="ai-quota-hint" class="flex justify-center"></div>
     <p class="text-[#6b6b6b] text-[12px] text-center">
       ⚠️ 內容由 AI 生成，請勿輸入機密資料，資料具時效性，請自行判斷準確性。
     </p>
@@ -716,7 +720,7 @@
 
 <!-- ── Toast ── -->
 <div id="toast"
-  class="fixed bottom-8 right-6 z-[999] bg-[#1a1a2e] text-white text-sm px-4 py-2.5 rounded-xl shadow-lg pointer-events-none"
+  class="fixed bottom-8 right-6 z-[600] bg-[#1a1a2e] text-white text-sm px-4 py-2.5 rounded-xl shadow-lg pointer-events-none"
   style="opacity:0;transition:opacity .25s ease;"></div>
 
 
@@ -724,7 +728,7 @@
      LOGIN MODAL
      (overlay that dims the whole page)
 ════════════════════════════════════════════ -->
-<div id="modal-login" class="hidden fixed inset-0 z-[200] flex items-center justify-center"
+<div id="modal-login" class="hidden fixed inset-0 z-[300] flex items-center justify-center"
   style="background:rgba(15,20,40,.55);backdrop-filter:blur(4px)">
 
   <!-- Card -->
@@ -770,13 +774,13 @@
         <!-- Quick login buttons -->
         <div class="flex flex-col gap-2.5 w-full">
           <button onclick="doLogin('line')"
-            class="w-full flex items-center justify-center gap-2.5 py-2.5 rounded-xl font-bold text-sm text-white cursor-pointer hover:opacity-90 transition-opacity"
+            class="w-full flex items-center justify-center gap-2.5 py-2.5 rounded-sm font-bold text-sm text-white cursor-pointer hover:opacity-90 transition-opacity"
             style="background:#4CC764">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 5.58 2 10c0 3.17 1.97 5.93 4.9 7.44L6 21l3.15-1.48C9.73 19.82 10.85 20 12 20c5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
             使用 LINE 快速登入
           </button>
           <button onclick="doLogin('google')"
-            class="w-full flex items-center justify-center gap-2.5 py-2.5 rounded-xl font-medium text-sm text-gray-700 border border-gray-200 bg-white cursor-pointer hover:bg-gray-50 transition-colors">
+            class="w-full flex items-center justify-center gap-2.5 py-2.5 rounded-sm font-medium text-sm text-gray-700 border border-gray-200 bg-white cursor-pointer hover:bg-gray-50 transition-colors">
             <svg class="w-5 h-5" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -798,12 +802,12 @@
         <div class="flex flex-col gap-2.5 w-full">
           <label for="login-email" class="sr-only">電子郵件</label>
           <input id="login-email" type="email" placeholder="電子郵件"
-            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#217446] transition-colors" />
+            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring focus:ring-[#217446] focus:border-[#217446] transition-colors" />
           <label for="login-password" class="sr-only">密碼</label>
           <input id="login-password" type="password" placeholder="密碼"
-            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#217446] transition-colors" />
+            class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring focus:ring-[#217446] focus:border-[#217446] transition-colors" />
           <button onclick="doLogin('email')"
-            class="w-full bg-[#217446] text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-[#1a5e38] transition-colors cursor-pointer">
+            class="w-full bg-[#217446] text-white font-semibold text-sm py-2.5 rounded-sm hover:bg-[#144529] transition-colors cursor-pointer">
             登入
           </button>
         </div>
@@ -833,7 +837,7 @@
 <!-- ════════════════════════════════════════════
      HARD-GATE MODAL  (quota exceeded)
 ════════════════════════════════════════════ -->
-<div id="modal-limit" class="hidden fixed inset-0 z-[200] flex items-center justify-center"
+<div id="modal-limit" class="hidden fixed inset-0 z-[300] flex items-center justify-center"
   style="background:rgba(15,20,40,.72);backdrop-filter:blur(4px)">
 
   <div class="bg-white rounded-[20px] shadow-2xl w-[600px] overflow-hidden relative">
@@ -869,10 +873,10 @@
       <div class="flex gap-3 w-full mt-2">
         <label for="limit-email-input" class="sr-only">電子郵件</label>
         <input id="limit-email-input" type="email" placeholder="請留下信箱"
-          class="flex-1 bg-gray-100 rounded-xl px-5 py-3.5 text-[15px] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#217446]/30 transition"
+          class="flex-1 bg-gray-100 rounded-xl px-5 py-3.5 text-[15px] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring focus:ring-[#217446] transition"
           onkeydown="if(event.key==='Enter') submitLimitEmail()" />
         <button onclick="submitLimitEmail()"
-          class="bg-[#217446] text-white font-bold text-[16px] px-7 py-3.5 rounded-xl hover:bg-[#1a5e38] transition-colors cursor-pointer whitespace-nowrap">
+          class="bg-[#217446] text-white font-bold text-[16px] px-7 py-3.5 rounded-sm hover:bg-[#144529] transition-colors cursor-pointer whitespace-nowrap">
           送出
         </button>
       </div>
@@ -932,9 +936,9 @@ const DB = {
 
 研究顯示，擁抱不確定性的領導者往往具備更高的「認知彈性」。他們能夠同時持有多種可能性，而不急於做出最終判斷。這種能力可以透過刻意練習來培養，例如定期進行「情境規劃」演練，預想不同的未來場景並制定應對策略。`,
     sources: [
-      { title: 'VUCA 時代的領導力轉型策略' },
-      { title: '打造韌性組織的五個關鍵步驟' },
-      { title: '認知彈性與決策品質的關聯研究' },
+      { title: 'VUCA 時代的領導力轉型策略', category: '領導管理', excerpt: '在易變、不確定、複雜、模糊的商業環境中，領導者必須從「控制導向」轉向「適應導向」的思維模式，才能帶領組織持續前行。' },
+      { title: '打造韌性組織的五個關鍵步驟', category: '組織管理', excerpt: '組織韌性不是靠硬撐，而是透過多元化人才配置、彈性流程設計與快速學習機制，讓企業在衝擊後能迅速回彈。' },
+      { title: '認知彈性與決策品質的關聯研究', category: '心理學', excerpt: '研究指出，擁有高認知彈性的領導者能同時容納多種矛盾觀點，在模糊情境中做出更高品質的決策。' },
     ]
   },
   '如何提升決策品質，迅速做出最佳決策？': {
@@ -947,9 +951,9 @@ const DB = {
 
 研究發現，優秀的決策者能夠快速識別問題類型，並匹配相應的決策框架，而不是用同一套方法處理所有問題。`,
     sources: [
-      { title: '決策框架實務應用指南' },
-      { title: 'Pre-mortem 分析方法與案例' },
-      { title: '數據驅動決策的迷思破解' },
+      { title: '決策框架實務應用指南', category: '決策力', excerpt: '將問題分類為「可逆」與「不可逆」兩類，套用不同的決策框架，能有效提升決策速度並降低後悔風險。' },
+      { title: 'Pre-mortem 分析方法與案例', category: '領導管理', excerpt: 'Pre-mortem 是在決策前假設失敗已發生，強迫團隊反向思考，能揭露傳統腦力激盪看不見的盲點。' },
+      { title: '數據驅動決策的迷思破解', category: '策略思考', excerpt: '過度依賴數據反而會造成「分析癱瘓」，優秀的決策者懂得在數據與直覺之間找到動態平衡點。' },
     ]
   },
   '持續學習的好習慣有哪些？如何有效落實？': {
@@ -963,9 +967,9 @@ const DB = {
 
 落實關鍵在於：從小處著手，先建立習慣，再逐步提升學習深度和廣度。`,
     sources: [
-      { title: '費曼學習法與知識內化技巧' },
-      { title: '個人知識管理系統建立指南' },
-      { title: '高效學習的神經科學研究' },
+      { title: '費曼學習法與知識內化技巧', category: '學習力', excerpt: '費曼學習法的精髓在於「輸出即學習」——把複雜概念轉化為白話文解釋，是最快驗證自己是否真懂的方法。' },
+      { title: '個人知識管理系統建立指南', category: '工作效率', excerpt: '從散亂的筆記到系統化的知識網絡，關鍵在於建立「連結」而非只是「儲存」，讓每條新知識都能喚醒舊知識。' },
+      { title: '高效學習的神經科學研究', category: '心理學', excerpt: '間隔重複與主動回憶是目前神經科學最有力的兩種記憶鞏固策略，勝過反覆閱讀數倍以上。' },
     ]
   },
 };
@@ -983,8 +987,8 @@ function getDB(q) {
 
 最重要的是保持開放的心態，持續從實踐中學習和調整。如果你想深入了解特定面向，歡迎繼續追問！`,
     sources: [
-      { title: '管理思維的系統化框架' },
-      { title: '決策品質提升實務指引' },
+      { title: '管理思維的系統化框架', category: '領導管理', excerpt: '好的管理思維不是靠天賦，而是透過持續套用成熟框架、累積判斷經驗，逐步內化為直覺反應。' },
+      { title: '決策品質提升實務指引', category: '決策力', excerpt: '決策品質的提升有跡可循：建立決策記錄、定期複盤、辨識自己的認知偏誤，是三個最有效的方法。' },
     ]
   };
 }
@@ -1077,7 +1081,7 @@ function renderSidebar() {
               註冊
             </button>
             <button onclick="openLoginModal()"
-              class="flex-1 bg-[#217446] rounded-lg py-2 text-sm text-white font-medium hover:bg-[#1a5e38] transition-colors cursor-pointer">
+              class="flex-1 bg-[#217446] rounded-lg py-2 text-sm text-white font-medium hover:bg-[#144529] transition-colors cursor-pointer">
               登入
             </button>
           </div>
@@ -1087,10 +1091,6 @@ function renderSidebar() {
       </div>`;
   } else {
     /* ── MEMBER sidebar ── */
-    const used   = memberCount;
-    const remain = Math.max(0, MAX_MEMBER - used);
-    const pct    = (used / MAX_MEMBER) * 100;
-
     el.innerHTML = `
       <div class="flex flex-col gap-3 w-[260px]">
 
@@ -1108,27 +1108,6 @@ function renderSidebar() {
           </button>
         </div>
 
-        <!-- Usage counter -->
-        <div class="bg-white rounded-xl px-4 py-3 shadow-sm">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-xs text-gray-500">今日剩餘次數</span>
-            <span class="text-sm font-bold text-[#217446]">${remain}&thinsp;/&thinsp;${MAX_MEMBER}</span>
-          </div>
-          <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden">
-            <div class="h-full bg-[#217446] rounded-full transition-all duration-500" style="width:${100 - pct}%"></div>
-          </div>
-          <p class="text-[11px] text-gray-400 mt-1.5">已使用 ${used} 次</p>
-        </div>
-
-        <!-- History card -->
-        <div class="bg-white rounded-xl overflow-hidden shadow-sm">
-          <div class="px-5 py-2.5 border-b border-[#217446]">
-            <p class="font-medium text-[#217446] text-base leading-normal whitespace-nowrap">Manager AI 工作紀錄</p>
-          </div>
-          <div class="divide-y divide-[#e5e5e5]">
-            ${historyRowsHTML()}
-          </div>
-        </div>
       </div>`;
   }
 }
@@ -1156,28 +1135,49 @@ function updateQuotaHint() {
   const el = document.getElementById('ai-quota-hint');
   if (!el) return;
 
-  const total    = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
-  const used     = isLoggedIn ? memberCount : guestCount;
-  const remain   = Math.max(0, total - used);
+  const total     = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
+  const used      = isLoggedIn ? memberCount : guestCount;
+  const remain    = Math.max(0, total - used);
   const exhausted = remain === 0;
   const isWarning = remain === 1 && total > 1;
-  const dots     = quotaDotsHTML(total, remain);
+  const pct       = total > 0 ? Math.round((remain / total) * 100) : 0;
 
-  let label = '';
+  /* Pill colours */
+  let pillBg, barColor, textColor, statusText, extra = '';
   if (exhausted) {
-    label = `<span class="text-gray-400">今日已用完，明日重置</span>`;
+    pillBg    = 'background:#f9fafb;border:1px solid #e5e7eb';
+    barColor  = '#d1d5db';
+    textColor = '#9ca3af';
+    statusText = '今日已用完，明日 00:00 重置';
   } else if (isWarning) {
-    const loginHint = !isLoggedIn
-      ? ` · <button onclick="openLoginModal()" class="text-[#217446] underline cursor-pointer">登入解鎖更多</button>`
-      : '';
-    label = `<span class="text-red-400 font-medium">最後 1 次${loginHint}</span>`;
+    pillBg    = 'background:#fff5f5;border:1px solid #fecaca';
+    barColor  = '#f87171';
+    textColor = '#ef4444';
+    statusText = '最後 1 次';
+    if (!isLoggedIn) extra = `<button onclick="openLoginModal()" style="color:#217446;font-size:11px;text-decoration:underline;margin-left:6px;cursor:pointer">登入解鎖更多</button>`;
   } else if (!isLoggedIn && used === 0) {
-    label = `<span class="text-gray-400">訪客每日 ${MAX_GUEST} 次免費提問</span>`;
+    pillBg    = 'background:#f0faf4;border:1px solid #a3d9bc';
+    barColor  = '#217446';
+    textColor = '#217446';
+    statusText = `訪客每日 ${MAX_GUEST} 次免費`;
+    extra = `<button onclick="openLoginModal()" style="color:#217446;font-size:11px;text-decoration:underline;margin-left:6px;cursor:pointer">登入解鎖更多</button>`;
   } else {
-    label = `<span class="${isLoggedIn ? 'text-[#217446]' : 'text-gray-500'}">今日剩餘 <strong>${remain}</strong> 次</span>`;
+    pillBg    = isLoggedIn ? 'background:#f0faf4;border:1px solid #a3d9bc' : 'background:#f9fafb;border:1px solid #e5e7eb';
+    barColor  = '#217446';
+    textColor = isLoggedIn ? '#217446' : '#6b7280';
+    statusText = `今日剩餘 <strong style="font-weight:700">${remain}</strong> / ${total} 次`;
   }
 
-  el.innerHTML = `<span class="inline-flex items-center gap-2">${dots}${label}</span>`;
+  el.innerHTML = `
+    <div style="${pillBg};border-radius:100px;padding:6px 14px 6px 12px;display:inline-flex;align-items:center;gap:8px;min-width:180px">
+      <!-- progress track -->
+      <div style="width:80px;height:4px;background:#e5e7eb;border-radius:100px;overflow:hidden;flex-shrink:0">
+        <div style="height:100%;width:${pct}%;background:${barColor};border-radius:100px;transition:width .4s ease"></div>
+      </div>
+      <!-- label -->
+      <span style="font-size:12px;color:${textColor};white-space:nowrap">${statusText}</span>
+      ${extra}
+    </div>`;
 
   /* Disable input when exhausted */
   const inp = document.getElementById('ai-input');
@@ -1217,10 +1217,16 @@ function loadAnswer(q) {
   ansEl.classList.add('fade-up');
   setTimeout(() => ansEl.classList.remove('fade-up'), 400);
 
-  document.getElementById('ai-sources').innerHTML = data.sources.map(s => `
-    <div class="src-card bg-white rounded-lg flex gap-3 items-center overflow-hidden cursor-pointer w-full">
-      <div class="w-[160px] h-[90px] shrink-0 bg-[#9ca3af]"></div>
-      <p class="flex-1 font-medium text-[18px] text-[#1a1a1a] leading-[1.4] min-w-0 pr-3">${s.title}</p>
+  document.getElementById('ai-sources').innerHTML = data.sources.map((s, i) => `
+    <div class="src-card bg-white rounded-xl flex flex-col gap-2 p-4 border border-gray-100 cursor-pointer hover:border-[#217446] hover:shadow-sm transition-all w-full">
+      <div class="flex items-center gap-2">
+        <span class="text-[11px] font-bold text-white bg-[#217446] w-[18px] h-[18px] rounded flex items-center justify-center shrink-0 leading-none">${i + 1}</span>
+        <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="6" fill="#217446"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="18" font-weight="bold" fill="white" font-family="serif">M</text></svg>
+        <span class="text-[12px] text-gray-400">managertoday.com.tw</span>
+        <span class="ml-auto text-[11px] text-[#217446] bg-[#e5f5eb] px-2 py-0.5 rounded-full shrink-0 whitespace-nowrap">${s.category}</span>
+      </div>
+      <p class="font-semibold text-[15px] text-[#1a1a1a] leading-[1.4]">${s.title}</p>
+      <p class="text-[13px] text-gray-500 leading-[1.6] line-clamp-2">${s.excerpt}</p>
     </div>`).join('');
 
   renderOtherPills(q);
@@ -1298,15 +1304,25 @@ function submitArtQ() {
 
   document.getElementById('ai-q-title').textContent = q;
   document.getElementById('ai-answer').innerHTML = `
-    <div class="flex items-center gap-3 py-4">
-      <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 bg-[#217446] rounded-full dot"></div>
-        <div class="w-2.5 h-2.5 bg-[#217446] rounded-full dot"></div>
-        <div class="w-2.5 h-2.5 bg-[#217446] rounded-full dot"></div>
+    <div class="flex flex-col gap-3 py-2">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-[#217446] shrink-0 animate-spin" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span class="text-[14px] text-[#217446] font-medium">正在搜尋經理人文章庫…</span>
       </div>
-      <span class="text-sm text-[#6b6b6b]">AI 經理人正在思考中…</span>
     </div>`;
-  document.getElementById('ai-sources').innerHTML = '';
+  document.getElementById('ai-sources').innerHTML = `
+    ${[1,2,3].map(n => `
+    <div class="bg-white rounded-xl flex flex-col gap-2.5 p-4 border border-gray-100 w-full animate-pulse" style="animation-delay:${(n-1)*120}ms">
+      <div class="flex items-center gap-2">
+        <div class="w-[18px] h-[18px] bg-gray-200 rounded shrink-0"></div>
+        <div class="h-3 bg-gray-200 rounded w-32"></div>
+        <div class="ml-auto h-[18px] bg-gray-100 rounded-full w-14"></div>
+      </div>
+      <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+      <div class="h-3 bg-gray-100 rounded w-full"></div>
+      <div class="h-3 bg-gray-100 rounded w-3/4"></div>
+    </div>`).join('')}
+  `;
   document.getElementById('ai-input').value = '';
 
   setTimeout(() => {
@@ -1341,15 +1357,25 @@ function submitAI() {
 
   document.getElementById('ai-q-title').textContent = q;
   document.getElementById('ai-answer').innerHTML = `
-    <div class="flex items-center gap-3 py-4">
-      <div class="flex gap-1.5">
-        <div class="w-2.5 h-2.5 bg-[#217446] rounded-full dot"></div>
-        <div class="w-2.5 h-2.5 bg-[#217446] rounded-full dot"></div>
-        <div class="w-2.5 h-2.5 bg-[#217446] rounded-full dot"></div>
+    <div class="flex flex-col gap-3 py-2">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-[#217446] shrink-0 animate-spin" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span class="text-[14px] text-[#217446] font-medium">正在搜尋經理人文章庫…</span>
       </div>
-      <span class="text-sm text-[#6b6b6b]">AI 經理人正在思考中…</span>
     </div>`;
-  document.getElementById('ai-sources').innerHTML = '';
+  document.getElementById('ai-sources').innerHTML = `
+    ${[1,2,3].map(n => `
+    <div class="bg-white rounded-xl flex flex-col gap-2.5 p-4 border border-gray-100 w-full animate-pulse" style="animation-delay:${(n-1)*120}ms">
+      <div class="flex items-center gap-2">
+        <div class="w-[18px] h-[18px] bg-gray-200 rounded shrink-0"></div>
+        <div class="h-3 bg-gray-200 rounded w-32"></div>
+        <div class="ml-auto h-[18px] bg-gray-100 rounded-full w-14"></div>
+      </div>
+      <div class="h-4 bg-gray-200 rounded w-4/5"></div>
+      <div class="h-3 bg-gray-100 rounded w-full"></div>
+      <div class="h-3 bg-gray-100 rounded w-3/4"></div>
+    </div>`).join('')}
+  `;
 
   setTimeout(() => {
     loadAnswer(q);
