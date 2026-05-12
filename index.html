@@ -117,7 +117,7 @@
     <div class="max-w-[1280px] mx-auto px-14 h-14 flex items-center justify-between">
       <!-- Left: hamburger + logo + category nav -->
       <div class="flex items-center gap-4">
-        <button class="w-6 h-6 flex flex-col justify-center gap-[5px] cursor-pointer group" aria-label="選單">
+        <button class="w-11 h-11 flex flex-col justify-center items-center gap-[5px] cursor-pointer group" aria-label="選單">
           <span class="block w-full h-0.5 bg-gray-600 group-hover:bg-mt transition-colors rounded"></span>
           <span class="block w-full h-0.5 bg-gray-600 group-hover:bg-mt transition-colors rounded"></span>
           <span class="block w-full h-0.5 bg-gray-600 group-hover:bg-mt transition-colors rounded"></span>
@@ -143,12 +143,12 @@
           <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 5.58 2 10c0 3.17 1.97 5.93 4.9 7.44L6 21l3.15-1.48C9.73 19.82 10.85 20 12 20c5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
           加好友
         </button>
-        <button class="p-1 text-gray-500 hover:text-mt transition-colors cursor-pointer" aria-label="搜尋">
+        <button class="w-11 h-11 flex items-center justify-center text-gray-500 hover:text-mt transition-colors cursor-pointer" aria-label="搜尋">
           <svg class="w-[22px] h-[22px]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
         </button>
         <button class="text-sm text-[#555] hover:text-mt transition-colors hidden sm:block cursor-pointer">登入 / 註冊</button>
         <div class="relative cursor-pointer">
-          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center">
+          <div class="w-11 h-11 rounded-full bg-gray-200 flex items-center justify-center">
             <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
           </div>
           <span class="absolute -top-0.5 -right-0.5 bg-[#cab27c] text-white text-[10px] font-medium rounded-full w-3.5 h-3.5 flex items-center justify-center">1</span>
@@ -186,7 +186,7 @@
         </h1>
         <!-- Hero image 832×468 -->
         <div class="w-full rounded-2xl overflow-hidden bg-gray-900" style="aspect-ratio:832/468">
-          <svg viewBox="0 0 832 468" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 832 468" class="w-full h-full" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="城市夜景插圖">
             <defs>
               <linearGradient id="artSky" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stop-color="#0f1b35"/>
@@ -313,17 +313,17 @@
       <!-- Left: Social icons (160px, sticky) -->
       <div class="w-[160px] shrink-0 hidden lg:block">
         <div class="social-sticky flex flex-col items-center gap-3 pt-2">
-          <button class="w-10 h-10 rounded-full bg-[#1877F2] flex items-center justify-center text-white hover:opacity-85 transition-opacity cursor-pointer" aria-label="Facebook">
+          <button class="w-11 h-11 rounded-full bg-[#1877F2] flex items-center justify-center text-white hover:opacity-85 transition-opacity cursor-pointer" aria-label="Facebook">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
           </button>
-          <button class="w-10 h-10 rounded-full flex items-center justify-center text-white hover:opacity-85 transition-opacity cursor-pointer" style="background:#4CC764" aria-label="LINE">
+          <button class="w-11 h-11 rounded-full flex items-center justify-center text-white hover:opacity-85 transition-opacity cursor-pointer" style="background:#4CC764" aria-label="LINE">
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 5.58 2 10c0 3.17 1.97 5.93 4.9 7.44L6 21l3.15-1.48C9.73 19.82 10.85 20 12 20c5.52 0 10-3.58 10-8s-4.48-8-10-8z"/></svg>
           </button>
-          <button class="w-10 h-10 rounded-full bg-[#0A66C2] flex items-center justify-center text-white hover:opacity-85 transition-opacity cursor-pointer" aria-label="LinkedIn">
+          <button class="w-11 h-11 rounded-full bg-[#0A66C2] flex items-center justify-center text-white hover:opacity-85 transition-opacity cursor-pointer" aria-label="LinkedIn">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
           </button>
           <div class="w-7 h-px bg-gray-200"></div>
-          <button onclick="toggleBookmark(this)" class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer" aria-label="收藏">
+          <button onclick="toggleBookmark(this)" class="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer" aria-label="收藏">
             <svg class="w-4 h-4" id="bookmark-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
           </button>
         </div>
@@ -389,6 +389,7 @@
             <!-- Input area (Figma: gradient container rounded-[16px], input border #95d9b3 rounded-[12px], btn #217446 rounded-[12px]) -->
             <div class="mt-1 p-2 rounded-[16px] flex gap-2"
               style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+              <label for="art-input" class="sr-only">輸入問題</label>
               <input id="art-input" type="text"
                 placeholder="請輸入你想了解的問題…"
                 class="flex-1 bg-white text-[14px] text-gray-700 px-4 py-2.5 focus:outline-none transition-colors"
@@ -693,6 +694,7 @@
         <span class="flex items-center gap-1 text-[12px] text-[#217446] font-medium bg-[#e5f5eb] px-3 py-1 rounded-full whitespace-nowrap shrink-0 select-none">
           📚 全站文章庫
         </span>
+        <label for="ai-input" class="sr-only">輸入問題</label>
         <input id="ai-input" type="text"
           placeholder="輸入任何管理或職涯問題..."
           class="flex-1 bg-transparent text-[15px] font-medium text-[rgba(33,116,70,0.8)] placeholder-[rgba(33,116,70,0.6)] focus:outline-none"
@@ -794,9 +796,11 @@
 
         <!-- Email form -->
         <div class="flex flex-col gap-2.5 w-full">
-          <input type="email" placeholder="電子郵件"
+          <label for="login-email" class="sr-only">電子郵件</label>
+          <input id="login-email" type="email" placeholder="電子郵件"
             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#217446] transition-colors" />
-          <input type="password" placeholder="密碼"
+          <label for="login-password" class="sr-only">密碼</label>
+          <input id="login-password" type="password" placeholder="密碼"
             class="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#217446] transition-colors" />
           <button onclick="doLogin('email')"
             class="w-full bg-[#217446] text-white font-semibold text-sm py-2.5 rounded-xl hover:bg-[#1a5e38] transition-colors cursor-pointer">
@@ -863,6 +867,7 @@
 
       <!-- Email capture row -->
       <div class="flex gap-3 w-full mt-2">
+        <label for="limit-email-input" class="sr-only">電子郵件</label>
         <input id="limit-email-input" type="email" placeholder="請留下信箱"
           class="flex-1 bg-gray-100 rounded-xl px-5 py-3.5 text-[15px] text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#217446]/30 transition"
           onkeydown="if(event.key==='Enter') submitLimitEmail()" />
