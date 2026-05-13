@@ -43,6 +43,18 @@
     }
     .fade-up { animation: fadeUp 0.25s ease forwards; }
 
+    /* Placeholder rotation */
+    @keyframes phExit {
+      from { opacity:1; transform:translateY(-50%); }
+      to   { opacity:0; transform:translateY(calc(-50% + 10px)); }
+    }
+    @keyframes phEnter {
+      from { opacity:0; transform:translateY(calc(-50% - 10px)); }
+      to   { opacity:1; transform:translateY(-50%); }
+    }
+    .ph-exit  { animation: phExit  0.25s ease forwards; }
+    .ph-enter { animation: phEnter 0.3s ease forwards; }
+
     @keyframes dotPulse {
       0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
       40%           { opacity: 1;    transform: scale(1.1); }
@@ -101,6 +113,16 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 99px; }
     ::-webkit-scrollbar-track { background: transparent; }
+
+    @keyframes cellPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.7); }
+    }
+    @keyframes cellUnlock {
+      0%   { transform: scale(0.15); opacity: 0; }
+      60%  { transform: scale(1.35); opacity: 1; }
+      100% { transform: scale(1); }
+    }
 
     @media (prefers-reduced-motion: reduce) {
       .fade-up, .dot { animation: none; }
@@ -366,6 +388,8 @@
               <path d="M10.8806 0.345594C10.8425 -0.119239 10.4681 -0.5 10 -0.5C9.53193 -0.5 9.15751 -0.119239 9.11942 0.345594C8.71166 5.27945 4.77823 9.21256 -0.154346 9.61871C-0.620796 9.65678 -1 10.0328 -1 10.4992C-1 10.9672 -0.6208 11.3417 -0.154346 11.3813C4.77864 11.7875 8.711 15.7206 9.11942 20.6544C9.15751 21.1192 9.53193 21.5 10 21.5C10.4681 21.5 10.8425 21.1192 10.8806 20.6544C11.2883 15.7206 15.2218 11.7875 20.1543 11.3813C20.6208 11.3417 21 10.9672 21 10.4992C21 10.0328 20.6208 9.65678 20.1543 9.61871C15.2218 9.21256 11.2883 5.27945 10.8806 0.345594Z" fill="#217446"></path>
             </svg>
             <p class="font-bold text-base text-[#217446] tracking-[0.04em] leading-tight whitespace-nowrap">Manager AI 幫你提問：</p>
+            <span class="ml-auto text-xs text-[#217446] bg-[#e5f5eb] px-2 py-0.5 rounded-full shrink-0 inline-flex items-center gap-1 whitespace-nowrap">
+              <svg class="w-3.5 h-3.5 shrink-0 text-[#217446]" viewBox="0 0 14 14" fill="currentColor"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z"/></svg>Power by 經理人知識庫</span>
           </div>
 
           <div class="flex flex-col gap-1 w-full">
@@ -392,16 +416,21 @@
             </button>
           </div>
 
-          <div class="p-3 rounded-[16px] flex gap-2 items-center"
-            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+          <div class="p-2 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%);">
             <label for="art-input" class="sr-only">輸入問題</label>
-            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
-              <span class="shrink-0 text-white text-[13px] font-medium px-2 py-1 rounded-[40px] whitespace-nowrap" style="background:linear-gradient(90deg,#3ea97a,#3ea97a)">經理人文章庫</span>
-              <input id="art-input" type="text"
-                placeholder="換你問 Manager AI..."
-                class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0"
-                style="letter-spacing:-0.28px;"
-                onkeydown="if(event.key==='Enter') submitArtQ()" />
+            <div id="art-input-pill" class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #a3d9bc;">
+              <div style="position:relative;flex:1;min-width:0;display:flex;align-items:center;overflow:hidden;">
+                <input id="art-input" type="text"
+                  placeholder=""
+                  class="w-full bg-transparent text-[14px] text-gray-700 focus:outline-none"
+                  style="letter-spacing:-0.28px;"
+                  onkeydown="if(event.key==='Enter') submitArtQ()"
+                  onfocus="var p=document.getElementById('art-ph');p.classList.remove('ph-enter','ph-exit');p.style.opacity='0';"
+                  onblur="if(!this.value&&!this.disabled){var p=document.getElementById('art-ph');p.style.opacity='1';}" />
+                <span id="art-ph" style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);pointer-events:none;font-size:14px;color:#9ca3af;letter-spacing:-0.28px;white-space:nowrap;overflow:hidden;opacity:1;"></span>
+              </div>
+              <span id="art-quota-inline" class="shrink-0" style="display:inline-flex;align-items:center;padding-left:10px;border-left:1px solid #d1fae5"></span>
             </div>
             <button onclick="submitArtQ()"
               class="text-white text-[16px] font-semibold px-7 py-2 cursor-pointer hover:opacity-90 transition-opacity whitespace-nowrap rounded-[40px] shrink-0"
@@ -410,7 +439,7 @@
             </button>
           </div>
 
-          <p class="font-normal text-sm text-[#666] text-center leading-none w-full">⚠️ 內容由 AI 生成，內容請勿輸入機密資料，資料具時效性限制，請自行判斷資訊準確性。</p>
+          <p class="font-normal text-xs text-slate-400 text-center leading-none w-full">⚠️ 內容由 AI 根據《經理人》知識庫輔助生成，資料具時效性，請自行判斷準確性；提問請勿輸入機密資料。</p>
         </div>
 
         <!-- Google News + LINE follow buttons -->
@@ -624,7 +653,7 @@
         <svg class="w-3.5 h-3.5 text-[#217446]" viewBox="0 0 14 14" fill="currentColor">
           <path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z"/>
         </svg>
-        <span class="text-[#217446] text-[14px] leading-none whitespace-nowrap">Powered by Manager Today AI</span>
+        <span class="text-[#217446] text-[14px] leading-none whitespace-nowrap">Powered by 經理人知識庫</span>
       </div>
 
       <!-- Answer section (Figma: 369:7513 flex-col gap=24) -->
@@ -659,6 +688,54 @@
 
       <!-- Other article pills (shown when current Q is one of the AI-generated pills) -->
       <div id="ai-other-pills" class="hidden flex-col gap-2"></div>
+
+      <!-- ── AI 推薦提問 Widget ── -->
+      <div class="flex flex-col gap-3 py-1 rounded-xl mt-8 w-full">
+        <div class="flex gap-2 items-center">
+          <svg class="w-5 h-5 shrink-0" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.8806 0.345594C10.8425 -0.119239 10.4681 -0.5 10 -0.5C9.53193 -0.5 9.15751 -0.119239 9.11942 0.345594C8.71166 5.27945 4.77823 9.21256 -0.154346 9.61871C-0.620796 9.65678 -1 10.0328 -1 10.4992C-1 10.9672 -0.6208 11.3417 -0.154346 11.3813C4.77864 11.7875 8.711 15.7206 9.11942 20.6544C9.15751 21.1192 9.53193 21.5 10 21.5C10.4681 21.5 10.8425 21.1192 10.8806 20.6544C11.2883 15.7206 15.2218 11.7875 20.1543 11.3813C20.6208 11.3417 21 10.9672 21 10.4992C21 10.0328 20.6208 9.65678 20.1543 9.61871C15.2218 9.21256 11.2883 5.27945 10.8806 0.345594Z" fill="#217446"></path>
+          </svg>
+          <p class="font-bold text-base text-[#217446] tracking-[0.04em] leading-tight whitespace-nowrap">Manager AI 幫你提問：</p>
+          <span class="ml-auto text-xs text-[#217446] bg-[#e5f5eb] px-2 py-0.5 rounded-full shrink-0 inline-flex items-center gap-1 whitespace-nowrap">
+            <svg class="w-3.5 h-3.5 shrink-0 text-[#217446]" viewBox="0 0 14 14" fill="currentColor"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z"/></svg>Power by 經理人知識庫
+          </span>
+        </div>
+
+        <div class="flex flex-col gap-1 w-full">
+          <button onclick="goAI('開會時總是沒人敢提意見，主管該如何打破沈默的僵局？')" class="flex gap-2.5 items-center px-4 py-2 rounded-lg w-full bg-[#fafafa] hover:bg-[#c6ecd5] transition-colors text-left cursor-pointer">
+            <p class="flex-1 font-medium text-base text-[#1a1a1a]">開會時總是沒人敢提意見，主管該如何打破沈默的僵局？</p>
+            <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 18 18" fill="none"><path d="M5.25 5.25H12.75V12.75" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.25 12.75L12.75 5.25" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button onclick="goAI('員工私下抱怨卻不敢在會議說真話，主管該怎麼引導？')" class="flex gap-2.5 items-center px-4 py-2 rounded-lg w-full bg-[#fafafa] hover:bg-[#c6ecd5] transition-colors text-left cursor-pointer">
+            <p class="flex-1 font-medium text-base text-[#1a1a1a]">員工私下抱怨卻不敢在會議說真話，主管該怎麼引導？</p>
+            <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 18 18" fill="none"><path d="M5.25 5.25H12.75V12.75" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.25 12.75L12.75 5.25" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button onclick="goAI('想建立敢說真話的團隊文化，主管必須戒掉哪三個習慣？')" class="flex gap-2.5 items-center px-4 py-2 rounded-lg w-full bg-[#fafafa] hover:bg-[#c6ecd5] transition-colors text-left cursor-pointer">
+            <p class="flex-1 font-medium text-base text-[#1a1a1a]">想建立敢說真話的團隊文化，主管必須戒掉哪三個習慣？</p>
+            <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 18 18" fill="none"><path d="M5.25 5.25H12.75V12.75" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.25 12.75L12.75 5.25" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <div class="p-2 rounded-[16px] flex gap-2 items-center"
+          style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+          <label for="ai-sugg-input" class="sr-only">輸入問題</label>
+          <div id="ai-sugg-pill" class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #a3d9bc;">
+            <input id="ai-sugg-input" type="text"
+              placeholder="換你問 Manager AI..."
+              class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0"
+              style="letter-spacing:-0.28px;"
+              onkeydown="if(event.key==='Enter') submitAISugg()" />
+            <span id="ai-sugg-quota" class="shrink-0" style="display:inline-flex;align-items:center;padding-left:10px;border-left:1px solid #d1fae5"></span>
+          </div>
+          <button onclick="submitAISugg()"
+            class="text-white text-[16px] font-semibold px-7 py-2 cursor-pointer hover:opacity-90 transition-opacity whitespace-nowrap rounded-[40px] shrink-0"
+            style="background:#217446; letter-spacing:0.04em">
+            送出
+          </button>
+        </div>
+
+        <p class="font-normal text-xs text-slate-400 text-center leading-none w-full">⚠️ 內容由 AI 根據《經理人》知識庫輔助生成，資料具時效性，請自行判斷準確性；提問請勿輸入機密資料。</p>
+      </div>
 
       <!-- Bottom spacer — prevents content from hiding behind the sticky input bar -->
       <div class="h-36"></div>
@@ -977,9 +1054,10 @@ const MAX_GUEST  = 1;   // daily limit for guests
 const MAX_MEMBER = 4;   // daily limit for members (demo)
 const MEMBER     = { name: '王小明', initial: '王', plan: '一般會員' };
 
-let isLoggedIn  = false;
-let guestCount  = 0;   // questions used as guest
-let memberCount = 0;   // questions used as member
+let isLoggedIn      = false;
+let prevLoginState  = false;
+let guestCount      = 0;
+let memberCount     = 0;
 
 let historyItems = [
   '為什麼領導者需要擁抱不確定性？有哪些具體做法？',
@@ -1090,19 +1168,50 @@ function renderSidebar() {
 
 
 /* ══════════════════════════════════════
-   QUOTA HINT (dot indicators)
+   QUOTA — SHARED CELL RENDERER
 ══════════════════════════════════════ */
-function quotaDotsHTML(total, remain) {
-  /* isWarning only when member is down to last dot (guest only has 1 total, not a warning state) */
-  const isWarning = remain === 1 && total > 1;
-  let html = '<span class="inline-flex items-center gap-[5px]">';
-  for (let i = 0; i < total; i++) {
-    const filled = i < remain;
-    const cls = !filled
-      ? 'bg-gray-300'
-      : isWarning ? 'bg-red-400' : 'bg-[#217446]';
-    html += `<span class="inline-block w-[10px] h-[10px] rounded-full ${cls} transition-colors duration-300"></span>`;
+function cellsHTML(cellPx, unlockAnimate) {
+  const total  = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
+  const used   = isLoggedIn ? memberCount : guestCount;
+  const remain = Math.max(0, total - used);
+  const locked = isLoggedIn ? 0 : MAX_MEMBER - MAX_GUEST;
+  const isWarn = remain === 1 && total > 1;
+  const s = cellPx + 'px';
+  const r = Math.max(2, Math.round(cellPx * 0.28)) + 'px';
+  const ic = Math.max(4, cellPx - 4);
+
+  let html = `<span style="display:inline-flex;align-items:center;gap:3px">`;
+
+  /* used cells — gray */
+  for (let i = 0; i < used; i++) {
+    html += `<span style="width:${s};height:${s};border-radius:${r};background:#e5e7eb;flex-shrink:0;display:inline-block"></span>`;
   }
+
+  /* available cells — green (or red if warning) */
+  for (let i = 0; i < remain; i++) {
+    const color = isWarn ? '#f87171' : '#217446';
+    /* stagger unlock animation for cells beyond the guest quota */
+    const isNew = unlockAnimate && isLoggedIn && (used + i) >= MAX_GUEST;
+    let anim = '';
+    if (isNew) {
+      anim = `animation:cellUnlock .35s ease ${(used + i - MAX_GUEST) * 70}ms both;`;
+    } else if (isWarn) {
+      anim = 'animation:cellPulse 1.2s ease-in-out infinite;';
+    }
+    html += `<span style="width:${s};height:${s};border-radius:${r};background:${color};flex-shrink:0;display:inline-block;${anim}"></span>`;
+  }
+
+  /* locked cells — shown for guests, with lock icon */
+  for (let i = 0; i < locked; i++) {
+    html += `<span style="width:${s};height:${s};border-radius:${r};background:#f3f4f6;border:1px solid #e5e7eb;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center">
+      <svg width="${ic}" height="${ic}" viewBox="0 0 12 14" fill="none">
+        <rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/>
+        <path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/>
+      </svg>
+    </span>`;
+  }
+
   html += '</span>';
   return html;
 }
@@ -1111,59 +1220,98 @@ function updateQuotaHint() {
   const el = document.getElementById('ai-quota-hint');
   if (!el) return;
 
+  const justLoggedIn = isLoggedIn && !prevLoginState;
   const total     = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
   const used      = isLoggedIn ? memberCount : guestCount;
   const remain    = Math.max(0, total - used);
   const exhausted = remain === 0;
-  const isWarning = remain === 1 && total > 1;
-  const pct       = total > 0 ? Math.round((remain / total) * 100) : 0;
+  const isWarn    = remain === 1 && total > 1;
 
-  /* Pill colours */
-  let pillBg, barColor, textColor, statusText, extra = '';
+  let pillBg, textColor, statusText, extra = '';
   if (exhausted) {
-    pillBg    = 'background:#f9fafb;border:1px solid #e5e7eb';
-    barColor  = '#d1d5db';
-    textColor = '#9ca3af';
+    pillBg     = 'background:#f9fafb;border:1px solid #e5e7eb';
+    textColor  = '#9ca3af';
     statusText = '今日已用完，明日 00:00 重置';
-  } else if (isWarning) {
-    pillBg    = 'background:#fff5f5;border:1px solid #fecaca';
-    barColor  = '#f87171';
-    textColor = '#ef4444';
+  } else if (isWarn) {
+    pillBg     = 'background:#fff5f5;border:1px solid #fecaca';
+    textColor  = '#ef4444';
     statusText = '最後 1 次';
     if (!isLoggedIn) extra = `<button onclick="openLoginModal()" style="color:#217446;font-size:11px;text-decoration:underline;margin-left:6px;cursor:pointer">登入解鎖更多</button>`;
   } else if (!isLoggedIn && used === 0) {
-    pillBg    = 'background:#f0faf4;border:1px solid #a3d9bc';
-    barColor  = '#217446';
-    textColor = '#217446';
-    statusText = `訪客每日 ${MAX_GUEST} 次免費`;
-    extra = `<button onclick="openLoginModal()" style="color:#217446;font-size:11px;text-decoration:underline;margin-left:6px;cursor:pointer">登入解鎖更多</button>`;
+    pillBg     = 'background:#f0faf4;border:1px solid #a3d9bc';
+    textColor  = '#217446';
+    statusText = `今日 ${MAX_GUEST} 次免費`;
+    extra      = `<button onclick="openLoginModal()" style="color:#217446;font-size:11px;text-decoration:underline;margin-left:6px;cursor:pointer">登入解鎖更多</button>`;
   } else {
-    pillBg    = isLoggedIn ? 'background:#f0faf4;border:1px solid #a3d9bc' : 'background:#f9fafb;border:1px solid #e5e7eb';
-    barColor  = '#217446';
-    textColor = isLoggedIn ? '#217446' : '#6b7280';
-    statusText = `今日剩餘 <strong style="font-weight:700">${remain}</strong> / ${total} 次`;
+    pillBg     = isLoggedIn ? 'background:#f0faf4;border:1px solid #a3d9bc' : 'background:#f9fafb;border:1px solid #e5e7eb';
+    textColor  = isLoggedIn ? '#217446' : '#6b7280';
+    statusText = `自訂提問剩餘 ${remain} / ${total} 次`;
   }
 
   el.innerHTML = `
-    <div style="${pillBg};border-radius:100px;padding:6px 14px 6px 12px;display:inline-flex;align-items:center;gap:8px;min-width:180px">
-      <!-- progress track -->
-      <div style="width:80px;height:4px;background:#e5e7eb;border-radius:100px;overflow:hidden;flex-shrink:0">
-        <div style="height:100%;width:${pct}%;background:${barColor};border-radius:100px;transition:width .4s ease"></div>
-      </div>
-      <!-- label -->
+    <div style="${pillBg};border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+      ${cellsHTML(12, justLoggedIn)}
       <span style="font-size:12px;color:${textColor};white-space:nowrap">${statusText}</span>
       ${extra}
     </div>`;
 
-  /* Disable input when exhausted */
   const inp = document.getElementById('ai-input');
   const btn = document.querySelector('#pg-ai button[onclick="submitAI()"]');
   if (inp) {
-    inp.disabled = exhausted;
-    inp.placeholder = exhausted ? '今日提問次數已達上限' : '輸入任何管理或職涯問題...';
+    inp.disabled    = exhausted;
+    inp.placeholder = exhausted ? '今日提問次數已達上限' : '換你問 Manager AI...';
     inp.style.opacity = exhausted ? '0.5' : '1';
   }
   if (btn) { btn.disabled = exhausted; btn.style.opacity = exhausted ? '0.5' : '1'; }
+  updateAISuggQuota();
+}
+
+
+function updateAISuggQuota() {
+  const el   = document.getElementById('ai-sugg-quota');
+  const pill = document.getElementById('ai-sugg-pill');
+  if (!el) return;
+
+  const total     = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
+  const used      = isLoggedIn ? memberCount : guestCount;
+  const remain    = Math.max(0, total - used);
+  const exhausted = remain === 0;
+  const isWarn    = remain === 1 && total > 1;
+
+  const sepColor = isWarn ? '#fecaca' : exhausted ? '#e5e7eb' : '#d1fae5';
+  if (pill) pill.style.borderColor = isWarn ? '#fca5a5' : exhausted ? '#e5e7eb' : '#a3d9bc';
+  el.style.borderLeft = `1px solid ${sepColor}`;
+
+  let html = '';
+  if (exhausted && !isLoggedIn) {
+    html = `<button onclick="openLoginModal()" style="font-size:10px;color:#217446;text-decoration:underline;cursor:pointer;white-space:nowrap">🔒 登入解鎖 3 次提問</button>`;
+  } else if (exhausted && isLoggedIn) {
+    html = `<span style="font-size:10px;color:#9ca3af;white-space:nowrap">今日已用完，明日重置</span>`;
+  } else if (isWarn) {
+    html = `<span style="font-size:10px;color:#ef4444;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">1</b></span>`;
+  } else {
+    html = `<span style="font-size:10px;color:#217446;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">${remain}</b></span>`;
+  }
+  el.innerHTML = html;
+
+  const inp = document.getElementById('ai-sugg-input');
+  const btn = document.querySelector('button[onclick="submitAISugg()"]');
+  if (inp) {
+    inp.disabled      = exhausted;
+    inp.placeholder   = exhausted ? '今日提問次數已達上限' : '換你問 Manager AI...';
+    inp.style.opacity = exhausted ? '0.5' : '1';
+  }
+  if (btn) { btn.disabled = exhausted; btn.style.opacity = exhausted ? '0.5' : '1'; }
+}
+
+
+function submitAISugg() {
+  const sugg = document.getElementById('ai-sugg-input');
+  const q = sugg.value.trim();
+  if (!q) return;
+  sugg.value = '';
+  document.getElementById('ai-input').value = q;
+  submitAI();
 }
 
 
@@ -1256,6 +1404,57 @@ function pushHistory(q) {
 }
 
 
+function updateArtQuotaHint() {
+  const el   = document.getElementById('art-quota-inline');
+  const pill = document.getElementById('art-input-pill');
+  if (!el) return;
+
+  const total     = isLoggedIn ? MAX_MEMBER : MAX_GUEST;
+  const used      = isLoggedIn ? memberCount : guestCount;
+  const remain    = Math.max(0, total - used);
+  const exhausted = remain === 0;
+  const isWarn    = remain === 1 && total > 1;
+
+  const sepColor = isWarn ? '#fecaca' : exhausted ? '#e5e7eb' : '#d1fae5';
+  if (pill) pill.style.borderColor = isWarn ? '#fca5a5' : exhausted ? '#e5e7eb' : '#a3d9bc';
+  el.style.borderLeft = `1px solid ${sepColor}`;
+
+  let html = '';
+  if (exhausted && !isLoggedIn) {
+    html = `<button onclick="openLoginModal()" style="font-size:10px;color:#217446;text-decoration:underline;cursor:pointer;white-space:nowrap">🔒 登入解鎖 3 次提問</button>`;
+  } else if (exhausted && isLoggedIn) {
+    html = `<span style="font-size:10px;color:#9ca3af;white-space:nowrap">今日已用完，明日重置</span>`;
+  } else if (isWarn) {
+    html = `<span style="font-size:10px;color:#ef4444;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">1</b></span>`;
+  } else {
+    html = `<span style="font-size:10px;color:#217446;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">${remain}</b></span>`;
+  }
+
+  el.innerHTML = html;
+
+  const inp = document.getElementById('art-input');
+  const ph  = document.getElementById('art-ph');
+  const btn = document.querySelector('button[onclick="submitArtQ()"]');
+  if (inp) {
+    inp.disabled      = exhausted;
+    inp.placeholder   = '';
+    inp.style.opacity = exhausted ? '0.5' : '1';
+  }
+  if (ph) {
+    if (exhausted) {
+      ph.textContent   = '今日提問次數已達上限';
+      ph.style.color   = '#9ca3af';
+      ph.style.opacity = '0.5';
+    } else {
+      ph.textContent   = ART_PH[artPhIdx];
+      ph.style.color   = '#9ca3af';
+      ph.style.opacity = (inp && (document.activeElement === inp || inp.value)) ? '0' : '1';
+    }
+  }
+  if (btn) { btn.disabled = exhausted; btn.style.opacity = exhausted ? '0.5' : '1'; }
+}
+
+
 /* ══════════════════════════════════════
    ARTICLE PAGE ACTIONS
 ══════════════════════════════════════ */
@@ -1276,6 +1475,7 @@ function submitArtQ() {
   pushHistory(q);
   renderSidebar();
   updateQuotaHint();
+  updateArtQuotaHint();
   showPage('pg-ai');
 
   document.getElementById('ai-q-title').textContent = q;
@@ -1396,15 +1596,19 @@ function doLogin(method) {
     closeLimitModal();
     renderSidebar();
     updateQuotaHint();
+    updateArtQuotaHint();
+    prevLoginState = true;
     showToast(`已登入為 ${MEMBER.name} 👤`);
   }, 1800);
 }
 
 function doLogout() {
-  isLoggedIn  = false;
-  guestCount  = memberCount;   /* keep count so demo is realistic */
+  isLoggedIn     = false;
+  prevLoginState = false;
+  guestCount     = memberCount;
   renderSidebar();
   updateQuotaHint();
+  updateArtQuotaHint();
   showToast('已登出');
 }
 
@@ -1514,11 +1718,45 @@ function showToast(msg) {
 
 
 /* ══════════════════════════════════════
+   ARTICLE INPUT PLACEHOLDER ROTATION
+══════════════════════════════════════ */
+const ART_PH = [
+  '換你問 Manager AI...',
+  '工作中想不通的事，來問 Manager AI',
+  '帶人帶到懷疑人生？問問 Manager AI',
+  '想升 Manager，該準備什麼？問問 Manager AI',
+  '學習計畫怎麼排？ Manager AI 陪你想',
+];
+let artPhIdx = 0;
+
+setInterval(() => {
+  const el  = document.getElementById('art-ph');
+  const inp = document.getElementById('art-input');
+  if (!el || !inp || inp.disabled) return;
+  if (document.activeElement === inp || inp.value) return;
+  el.classList.remove('ph-enter');
+  el.classList.add('ph-exit');
+  setTimeout(() => {
+    artPhIdx = (artPhIdx + 1) % ART_PH.length;
+    el.textContent = ART_PH[artPhIdx];
+    el.classList.remove('ph-exit');
+    el.classList.add('ph-enter');
+  }, 260);
+}, 3000);
+
+
+/* ══════════════════════════════════════
    INIT
 ══════════════════════════════════════ */
 renderSidebar();
 loadAnswer(historyItems[0]);
 updateQuotaHint();
+updateArtQuotaHint();
+/* 初始化 placeholder overlay */
+(function () {
+  const el = document.getElementById('art-ph');
+  if (el) el.textContent = ART_PH[0];
+})();
 </script>
 </body>
 </html>

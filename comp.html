@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>元件庫 — 輸入框狀態</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Noto Sans TC', sans-serif; background: #f8fafc; }
+    .state-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #94a3b8; margin-bottom: 8px; }
+    .chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 100px; }
+
+    @keyframes cellPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.7); }
+    }
+    @keyframes cellUnlock {
+      0%   { transform: scale(0.15); opacity: 0; }
+      60%  { transform: scale(1.35); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes phExit {
+      from { opacity:1; transform:translateY(-50%); }
+      to   { opacity:0; transform:translateY(calc(-50% + 10px)); }
+    }
+    @keyframes phEnter {
+      from { opacity:0; transform:translateY(calc(-50% - 10px)); }
+      to   { opacity:1; transform:translateY(-50%); }
+    }
+    .ph-exit  { animation: phExit  0.25s ease forwards; }
+    .ph-enter { animation: phEnter 0.3s ease forwards; }
+  </style>
+</head>
+<body class="min-h-screen py-12 px-6">
+
+  <div class="max-w-[760px] mx-auto flex flex-col gap-14">
+
+    <!-- Header -->
+    <div class="flex flex-col gap-1">
+      <h1 class="text-2xl font-bold text-gray-900">元件庫</h1>
+      <p class="text-sm text-gray-500">Sticky Input Bar — 各狀態 × 方案 A / B 對照（能量格 + 解鎖設計）</p>
+    </div>
+
+    <!-- ════════════════════════
+         方案 B — Quota pill 在輸入框下方
+         ════════════════════════ -->
+    <section class="flex flex-col gap-8">
+      <div class="flex items-center gap-3">
+        <h2 class="text-base font-bold text-gray-700">Sticky Input Bar</h2>
+        <span class="chip bg-blue-50 text-blue-500">方案 B — Quota pill 在輸入框下方</span>
+      </div>
+
+      <!-- State 1: 訪客・未使用 (1 green + 3 locked) -->
+      <div>
+        <div class="state-label">State 1 — 訪客・未使用</div>
+        <div class="flex flex-col gap-2 max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+          <div class="flex justify-center">
+            <div style="background:#f0faf4;border:1px solid #a3d9bc;border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+              <!-- 1 green + 3 locked -->
+              <span style="display:inline-flex;align-items:center;gap:3px">
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #e5e7eb;display:inline-flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 12 14" fill="none"><rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/></svg></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #e5e7eb;display:inline-flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 12 14" fill="none"><rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/></svg></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #e5e7eb;display:inline-flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 12 14" fill="none"><rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/></svg></span>
+              </span>
+              <span style="font-size:12px;color:#217446;white-space:nowrap">今日 1 次免費</span>
+              <button style="color:#217446;font-size:11px;text-decoration:underline;cursor:pointer">登入解鎖更多</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 2: 訪客・已用完 (1 gray + 3 locked) -->
+      <div>
+        <div class="state-label">State 2 — 訪客・已用完（input disabled）</div>
+        <div class="flex flex-col gap-2 max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text" placeholder="今日提問次數已達上限" disabled class="flex-1 bg-transparent text-[14px] text-gray-400 focus:outline-none min-w-0" style="letter-spacing:-0.28px; opacity:0.5;" />
+            </div>
+            <button disabled class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em; opacity:0.5;">送出</button>
+          </div>
+          <div class="flex justify-center">
+            <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+              <span style="display:inline-flex;align-items:center;gap:3px">
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #e5e7eb;display:inline-flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 12 14" fill="none"><rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/></svg></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #e5e7eb;display:inline-flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 12 14" fill="none"><rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/></svg></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #e5e7eb;display:inline-flex;align-items:center;justify-content:center"><svg width="8" height="8" viewBox="0 0 12 14" fill="none"><rect x="1" y="5.5" width="10" height="8.5" rx="2" fill="#e5e7eb"/><path d="M4 5.5V4a2 2 0 014 0v1.5" stroke="#d1d5db" stroke-width="1.8" stroke-linecap="round"/><circle cx="6" cy="9.8" r="1.3" fill="#d1d5db"/></svg></span>
+              </span>
+              <span style="font-size:12px;color:#9ca3af;white-space:nowrap">今日已用完，明日 00:00 重置</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 3: 登入後解鎖（unlock 動畫示意）-->
+      <div>
+        <div class="state-label">State 3 — 登入後解鎖（3 格亮起動畫）</div>
+        <div class="flex flex-col gap-2 max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+          <div class="flex justify-center">
+            <div style="background:#f0faf4;border:1px solid #a3d9bc;border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+              <span style="display:inline-flex;align-items:center;gap:3px">
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block;animation:cellUnlock .35s ease 70ms both"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block;animation:cellUnlock .35s ease 140ms both"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block;animation:cellUnlock .35s ease 210ms both"></span>
+              </span>
+              <span style="font-size:12px;color:#217446;white-space:nowrap">自訂提問剩餘 4 / 4 次</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 4: 會員・正常 (1 used + 3 green) -->
+      <div>
+        <div class="state-label">State 4 — 會員・正常（剩 3 / 4 次）</div>
+        <div class="flex flex-col gap-2 max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+          <div class="flex justify-center">
+            <div style="background:#f0faf4;border:1px solid #a3d9bc;border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+              <span style="display:inline-flex;align-items:center;gap:3px">
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#217446;display:inline-block"></span>
+              </span>
+              <span style="font-size:12px;color:#217446;white-space:nowrap">自訂提問剩餘 3 / 4 次</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 5: 會員・最後 1 次 (3 used + 1 red pulse) -->
+      <div>
+        <div class="state-label">State 5 — 會員・最後 1 次（warning）</div>
+        <div class="flex flex-col gap-2 max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+          <div class="flex justify-center">
+            <div style="background:#fff5f5;border:1px solid #fecaca;border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+              <span style="display:inline-flex;align-items:center;gap:3px">
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#f87171;display:inline-block;animation:cellPulse 1.2s ease-in-out infinite"></span>
+              </span>
+              <span style="font-size:12px;color:#ef4444;white-space:nowrap">最後 1 次</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 6: 會員・已用完 (4 gray) -->
+      <div>
+        <div class="state-label">State 6 — 會員・已用完（input disabled）</div>
+        <div class="flex flex-col gap-2 max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text" placeholder="今日提問次數已達上限" disabled class="flex-1 bg-transparent text-[14px] text-gray-400 focus:outline-none min-w-0" style="letter-spacing:-0.28px; opacity:0.5;" />
+            </div>
+            <button disabled class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em; opacity:0.5;">送出</button>
+          </div>
+          <div class="flex justify-center">
+            <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:100px;padding:6px 14px 6px 10px;display:inline-flex;align-items:center;gap:8px">
+              <span style="display:inline-flex;align-items:center;gap:3px">
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+                <span style="width:12px;height:12px;border-radius:3px;background:#e5e7eb;display:inline-block"></span>
+              </span>
+              <span style="font-size:12px;color:#9ca3af;white-space:nowrap">今日已用完，明日 00:00 重置</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-slate-200" />
+
+    <!-- ════════════════════════
+         方案 A — Quota 在輸入框內右側
+         ════════════════════════ -->
+    <section class="flex flex-col gap-8">
+      <div class="flex items-center gap-3">
+        <h2 class="text-base font-bold text-gray-700">Widget 輸入框</h2>
+        <span class="chip bg-amber-50 text-amber-600">方案 A — Quota 在輸入框內右側</span>
+      </div>
+
+      <!-- State 1: 訪客・未使用 (1 green + 3 locked) -->
+      <div>
+        <div class="state-label">State 1 — 訪客・未使用</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #a3d9bc;">
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+              <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;padding-left:10px;border-left:1px solid #d1fae5">
+                <span style="font-size:10px;color:#217446;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">1</b></span>
+              </div>
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 2: 訪客・已用完 (1 gray + 3 locked, disabled) -->
+      <div>
+        <div class="state-label">State 2 — 訪客・已用完（input disabled）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #e5e7eb;">
+              <input type="text" placeholder="今日提問次數已達上限" disabled class="flex-1 bg-transparent text-[14px] text-gray-400 focus:outline-none min-w-0" style="letter-spacing:-0.28px; opacity:0.5;" />
+              <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;padding-left:10px;border-left:1px solid #e5e7eb">
+                <button style="font-size:10px;color:#217446;text-decoration:underline;cursor:pointer;white-space:nowrap">🔒 登入解鎖 3 次提問</button>
+              </div>
+            </div>
+            <button disabled class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em; opacity:0.5;">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 3: 登入後解鎖（4 格亮起動畫）-->
+      <div>
+        <div class="state-label">State 3 — 登入後解鎖</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #a3d9bc;">
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+              <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;padding-left:10px;border-left:1px solid #d1fae5">
+                <span style="font-size:10px;color:#217446;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">3</b></span>
+              </div>
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 4: 會員・正常 (1 used + 3 green) -->
+      <div>
+        <div class="state-label">State 4 — 會員・正常（剩 2 / 3 次）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #a3d9bc;">
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+              <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;padding-left:10px;border-left:1px solid #d1fae5">
+                <span style="font-size:10px;color:#217446;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">2</b></span>
+              </div>
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 5: 會員・最後 1 次 (3 used + 1 red pulse) -->
+      <div>
+        <div class="state-label">State 5 — 會員・最後 1 次（warning）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #fca5a5;">
+              <input type="text" placeholder="換你問 Manager AI..." class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0" style="letter-spacing:-0.28px;" />
+              <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;padding-left:10px;border-left:1px solid #fecaca">
+                <span style="font-size:10px;color:#ef4444;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">1</b></span>
+              </div>
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- State 6: 會員・已用完 (4 gray, disabled) -->
+      <div>
+        <div class="state-label">State 6 — 會員・已用完（input disabled）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #e5e7eb;">
+              <input type="text" placeholder="今日提問次數已達上限" disabled class="flex-1 bg-transparent text-[14px] text-gray-400 focus:outline-none min-w-0" style="letter-spacing:-0.28px; opacity:0.5;" />
+              <div style="display:flex;align-items:center;gap:5px;flex-shrink:0;padding-left:10px;border-left:1px solid #e5e7eb">
+                <span style="font-size:10px;color:#9ca3af;white-space:nowrap">今日已用完，明日重置</span>
+              </div>
+            </div>
+            <button disabled class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em; opacity:0.5;">送出</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-slate-200" />
+
+    <!-- ════════════════════════
+         Bug fix — 長文字 textarea 自動撐高
+         ════════════════════════ -->
+    <section class="flex flex-col gap-8">
+      <div class="flex items-center gap-3">
+        <h2 class="text-base font-bold text-gray-700">長文字 Bug Fix</h2>
+        <span class="chip bg-rose-50 text-rose-500">input → textarea auto-grow</span>
+      </div>
+      <p class="text-sm text-gray-500 -mt-4">
+        <code class="bg-gray-100 px-1 rounded text-xs">input type="text"</code> 文字超出寬度後靠游標滾動，開頭文字不可見。<br>
+        改用 <code class="bg-gray-100 px-1 rounded text-xs">textarea rows="1"</code> 搭配 JS 自動撐高，文字永遠全部可見。<br>
+        <span class="text-gray-400 text-xs">Enter 送出 · Shift+Enter 換行</span>
+      </p>
+
+      <!-- Before：input（有 bug） -->
+      <div>
+        <div class="state-label">Before — input（長文字被吃掉）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[40px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <input type="text"
+                value="身為中階主管，同時面對上層壓力與團隊抵抗，我該如何在不得罪任何一方的情況下推動組織變革？"
+                class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0"
+                style="letter-spacing:-0.28px;" />
+            </div>
+            <button class="text-white text-[16px] font-semibold px-7 py-2 whitespace-nowrap rounded-[40px] shrink-0" style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- After：textarea auto-grow（修正） -->
+      <div>
+        <div class="state-label">After — textarea auto-grow（完整可見）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-end"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[24px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <textarea rows="1" id="demo-textarea"
+                class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0 resize-none overflow-hidden leading-snug py-1"
+                style="letter-spacing:-0.28px; line-height:1.5;"
+                placeholder="換你問 Manager AI..."
+                oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
+                onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault()}">身為中階主管，同時面對上層壓力與團隊抵抗，我該如何在不得罪任何一方的情況下推動組織變革？</textarea>
+            </div>
+            <button class="text-white text-[16px] font-semibold px-5 py-2 cursor-pointer hover:opacity-90 transition-opacity whitespace-nowrap rounded-[40px] shrink-0 self-end"
+              style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- After：空白初始狀態（確認外觀跟原本一致） -->
+      <div>
+        <div class="state-label">After — 空白初始狀態（外觀與原本相同）</div>
+        <div class="max-w-[720px]">
+          <div class="w-full p-3 rounded-[16px] flex gap-2 items-end"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <div class="flex flex-1 items-center bg-white rounded-[24px] px-2 py-1.5 gap-2" style="border:1px solid #95d9b3;">
+              <span class="shrink-0 text-white text-[11px] font-medium px-2 py-0.5 rounded-[40px] whitespace-nowrap" style="background:#3ea97a">經理人文章庫</span>
+              <textarea rows="1"
+                class="flex-1 bg-transparent text-[14px] text-gray-700 focus:outline-none min-w-0 resize-none overflow-hidden leading-snug py-1"
+                style="letter-spacing:-0.28px; line-height:1.5;"
+                placeholder="換你問 Manager AI..."
+                oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"
+                onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault()}"></textarea>
+            </div>
+            <button class="text-white text-[16px] font-semibold px-5 py-2 cursor-pointer hover:opacity-90 transition-opacity whitespace-nowrap rounded-[40px] shrink-0 self-end"
+              style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      /* 頁面載入時初始化已有內容的 textarea 高度 */
+      document.querySelectorAll('textarea').forEach(el => {
+        el.style.height = 'auto';
+        el.style.height = el.scrollHeight + 'px';
+      });
+    </script>
+
+    <hr class="border-slate-200" />
+
+    <!-- ════════════════════════
+         AI Widget — 工程師移植規格
+         ════════════════════════ -->
+    <section class="flex flex-col gap-8">
+      <div class="flex items-center gap-3">
+        <h2 class="text-base font-bold text-gray-700">AI Widget</h2>
+        <span class="chip bg-emerald-50 text-emerald-600">工程師移植規格 — 含動畫</span>
+      </div>
+      <p class="text-sm text-gray-500 -mt-4">
+        完整獨立元件，含 placeholder 輪播動畫、Quota 即時顯示、登入 / 登出狀態切換。<br>
+        所有可調參數集中於 JS <code class="bg-gray-100 px-1 rounded text-xs">/* ── WIDGET CONFIG ── */</code> 區塊。
+      </p>
+
+      <!-- Live Interactive Demo -->
+      <div>
+        <div class="state-label">互動 Demo — 可操作</div>
+
+        <!-- ╔══════════════════════════════════════════╗
+             ║  ↓↓↓  工程師複製此區塊 START  ↓↓↓        ║
+             ╚══════════════════════════════════════════╝ -->
+        <div class="flex flex-col gap-3 py-1 rounded-xl max-w-[720px]">
+
+          <!-- Header -->
+          <div class="flex gap-2 items-center">
+            <svg class="w-5 h-5 shrink-0" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.8806 0.345594C10.8425 -0.119239 10.4681 -0.5 10 -0.5C9.53193 -0.5 9.15751 -0.119239 9.11942 0.345594C8.71166 5.27945 4.77823 9.21256 -0.154346 9.61871C-0.620796 9.65678 -1 10.0328 -1 10.4992C-1 10.9672 -0.6208 11.3417 -0.154346 11.3813C4.77864 11.7875 8.711 15.7206 9.11942 20.6544C9.15751 21.1192 9.53193 21.5 10 21.5C10.4681 21.5 10.8425 21.1192 10.8806 20.6544C11.2883 15.7206 15.2218 11.7875 20.1543 11.3813C20.6208 11.3417 21 10.9672 21 10.4992C21 10.0328 20.6208 9.65678 20.1543 9.61871C15.2218 9.21256 11.2883 5.27945 10.8806 0.345594Z" fill="#217446"></path>
+            </svg>
+            <p class="font-bold text-base text-[#217446] tracking-[0.04em] leading-tight whitespace-nowrap">Manager AI 幫你提問：</p>
+            <span class="ml-auto text-xs text-[#217446] bg-[#e5f5eb] px-2 py-0.5 rounded-full shrink-0 inline-flex items-center gap-1 whitespace-nowrap">
+              <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 14 14" fill="#217446"><path d="M7 0 L8 6 L14 7 L8 8 L7 14 L6 8 L0 7 L6 6 Z"/></svg>Power by 經理人知識庫
+            </span>
+          </div>
+
+          <!-- Suggested Questions — 由 JS W_QUESTIONS 陣列驅動 -->
+          <div id="w-questions" class="flex flex-col gap-1 w-full"></div>
+
+          <!-- Input Bar -->
+          <div class="p-2 rounded-[16px] flex gap-2 items-center"
+            style="background:linear-gradient(90deg,#f0faf4 0%,#c6ecd5 50%,#f0faf4 100%); border:1px solid rgba(205,228,216,0.8)">
+            <label for="w-input" class="sr-only">輸入問題</label>
+            <div id="w-pill" class="flex flex-1 items-center bg-white rounded-[40px] px-5 py-[6px] gap-2" style="border:1px solid #a3d9bc;">
+              <!-- Placeholder overlay — 輪播動畫掛在此 span -->
+              <div style="position:relative;flex:1;min-width:0;display:flex;align-items:center;overflow:hidden;">
+                <input id="w-input" type="text" placeholder=""
+                  class="w-full bg-transparent text-[14px] text-gray-700 focus:outline-none"
+                  style="letter-spacing:-0.28px;"
+                  onkeydown="if(event.key==='Enter') wSubmit()"
+                  onfocus="var p=document.getElementById('w-ph');p.classList.remove('ph-enter','ph-exit');p.style.opacity='0';"
+                  onblur="if(!this.value&&!this.disabled){document.getElementById('w-ph').style.opacity='1';}" />
+                <span id="w-ph"
+                  style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);pointer-events:none;font-size:14px;color:#9ca3af;letter-spacing:-0.28px;white-space:nowrap;overflow:hidden;opacity:1;"></span>
+              </div>
+              <!-- Quota display -->
+              <span id="w-quota" class="shrink-0" style="display:inline-flex;align-items:center;padding-left:10px;border-left:1px solid #d1fae5;"></span>
+            </div>
+            <button id="w-btn" onclick="wSubmit()"
+              class="text-white text-[16px] font-semibold px-7 py-2 cursor-pointer hover:opacity-90 transition-opacity whitespace-nowrap rounded-[40px] shrink-0"
+              style="background:#217446; letter-spacing:0.04em">送出</button>
+          </div>
+
+          <!-- Disclaimer -->
+          <p class="font-normal text-xs text-slate-400 text-center leading-none w-full">⚠️ 內容由 AI 根據《經理人》知識庫輔助生成，資料具時效性，請自行判斷準確性；提問請勿輸入機密資料。</p>
+        </div>
+        <!-- ╔══════════════════════════════════════════╗
+             ║  ↑↑↑  工程師複製此區塊 END  ↑↑↑          ║
+             ╚══════════════════════════════════════════╝ -->
+
+        <!-- 示範用切換按鈕（上線時移除） -->
+        <div class="flex gap-3 mt-4">
+          <button onclick="wLogin()" class="text-xs px-3 py-1.5 rounded-full bg-[#217446] text-white cursor-pointer">模擬登入</button>
+          <button onclick="wLogout()" class="text-xs px-3 py-1.5 rounded-full bg-gray-200 text-gray-600 cursor-pointer">模擬登出</button>
+          <span id="w-state-label" class="text-xs text-gray-400 self-center">目前：訪客</span>
+        </div>
+      </div>
+
+      <!-- 規格說明表 -->
+      <div class="flex flex-col gap-3">
+        <div class="state-label">可設定參數</div>
+        <table class="text-sm w-full border-collapse">
+          <thead>
+            <tr class="text-left text-gray-500 border-b border-gray-200">
+              <th class="pb-2 pr-6 font-medium">JS 變數</th>
+              <th class="pb-2 pr-6 font-medium">預設值</th>
+              <th class="pb-2 font-medium">說明</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <tr class="border-b border-gray-100"><td class="py-2 pr-6 font-mono text-xs text-indigo-600">W_QUESTIONS</td><td class="py-2 pr-6 text-xs">陣列（3 筆）</td><td class="py-2 text-xs">推薦問題清單，點擊後呼叫 <code class="bg-gray-100 px-1 rounded">wAskQ(q)</code></td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-6 font-mono text-xs text-indigo-600">W_PLACEHOLDERS</td><td class="py-2 pr-6 text-xs">陣列（5 筆）</td><td class="py-2 text-xs">輸入框輪播文案，每 3 秒切換，上滑出 / 下滑入動畫</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-6 font-mono text-xs text-indigo-600">W_MAX_GUEST</td><td class="py-2 pr-6 text-xs">1</td><td class="py-2 text-xs">訪客每日免費提問次數</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-6 font-mono text-xs text-indigo-600">W_MAX_MEMBER</td><td class="py-2 pr-6 text-xs">3</td><td class="py-2 text-xs">會員每日提問次數（登入後解鎖）</td></tr>
+            <tr class="border-b border-gray-100"><td class="py-2 pr-6 font-mono text-xs text-indigo-600">wSubmit()</td><td class="py-2 pr-6 text-xs">—</td><td class="py-2 text-xs">送出邏輯，接 API 時替換此函式內容</td></tr>
+            <tr><td class="py-2 pr-6 font-mono text-xs text-indigo-600">wAskQ(q)</td><td class="py-2 pr-6 text-xs">—</td><td class="py-2 text-xs">點擊推薦問題時觸發，接 API 時替換</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 動畫規格 -->
+      <div class="flex flex-col gap-3">
+        <div class="state-label">動畫規格</div>
+        <table class="text-sm w-full border-collapse">
+          <thead>
+            <tr class="text-left text-gray-500 border-b border-gray-200">
+              <th class="pb-2 pr-6 font-medium">CSS class</th>
+              <th class="pb-2 pr-6 font-medium">Keyframe</th>
+              <th class="pb-2 font-medium">用途</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700">
+            <tr class="border-b border-gray-100"><td class="py-2 pr-6 font-mono text-xs text-indigo-600">.ph-exit</td><td class="py-2 pr-6 text-xs">phExit 0.25s ease</td><td class="py-2 text-xs">舊文案下滑淡出</td></tr>
+            <tr><td class="py-2 pr-6 font-mono text-xs text-indigo-600">.ph-enter</td><td class="py-2 pr-6 text-xs">phEnter 0.3s ease</td><td class="py-2 text-xs">新文案上滑淡入</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <script>
+      /* ════════════════════════════════════════
+         AI WIDGET — 完整移植 JS
+         以下所有邏輯可獨立運作，不依賴頁面其他 JS
+         ════════════════════════════════════════ */
+
+      /* ── WIDGET CONFIG（可設定區）── */
+      const W_QUESTIONS = [
+        '開會時總是沒人敢提意見，主管該如何打破沈默的僵局？',
+        '員工私下抱怨卻不敢在會議說真話，主管該怎麼引導？',
+        '想建立敢說真話的團隊文化，主管必須戒掉哪三個習慣？',
+      ];
+      const W_PLACEHOLDERS = [
+        '換你問 Manager AI...',
+        '工作中想不通的事，來問 Manager AI',
+        '帶人帶到懷疑人生？問問 Manager AI',
+        '想升 Manager，該準備什麼？問問 Manager AI',
+        '學習計畫怎麼排？ Manager AI 陪你想',
+      ];
+      const W_MAX_GUEST  = 1;   /* 訪客每日免費次數 */
+      const W_MAX_MEMBER = 3;   /* 會員每日次數 */
+      /* ── END CONFIG ── */
+
+      /* ── STATE（接 API 時由後端提供）── */
+      let wIsLoggedIn  = false;
+      let wGuestCount  = 0;
+      let wMemberCount = 0;
+
+      /* ── 渲染推薦問題列表 ── */
+      (function wRenderQuestions() {
+        const container = document.getElementById('w-questions');
+        if (!container) return;
+        container.innerHTML = W_QUESTIONS.map(q => `
+          <button onclick="wAskQ('${q.replace(/'/g, "\\'")}')"
+            class="flex gap-2.5 items-center px-4 py-2 rounded-lg w-full bg-[#fafafa] hover:bg-[#c6ecd5] transition-colors text-left cursor-pointer">
+            <p class="flex-1 font-medium text-base text-[#1a1a1a]">${q}</p>
+            <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 18 18" fill="none">
+              <path d="M5.25 5.25H12.75V12.75" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.25 12.75L12.75 5.25" stroke="#217446" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>`).join('');
+      })();
+
+      /* ── Placeholder 輪播動畫（3 秒間隔，上滑出 / 下滑入）── */
+      let wPhIdx = 0;
+      (function wInitPh() {
+        const el = document.getElementById('w-ph');
+        if (el) el.textContent = W_PLACEHOLDERS[0];
+      })();
+      setInterval(() => {
+        const el  = document.getElementById('w-ph');
+        const inp = document.getElementById('w-input');
+        if (!el || !inp || inp.disabled) return;
+        if (document.activeElement === inp || inp.value) return;
+        el.classList.remove('ph-enter');
+        el.classList.add('ph-exit');
+        setTimeout(() => {
+          wPhIdx = (wPhIdx + 1) % W_PLACEHOLDERS.length;
+          el.textContent = W_PLACEHOLDERS[wPhIdx];
+          el.classList.remove('ph-exit');
+          el.classList.add('ph-enter');
+        }, 260);
+      }, 3000);
+
+      /* ── Quota 顯示更新 ── */
+      function wUpdateQuota() {
+        const el   = document.getElementById('w-quota');
+        const pill = document.getElementById('w-pill');
+        const ph   = document.getElementById('w-ph');
+        const inp  = document.getElementById('w-input');
+        const btn  = document.getElementById('w-btn');
+        if (!el) return;
+
+        const total     = wIsLoggedIn ? W_MAX_MEMBER : W_MAX_GUEST;
+        const used      = wIsLoggedIn ? wMemberCount : wGuestCount;
+        const remain    = Math.max(0, total - used);
+        const exhausted = remain === 0;
+        const isWarn    = remain === 1 && total > 1;
+
+        const sepColor = isWarn ? '#fecaca' : exhausted ? '#e5e7eb' : '#d1fae5';
+        if (pill) pill.style.borderColor = isWarn ? '#fca5a5' : exhausted ? '#e5e7eb' : '#a3d9bc';
+        el.style.borderLeft = `1px solid ${sepColor}`;
+
+        let html = '';
+        if (exhausted && !wIsLoggedIn) {
+          html = `<button onclick="wLogin()" style="font-size:10px;color:#217446;text-decoration:underline;cursor:pointer;white-space:nowrap">🔒 登入解鎖 3 次提問</button>`;
+        } else if (exhausted) {
+          html = `<span style="font-size:10px;color:#9ca3af;white-space:nowrap">今日已用完，明日重置</span>`;
+        } else if (isWarn) {
+          html = `<span style="font-size:10px;color:#ef4444;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">1</b></span>`;
+        } else {
+          html = `<span style="font-size:10px;color:#217446;white-space:nowrap">今日剩餘提問 <b style="font-size:12px">${remain}</b></span>`;
+        }
+        el.innerHTML = html;
+
+        if (inp) {
+          inp.disabled      = exhausted;
+          inp.style.opacity = exhausted ? '0.5' : '1';
+        }
+        if (ph) {
+          if (exhausted) { ph.textContent = '今日提問次數已達上限'; ph.style.opacity = '0.5'; }
+          else { ph.textContent = W_PLACEHOLDERS[wPhIdx]; ph.style.opacity = (document.activeElement === inp) ? '0' : '1'; }
+        }
+        if (btn) { btn.disabled = exhausted; btn.style.opacity = exhausted ? '0.5' : '1'; }
+      }
+
+      /* ── 送出邏輯（接 API 時替換 wSubmit 內容）── */
+      function wSubmit() {
+        const inp = document.getElementById('w-input');
+        const q = inp ? inp.value.trim() : '';
+        if (!q || inp.disabled) return;
+        if (!wIsLoggedIn && wGuestCount >= W_MAX_GUEST) { alert('請登入解鎖更多次數'); return; }
+        if (wIsLoggedIn && wMemberCount >= W_MAX_MEMBER) { alert('今日次數已用完，明日 00:00 重置'); return; }
+        if (!wIsLoggedIn) wGuestCount++;
+        else wMemberCount++;
+        inp.value = '';
+        wUpdateQuota();
+        /* TODO: 接 API — 傳送問題 q */
+        console.log('[Widget] 送出問題：', q);
+      }
+
+      /* ── 點擊推薦問題（接 API 時替換）── */
+      function wAskQ(q) {
+        /* TODO: 接 API — 直接送出推薦問題（不計入 quota）*/
+        console.log('[Widget] 推薦問題：', q);
+      }
+
+      /* ── 登入 / 登出（接 API 時由 SSO 觸發）── */
+      function wLogin() {
+        wIsLoggedIn = true;
+        wGuestCount = 0;
+        wMemberCount = 0;
+        document.getElementById('w-state-label').textContent = '目前：會員（王小明）';
+        wUpdateQuota();
+      }
+      function wLogout() {
+        wIsLoggedIn = false;
+        wGuestCount = 0;
+        wMemberCount = 0;
+        document.getElementById('w-state-label').textContent = '目前：訪客';
+        wUpdateQuota();
+      }
+
+      /* ── INIT ── */
+      wUpdateQuota();
+    </script>
+
+    <div class="pb-10"></div>
+  </div>
+
+</body>
+</html>
