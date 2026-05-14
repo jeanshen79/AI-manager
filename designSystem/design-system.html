@@ -1,0 +1,1887 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Today — Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;600;700&family=Fira+Sans+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* ── Design Tokens ── */
+    :root {
+      --mt-green:        #217446;
+      --mt-green-hover:  #144529;
+      --mt-green-light:  #edf7f1;
+      --mt-green-border: #a3d9bc;
+      --8m-brown:        #a78662;
+      --8m-brown-hover:  #8a6d4e;
+      --8m-brown-light:  #f5ede3;
+      --8m-blue:         #3ca9e3;
+      --8m-blue-hover:   #2a8fc7;
+      --8m-blue-light:   #e3f4fc;
+      --neon:            #73ffb2;
+      --dark-bg:         #0d1a13;
+      --dark-card:       #1a2820;
+      --dark-sidebar:    #0d1a13;
+      --line-green:      #4CC764;
+      --text-main:       #1d1b1b;
+      --text-muted:      #717171;
+      --text-meta:       #afafaf;
+      --border-color:    #e8e8e8;
+      --page-bg:         #f8f8f6;
+      --card-bg:         #ffffff;
+      --sidebar-bg:      #ffffff;
+      --input-bg:        #ffffff;
+      --shadow-sm:       0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md:       0 4px 12px rgba(0,0,0,0.10);
+      --shadow-lg:       0 8px 24px rgba(0,0,0,0.12);
+      --shadow-xl:       0 16px 40px rgba(0,0,0,0.14);
+      --radius-xs:       2px;
+      --radius-sm:       4px;
+      --radius-md:       8px;
+      --radius-lg:       12px;
+      --radius-xl:       16px;
+      --radius-full:     9999px;
+      --trans-fast:      150ms ease;
+      --trans-base:      250ms ease;
+      --trans-slow:      400ms ease;
+    }
+
+    /* ── Dark Mode Overrides ── */
+    html[data-dark] {
+      --mt-green:        #73ffb2;
+      --mt-green-hover:  #52e899;
+      --mt-green-light:  rgba(115,255,178,0.10);
+      --mt-green-border: rgba(115,255,178,0.30);
+      --text-main:       #ffffff;
+      --text-muted:      rgba(255,255,255,0.55);
+      --text-meta:       rgba(255,255,255,0.40);
+      --border-color:    rgba(115,255,178,0.12);
+      --page-bg:         #0d1a13;
+      --card-bg:         #1a2820;
+      --sidebar-bg:      #0d1a13;
+      --input-bg:        #1a2820;
+      --shadow-sm:       0 1px 3px rgba(0,0,0,0.30);
+      --shadow-md:       0 4px 12px rgba(0,0,0,0.40);
+      --shadow-lg:       0 8px 24px rgba(0,0,0,0.50);
+      --shadow-xl:       0 16px 40px rgba(0,0,0,0.60);
+    }
+
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--page-bg);
+      color: var(--text-main);
+      margin: 0;
+      transition: background var(--trans-base), color var(--trans-base);
+    }
+
+    /* ── Sidebar ── */
+    .ds-sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-color);
+      transition: background var(--trans-base), border-color var(--trans-base);
+    }
+    .ds-logo {
+      color: var(--mt-green);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.01em;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: background var(--trans-fast), color var(--trans-fast);
+      user-select: none;
+    }
+    .nav-item:hover {
+      background: var(--mt-green-light);
+      color: var(--mt-green);
+    }
+    .nav-item.active {
+      background: var(--mt-green-light);
+      color: var(--mt-green);
+      font-weight: 600;
+    }
+    .nav-item svg { flex-shrink: 0; }
+
+    /* ── Dark Toggle ── */
+    .dark-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: background var(--trans-fast);
+    }
+    .dark-toggle:hover { background: var(--mt-green-light); }
+    .toggle-track {
+      width: 36px;
+      height: 20px;
+      border-radius: 10px;
+      background: #ccc;
+      position: relative;
+      transition: background var(--trans-base);
+      flex-shrink: 0;
+    }
+    html[data-dark] .toggle-track { background: var(--mt-green); }
+    .toggle-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform var(--trans-base);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    html[data-dark] .toggle-thumb { transform: translateX(16px); }
+
+    /* ── Mobile Nav ── */
+    .mobile-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      white-space: nowrap;
+      transition: color var(--trans-fast), background var(--trans-fast);
+    }
+    .mobile-nav-item.active { color: var(--mt-green); }
+
+    /* ── Section Header ── */
+    .ds-section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: -0.02em;
+    }
+
+    /* ── Color Swatches ── */
+    .swatch-card {
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      transition: transform var(--trans-fast), box-shadow var(--trans-fast);
+      box-shadow: var(--shadow-sm);
+    }
+    .swatch-card:hover {
+      transform: scale(1.05);
+      box-shadow: var(--shadow-md);
+    }
+    .swatch-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.25);
+      opacity: 0;
+      transition: opacity var(--trans-fast);
+    }
+    .swatch-card:hover .swatch-overlay { opacity: 1; }
+    .swatch-copy-icon { color: white; }
+
+    /* ── Token Tables ── */
+    .token-table { width: 100%; border-collapse: collapse; }
+    .token-table th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .token-table td {
+      padding: 10px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+    .token-table tr:last-child td { border-bottom: none; }
+    .token-table tr:hover td { background: var(--mt-green-light); }
+
+    /* ── Copy Badge ── */
+    .copy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: 'Fira Sans Condensed', monospace;
+      background: var(--mt-green-light);
+      color: var(--mt-green);
+      border: 1px solid var(--mt-green-border);
+      cursor: pointer;
+      transition: background var(--trans-fast), transform var(--trans-fast);
+      user-select: none;
+    }
+    .copy-badge:hover { background: var(--mt-green-border); }
+    .copy-badge:active { transform: scale(0.96); }
+    .copy-badge.copied { background: #c8f7dc; color: #0a5c2e; }
+
+    /* ── Badges ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid transparent;
+    }
+    .badge-mt    { background: var(--mt-green-light); color: var(--mt-green); border-color: var(--mt-green-border); }
+    .badge-brown { background: var(--8m-brown-light); color: var(--8m-brown); border-color: #d4b896; }
+    .badge-blue  { background: var(--8m-blue-light);  color: var(--8m-blue);  border-color: #9dd3f0; }
+    .badge-dark  { background: rgba(115,255,178,0.1); color: var(--neon); border-color: rgba(115,255,178,0.3); }
+    .badge-neutral { background: #f4f4f4; color: var(--text-muted); border-color: #ddd; }
+    .badge-pr    { background: #fff0e8; color: #c45a1c; border-color: #f5b894; }
+    html[data-dark] .badge-mt { background: rgba(115,255,178,0.1); color: var(--neon); border-color: rgba(115,255,178,0.3); }
+    html[data-dark] .badge-neutral { background: rgba(255,255,255,0.08); color: var(--text-muted); border-color: rgba(255,255,255,0.15); }
+
+    /* ── Buttons ── */
+    .ds-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--trans-fast), color var(--trans-fast), box-shadow var(--trans-fast), opacity var(--trans-fast);
+      border: 1px solid transparent;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .ds-btn:focus { outline: none; box-shadow: 0 0 0 3px rgba(33,116,70,0.35); }
+    .ds-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .ds-btn-sm { font-size: 13px; padding: 6px 14px; border-radius: 4px; }
+    .ds-btn-md { font-size: 14px; padding: 9px 20px; border-radius: 4px; }
+    .ds-btn-lg { font-size: 16px; padding: 12px 28px; border-radius: 4px; }
+
+    .ds-btn-primary    { background: var(--mt-green); color: #fff; }
+    .ds-btn-primary:hover:not(:disabled) { background: var(--mt-green-hover); }
+    .ds-btn-outline    { background: transparent; color: var(--mt-green); border-color: var(--mt-green); }
+    .ds-btn-outline:hover:not(:disabled) { background: var(--mt-green-light); }
+    .ds-btn-ghost      { background: transparent; color: var(--mt-green); border-color: transparent; }
+    .ds-btn-ghost:hover:not(:disabled)  { background: var(--mt-green-light); }
+    .ds-btn-dark       { background: #1a2820; color: var(--neon); }
+    .ds-btn-dark:hover:not(:disabled)  { background: #243728; }
+    .ds-btn-brown      { background: var(--8m-brown); color: #fff; }
+    .ds-btn-brown:hover:not(:disabled) { background: var(--8m-brown-hover); }
+    .ds-btn-blue-8m    { background: var(--8m-blue); color: #fff; }
+    .ds-btn-blue-8m:hover:not(:disabled) { background: var(--8m-blue-hover); }
+    .ds-btn-neon       { background: var(--neon); color: #0d1a13; }
+    .ds-btn-neon:hover:not(:disabled)  { background: #52e899; }
+
+    /* ── Cards ── */
+    .ds-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: background var(--trans-base), border-color var(--trans-base), box-shadow var(--trans-fast);
+    }
+    .ds-card:hover { box-shadow: var(--shadow-md); }
+    .ds-card-featured {
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      transition: box-shadow var(--trans-fast);
+    }
+    .ds-card-featured:hover { box-shadow: var(--shadow-lg); }
+    .ds-card-compact {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      transition: background var(--trans-base), border-color var(--trans-base);
+    }
+
+    /* ── Category Nav ── */
+    .cat-nav-item {
+      padding: 7px 16px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      transition: background var(--trans-fast), color var(--trans-fast), border-color var(--trans-fast);
+    }
+    .cat-nav-item:hover { color: var(--text-main); border-color: #ccc; }
+    .cat-nav-item.active {
+      background: var(--mt-green);
+      color: #fff;
+      border-color: var(--mt-green);
+    }
+
+    /* ── Ranking Tabs ── */
+    .ranking-tab {
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      color: var(--text-muted);
+      transition: color var(--trans-fast), border-color var(--trans-fast);
+    }
+    .ranking-tab.active {
+      color: var(--mt-green);
+      border-bottom-color: var(--mt-green);
+    }
+
+    /* ── Article List Items ── */
+    .article-rank-num {
+      font-size: 18px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--8m-brown);
+      min-width: 28px;
+      line-height: 1;
+    }
+    .article-rank-num.top3 { font-size: 22px; color: var(--8m-brown); }
+
+    /* ── Dark Feature Block ── */
+    .dark-feature-block {
+      background: #0d1a13;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    /* ── Spacing Bar ── */
+    .spacing-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--mt-green);
+      min-width: 2px;
+    }
+
+    /* ── Shadow Preview ── */
+    .shadow-preview {
+      width: 64px;
+      height: 40px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    /* ── Z-index Bar ── */
+    .zindex-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--mt-green-light) 0%, var(--mt-green) 100%);
+      min-width: 3px;
+    }
+
+    /* ── Interactive Preview ── */
+    .preview-control-group {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .preview-control-btn {
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      background: transparent;
+      color: var(--text-muted);
+      transition: background var(--trans-fast), color var(--trans-fast), border-color var(--trans-fast);
+      font-family: inherit;
+    }
+    .preview-control-btn:hover { border-color: var(--mt-green); color: var(--mt-green); }
+    .preview-control-btn.active { background: var(--mt-green); color: #fff; border-color: var(--mt-green); }
+
+    /* ── Code Snippet ── */
+    .code-block {
+      font-family: 'Fira Sans Condensed', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      background: #0d1a13;
+      color: #c8f7dc;
+      border-radius: 12px;
+      padding: 20px 24px;
+      overflow-x: auto;
+      position: relative;
+    }
+    .code-copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(115,255,178,0.15);
+      color: var(--neon);
+      border: 1px solid rgba(115,255,178,0.3);
+      cursor: pointer;
+      transition: background var(--trans-fast);
+      font-family: inherit;
+    }
+    .code-copy-btn:hover { background: rgba(115,255,178,0.25); }
+    .code-prop   { color: #9dd3f0; }
+    .code-value  { color: #f5b894; }
+    .code-comment{ color: rgba(255,255,255,0.35); }
+
+    /* ── Tab Buttons (Button Tokens section) ── */
+    .btn-tab {
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 8px;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid transparent;
+      transition: background var(--trans-fast), color var(--trans-fast);
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .btn-tab:hover { background: var(--mt-green-light); color: var(--mt-green); }
+    .btn-tab.active {
+      background: var(--mt-green-light);
+      color: var(--mt-green);
+      border-color: var(--mt-green-border);
+      font-weight: 600;
+    }
+
+    /* ── Diagram boxes ── */
+    .diagram-box {
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+    }
+    .diagram-ref   { background: #fff8e1; border: 2px solid #f5d87c; color: #8a6c00; }
+    .diagram-sys   { background: var(--mt-green-light); border: 2px solid var(--mt-green-border); color: var(--mt-green); }
+    .diagram-comp  { background: #e8f0fe; border: 2px solid #93b4f8; color: #2451b3; }
+    .diagram-arrow { color: var(--text-meta); font-size: 20px; }
+    html[data-dark] .diagram-ref  { background: rgba(245,216,124,0.10); border-color: rgba(245,216,124,0.4); color: #f5d87c; }
+    html[data-dark] .diagram-comp { background: rgba(148,180,248,0.10); border-color: rgba(148,180,248,0.4); color: #93b4f8; }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #bbb; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .ds-sidebar { display: none; }
+    }
+    @media (min-width: 769px) {
+      .mobile-topbar, .mobile-nav { display: none !important; }
+    }
+
+    /* ── Reduced Motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ══════════════════════════════════════════════
+   ICONS — inline SVG paths
+══════════════════════════════════════════════ */
+const ICONS = {
+  palette:  '<path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 0 0 5.304 0l6.401-6.402M6.75 21A3.75 3.75 0 0 1 3 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 0 0 3.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008Z"/>',
+  type:     '<path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"/>',
+  spacing:  '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>',
+  layers:   '<path stroke-linecap="round" stroke-linejoin="round" d="M6.429 9.75 2.25 12l4.179 2.25m0-4.5 5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0 4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0-5.571 3-5.571-3"/>',
+  cube:     '<path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/>',
+  button:   '<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V13.5Zm0 2.25h.008v.008H8.25v-.008Zm0 2.25h.008v.008H8.25V18Zm2.498-6.75h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V13.5Zm0 2.25h.007v.008h-.007v-.008Zm0 2.25h.007v.008h-.007V18Zm2.504-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V18Zm2.498-6.75h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V13.5ZM8.25 6h7.5v2.25h-7.5V6ZM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.638 4.5 4.757V19.5a2.25 2.25 0 0 0 2.25 2.25h10.5a2.25 2.25 0 0 0 2.25-2.25V4.757c0-1.119-.507-2.157-1.657-2.185A48.507 48.507 0 0 0 12 2.25Z"/>',
+  sun:      '<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>',
+  moon:     '<path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>',
+  copy:     '<path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184"/>',
+  check:    '<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5"/>',
+  search:   '<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.197 5.197a7.5 7.5 0 0 0 10.606 10.606Z"/>',
+  eye:      '<path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>',
+  star:     '<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/>',
+  trending: '<path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"/>',
+  arrow:    '<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>',
+  chevron:  '<path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/>',
+  chevD:    '<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5"/>',
+  chevU:    '<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5"/>',
+  plus:     '<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>',
+  logo:     '<rect x="2" y="2" width="9" height="9" rx="2" fill="currentColor"/><rect x="13" y="2" width="9" height="9" rx="2" fill="currentColor" opacity="0.6"/><rect x="2" y="13" width="9" height="9" rx="2" fill="currentColor" opacity="0.6"/><rect x="13" y="13" width="9" height="9" rx="2" fill="currentColor" opacity="0.3"/>',
+  image:    '<path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/>',
+};
+
+function icon(name, size = 20, cls = '') {
+  const paths = ICONS[name] || '';
+  const isRect = paths.startsWith('<rect');
+  const attrs  = isRect
+    ? `xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" class="${cls}"`
+    : `xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="${cls}"`;
+  return `<svg ${attrs}>${paths}</svg>`;
+}
+
+/* ══════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════ */
+const S = {
+  dark:           false,
+  section:        'color',
+  btnTab:         'naming',
+  btnState:       'default',
+  btnSize:        'md',
+  btnVariant:     'primary',
+  btnIcon:        true,
+  rankingTab:     'mt',
+  catActive:      '商業',
+  expandedTables: new Set(),
+};
+
+/* ══════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════ */
+const DATA = {
+
+  nav: [
+    { id: 'color',         label: '色彩系統',     icon: 'palette' },
+    { id: 'typography',    label: '字型規範',     icon: 'type'    },
+    { id: 'spacing',       label: '間距 / 圓角',  icon: 'spacing' },
+    { id: 'zindex',        label: 'Z-Index / 動態', icon: 'layers' },
+    { id: 'components',    label: '元件展示',     icon: 'cube'    },
+    { id: 'button-tokens', label: 'Button Tokens', icon: 'button' },
+  ],
+
+  colors: {
+    mtGreen: [
+      { name: '50',    hex: '#edf7f1', token: '--mt-green-50'  },
+      { name: '100',   hex: '#d0ecdc', token: '--mt-green-100' },
+      { name: '200',   hex: '#a3d9bc', token: '--mt-green-200' },
+      { name: '300',   hex: '#6ec29a', token: '--mt-green-300' },
+      { name: '400',   hex: '#3ea97a', token: '--mt-green-400' },
+      { name: '500 ★', hex: '#217446', token: '--mt-green-500' },
+      { name: '600',   hex: '#1a5c37', token: '--mt-green-600' },
+      { name: '700',   hex: '#144529', token: '--mt-green-700' },
+      { name: '800',   hex: '#0d2e1b', token: '--mt-green-800' },
+      { name: '900',   hex: '#07170e', token: '--mt-green-900' },
+    ],
+    brown: [
+      { name: '50',    hex: '#f9f5ef', token: '--8m-brown-50'  },
+      { name: '100',   hex: '#f0e8d9', token: '--8m-brown-100' },
+      { name: '200',   hex: '#e0d0b4', token: '--8m-brown-200' },
+      { name: '300',   hex: '#cab27c', token: '--8m-brown-300' },
+      { name: '400',   hex: '#b89468', token: '--8m-brown-400' },
+      { name: '500 ★', hex: '#a78662', token: '--8m-brown-500' },
+      { name: '600',   hex: '#866952', token: '--8m-brown-600' },
+      { name: '700',   hex: '#644e3c', token: '--8m-brown-700' },
+      { name: '800',   hex: '#433428', token: '--8m-brown-800' },
+      { name: '900',   hex: '#221a14', token: '--8m-brown-900' },
+    ],
+    blue: [
+      { name: '50',    hex: '#eaf6fd', token: '--8m-blue-50'  },
+      { name: '100',   hex: '#c9eaf9', token: '--8m-blue-100' },
+      { name: '200',   hex: '#94d5f3', token: '--8m-blue-200' },
+      { name: '300',   hex: '#5dbfec', token: '--8m-blue-300' },
+      { name: '400 ★', hex: '#3ca9e3', token: '--8m-blue-400' },
+      { name: '500',   hex: '#2490cc', token: '--8m-blue-500' },
+      { name: '600',   hex: '#1b72a3', token: '--8m-blue-600' },
+      { name: '700',   hex: '#13547a', token: '--8m-blue-700' },
+      { name: '800',   hex: '#0c3752', token: '--8m-blue-800' },
+      { name: '900',   hex: '#061b29', token: '--8m-blue-900' },
+    ],
+    neutral: [
+      { name: 'White', hex: '#ffffff', token: '--neutral-0'   },
+      { name: '50',    hex: '#fafafa', token: '--neutral-50'  },
+      { name: '100',   hex: '#f5f5f5', token: '--neutral-100' },
+      { name: '200',   hex: '#eeeeee', token: '--neutral-200' },
+      { name: '300',   hex: '#e8e8e8', token: '--neutral-300' },
+      { name: '400',   hex: '#cccccc', token: '--neutral-400' },
+      { name: '500',   hex: '#afafaf', token: '--neutral-500' },
+      { name: '600',   hex: '#717171', token: '--neutral-600' },
+      { name: '800',   hex: '#2e2e2e', token: '--neutral-800' },
+      { name: '900 ★', hex: '#1d1b1b', token: '--neutral-900' },
+    ],
+    special: [
+      { name: '螢光綠 Neon',      hex: '#73ffb2', token: '--neon-green'    },
+      { name: '深底 Dark BG',     hex: '#0d1a13', token: '--dark-bg-900'   },
+      { name: '深卡片 Surface',   hex: '#1a2820', token: '--dark-surface'  },
+      { name: '經理人藍邊',        hex: '#1e3a5f', token: '--border-navy'   },
+      { name: '警示紅',           hex: '#d4183d', token: '--destructive'   },
+    ],
+  },
+
+  colorGroups: [
+    { label: '經理人主綠 MT Green — Primary Brand',    key: 'mtGreen' },
+    { label: '八分生活棕 8min Brown — Secondary A',    key: 'brown'   },
+    { label: '八分生活藍 8min Blue — Secondary B',     key: 'blue'    },
+    { label: '中性色 Neutral',                        key: 'neutral' },
+    { label: '特殊 / 語義色 Special & Semantic',      key: 'special' },
+  ],
+
+  typography: {
+    families: [
+      { name: 'Noto Sans TC',       role: '主字型 — 繁體中文內文',  sample: '高績效領導管理', italic: false },
+      { name: 'Inter',              role: '拉丁字型 — 英文 / 數字', sample: 'Management 2026', italic: false },
+      { name: 'Fira Sans Condensed',role: '排名數字 — Italic Bold', sample: '01 02 03',        italic: true  },
+    ],
+    scale: [
+      { label: 'Display / H1',    size: '32px', weight: '700', family: 'Noto Sans TC',        sample: '管理者必懂的五大決策框架',       token: '--text-5xl'      },
+      { label: 'H2 Section',      size: '28px', weight: '600', family: 'Noto Sans TC',        sample: '2026 管理趨勢深度報告',          token: '--text-4xl'      },
+      { label: 'H3 Sub-section',  size: '24px', weight: '600', family: 'Noto Sans TC',        sample: '高績效團隊的秘密',               token: '--text-3xl'      },
+      { label: 'H4 Card Title',   size: '20px', weight: '500', family: 'Noto Sans TC',        sample: '職場溝通的關鍵技巧',             token: '--text-xl'       },
+      { label: 'Body Large',      size: '17px', weight: '400', family: 'Noto Sans TC',        sample: '遠距工作時代的領導力：如何帶領看不見的團隊。', token: '--text-md'  },
+      { label: 'Body Base',       size: '16px', weight: '400', family: 'Noto Sans TC',        sample: '數位轉型的第一步從流程自動化開始，逐步建立 AI 應用基礎。', token: '--text-base' },
+      { label: 'Body Small',      size: '13px', weight: '400', family: 'Noto Sans TC',        sample: '閱讀時間 5 分鐘 · 2026年05月12日 · 商業管理', token: '--text-sm' },
+      { label: 'Ranking / Numeric', size: '28px', weight: '700', family: 'Fira Sans Condensed', sample: '01  02  03  04  05', token: 'numeric italic' },
+      { label: 'Category Tag',    size: '13px', weight: '600', family: 'Noto Sans TC',        sample: '商業  領導  管理  成功  學習資源', token: '--text-sm semibold' },
+    ],
+  },
+
+  spacing: [
+    { token: '--space-1',  value: '4px',  label: 'Space 1'                      },
+    { token: '--space-2',  value: '8px',  label: 'Space 2'                      },
+    { token: '--space-3',  value: '12px', label: 'Space 3'                      },
+    { token: '--space-4',  value: '16px', label: 'Space 4 (Section Mobile)'     },
+    { token: '--space-5',  value: '20px', label: 'Space 5'                      },
+    { token: '--space-6',  value: '24px', label: 'Space 6 (Section Tablet)'     },
+    { token: '--space-8',  value: '32px', label: 'Space 8'                      },
+    { token: '--space-10', value: '40px', label: 'Space 10 (Section Desktop)'   },
+    { token: '--space-12', value: '48px', label: 'Space 12'                     },
+    { token: '--space-16', value: '64px', label: 'Space 16'                     },
+    { token: '--space-20', value: '80px', label: 'Space 20'                     },
+    { token: '--space-24', value: '96px', label: 'Space 24'                     },
+  ],
+
+  radius: [
+    { token: '--radius-xs',   value: '2px',    label: 'XS'                    },
+    { token: '--radius-sm',   value: '4px',    label: 'SM (Card, Button)'     },
+    { token: '--radius-md',   value: '6px',    label: 'MD'                    },
+    { token: '--radius-lg',   value: '8px',    label: 'LG (Hero Box)'         },
+    { token: '--radius-xl',   value: '12px',   label: 'XL'                    },
+    { token: '--radius-2xl',  value: '16px',   label: '2XL'                   },
+    { token: '--radius-3xl',  value: '24px',   label: '3XL'                   },
+    { token: '--radius-full', value: '9999px', label: 'Full (Pills, Badges)'  },
+  ],
+
+  shadows: [
+    { token: '--shadow-xs',    value: '0 1px 2px rgba(0,0,0,0.06)',           label: 'XS'             },
+    { token: '--shadow-sm',    value: '0 1px 4px rgba(0,0,0,0.08)',           label: 'SM'             },
+    { token: '--shadow-md',    value: '0 2px 8px rgba(0,0,0,0.10)',           label: 'MD (Card)'      },
+    { token: '--shadow-lg',    value: '0 4px 16px rgba(0,0,0,0.12)',          label: 'LG'             },
+    { token: '--shadow-xl',    value: '0 8px 32px rgba(0,0,0,0.14)',          label: 'XL (Modal)'     },
+    { token: '--shadow-brand', value: '0 4px 16px rgba(33,116,70,0.20)',      label: 'Brand'          },
+    { token: '--shadow-neon',  value: '0 0 20px rgba(115,255,178,0.30)',      label: 'Neon (Dark)'    },
+  ],
+
+  zindex: [
+    { token: '--z-below',    value: '-1',  label: 'Below — 背景層'      },
+    { token: '--z-base',     value: '0',   label: 'Base — 基礎'         },
+    { token: '--z-raised',   value: '10',  label: 'Raised — 浮起元件'   },
+    { token: '--z-dropdown', value: '100', label: 'Dropdown — 下拉選單' },
+    { token: '--z-sticky',   value: '200', label: 'Sticky — 固定導覽'   },
+    { token: '--z-overlay',  value: '300', label: 'Overlay — 遮罩'      },
+    { token: '--z-modal',    value: '400', label: 'Modal — 彈窗'        },
+    { token: '--z-popover',  value: '500', label: 'Popover — 浮動提示'  },
+    { token: '--z-toast',    value: '600', label: 'Toast — 通知訊息'    },
+    { token: '--z-tooltip',  value: '700', label: 'Tooltip — 工具提示'  },
+  ],
+
+  breakpoints: [
+    { label: 'Mobile',  value: '375px',  token: '--bp-mobile',  desc: '行動裝置首要' },
+    { label: 'Tablet',  value: '768px',  token: '--bp-tablet',  desc: '平板斷點'     },
+    { label: 'Desktop', value: '1024px', token: '--bp-desktop', desc: '桌機斷點'     },
+    { label: 'Wide',    value: '1280px', token: '--bp-wide',    desc: '寬螢幕'       },
+    { label: 'Full',    value: '1440px', token: '--bp-full',    desc: '全寬'         },
+  ],
+
+  transitions: [
+    { token: '--transition-fast', value: '150ms ease', label: 'Fast — 按鈕 Hover' },
+    { token: '--transition-base', value: '250ms ease', label: 'Base — 一般過場'   },
+    { token: '--transition-slow', value: '400ms ease', label: 'Slow — 卡片展開'   },
+  ],
+
+  sampleArticles: [
+    { id: 1, rank: 1, title: '5 個提升工作效率的管理秘訣，讓你的團隊事半功倍', meta: '5 min · 商業管理', image: 'https://picsum.photos/seed/mt1/80/60' },
+    { id: 2, rank: 2, title: '遠距工作的陷阱：如何避免團隊溝通斷裂？', meta: '4 min · 領導力', image: 'https://picsum.photos/seed/mt2/80/60' },
+    { id: 3, rank: 3, title: 'AI 時代的決策框架：數據與直覺如何並用', meta: '6 min · 數位轉型', image: 'https://picsum.photos/seed/mt3/80/60' },
+    { id: 4, rank: 4, title: '打造高績效文化的 3 個關鍵行動', meta: '3 min · 組織管理', image: 'https://picsum.photos/seed/mt4/80/60' },
+    { id: 5, rank: 5, title: '從失敗中學習：頂尖 CEO 都在做的反思習慣', meta: '5 min · 成功學習', image: 'https://picsum.photos/seed/mt5/80/60' },
+  ],
+
+  rankingArticles8m: [
+    { id: 1, rank: 1, title: '每天 8 分鐘：用碎片時間打造高效學習系統', meta: '8 min · 學習效率' },
+    { id: 2, rank: 2, title: '晨間例行清單：讓你整天都在最佳狀態', meta: '8 min · 生活習慣' },
+    { id: 3, rank: 3, title: '番茄工作法升級版：為什麼 25 分鐘不夠用？', meta: '8 min · 時間管理' },
+    { id: 4, rank: 4, title: '數位斷捨離：刪掉 App 之後我的生產力提升了 40%', meta: '8 min · 數位生活' },
+    { id: 5, rank: 5, title: '睡前 8 分鐘冥想：改善焦慮和睡眠品質的科學方法', meta: '8 min · 健康管理' },
+  ],
+
+  categories: ['商業', '領導', '管理', '成功', '學習資源', '數位轉型', '職場技能', '創新思維'],
+
+  refTokens: {
+    palette: [
+      { token: '--mt-ref-palette-primary10',  value: '#07170e', resolved: '#07170e', desc: '最深綠，高對比文字' },
+      { token: '--mt-ref-palette-primary20',  value: '#0d2e1b', resolved: '#0d2e1b', desc: '按壓狀態底色' },
+      { token: '--mt-ref-palette-primary30',  value: '#144529', resolved: '#144529', desc: 'Hover 狀態底色' },
+      { token: '--mt-ref-palette-primary40',  value: '#217446', resolved: '#217446', desc: '★ 品牌主色 Brand Primary' },
+      { token: '--mt-ref-palette-primary50',  value: '#3ea97a', resolved: '#3ea97a', desc: '淺一階主綠' },
+      { token: '--mt-ref-palette-primary80',  value: '#a3d9bc', resolved: '#a3d9bc', desc: 'State layer tint' },
+      { token: '--mt-ref-palette-primary90',  value: '#d0ecdc', resolved: '#d0ecdc', desc: 'Container 淺色' },
+      { token: '--mt-ref-palette-primary95',  value: '#edf7f1', resolved: '#edf7f1', desc: 'Surface 最淺' },
+      { token: '--mt-ref-palette-neutral10',  value: '#1d1b1b', resolved: '#1d1b1b', desc: '主文字色' },
+      { token: '--mt-ref-palette-neutral100', value: '#ffffff', resolved: '#ffffff', desc: '純白 On-Primary 文字' },
+      { token: '--mt-ref-palette-neon50',     value: '#73ffb2', resolved: '#73ffb2', desc: '深色主題螢光強調' },
+    ],
+    typeface: [
+      { token: '--mt-ref-typeface-brand', value: "'Noto Sans TC', sans-serif", resolved: 'Noto Sans TC', desc: '品牌主字型 (中文)' },
+      { token: '--mt-ref-typeface-plain', value: "'Inter', sans-serif",        resolved: 'Inter',        desc: '輔助字型 (英數)' },
+    ],
+    spacing: [
+      { token: '--mt-ref-spacing-4',  value: '4px',  resolved: '4px',  desc: '基礎間距 1x' },
+      { token: '--mt-ref-spacing-8',  value: '8px',  resolved: '8px',  desc: '基礎間距 2x' },
+      { token: '--mt-ref-spacing-12', value: '12px', resolved: '12px', desc: '基礎間距 3x' },
+      { token: '--mt-ref-spacing-16', value: '16px', resolved: '16px', desc: 'Icon-Label 間距來源' },
+      { token: '--mt-ref-spacing-24', value: '24px', resolved: '24px', desc: 'Button 水平 padding 來源' },
+      { token: '--mt-ref-spacing-32', value: '32px', resolved: '32px', desc: 'Button LG padding 來源' },
+    ],
+    shape: [
+      { token: '--mt-ref-shape-corner-xs',   value: '2px',    resolved: '2px',    desc: '極小圓角' },
+      { token: '--mt-ref-shape-corner-sm',   value: '4px',    resolved: '4px',    desc: '★ 按鈕預設圓角' },
+      { token: '--mt-ref-shape-corner-md',   value: '8px',    resolved: '8px',    desc: 'Hero box 圓角' },
+      { token: '--mt-ref-shape-corner-full', value: '9999px', resolved: '9999px', desc: 'Pill 形態' },
+    ],
+    elevation: [
+      { token: '--mt-ref-elevation-shadow-brand', value: '0 4px 16px rgba(33,116,70,0.20)', resolved: '0 4px 16px rgba(33,116,70,0.20)', desc: '品牌綠陰影' },
+      { token: '--mt-ref-elevation-shadow-none',  value: 'none', resolved: 'none', desc: '無陰影' },
+    ],
+    state: [
+      { token: '--mt-ref-state-hover-opacity',    value: '0.08', resolved: '0.08', desc: 'Hover state layer 透明度' },
+      { token: '--mt-ref-state-focus-opacity',    value: '0.12', resolved: '0.12', desc: 'Focus state layer 透明度' },
+      { token: '--mt-ref-state-pressed-opacity',  value: '0.16', resolved: '0.16', desc: 'Pressed state layer 透明度' },
+      { token: '--mt-ref-state-disabled-opacity', value: '0.38', resolved: '0.38', desc: 'Disabled 內容透明度' },
+    ],
+  },
+
+  sysTokens: {
+    color: [
+      { token: '--mt-sys-color-primary',              value: 'var(--mt-ref-palette-primary40)',  resolved: '#217446', desc: '主要行動色' },
+      { token: '--mt-sys-color-on-primary',           value: 'var(--mt-ref-palette-neutral100)', resolved: '#ffffff', desc: '主色上的文字/圖示' },
+      { token: '--mt-sys-color-primary-container',    value: 'var(--mt-ref-palette-primary90)',  resolved: '#d0ecdc', desc: '主色容器背景' },
+      { token: '--mt-sys-color-on-primary-container', value: 'var(--mt-ref-palette-primary10)',  resolved: '#07170e', desc: '容器上文字' },
+      { token: '--mt-sys-color-primary-hover',        value: 'var(--mt-ref-palette-primary30)',  resolved: '#144529', desc: 'Hover 狀態背景' },
+      { token: '--mt-sys-color-primary-pressed',      value: 'var(--mt-ref-palette-primary20)',  resolved: '#0d2e1b', desc: 'Pressed 狀態背景' },
+      { token: '--mt-sys-color-surface-tint',         value: 'var(--mt-ref-palette-primary80)',  resolved: '#a3d9bc', desc: 'Surface 染色層' },
+      { token: '--mt-sys-color-outline',              value: 'var(--mt-ref-palette-primary40)',  resolved: '#217446', desc: 'Focus ring 顏色' },
+    ],
+    typescale: [
+      { token: '--mt-sys-typescale-label-lg-font',        value: 'var(--mt-ref-typeface-brand)',    resolved: 'Noto Sans TC', desc: '標籤字型' },
+      { token: '--mt-sys-typescale-label-lg-size',        value: '15px',                            resolved: '15px',         desc: 'MD 按鈕字級' },
+      { token: '--mt-sys-typescale-label-lg-size-sm',     value: '13px',                            resolved: '13px',         desc: 'SM 按鈕字級' },
+      { token: '--mt-sys-typescale-label-lg-size-lg',     value: '17px',                            resolved: '17px',         desc: 'LG 按鈕字級' },
+      { token: '--mt-sys-typescale-label-lg-weight',      value: '500',                             resolved: 'Medium 500',   desc: '字重' },
+      { token: '--mt-sys-typescale-label-lg-tracking',    value: '0.01em',                          resolved: '0.01em',       desc: '字距' },
+      { token: '--mt-sys-typescale-label-lg-line-height', value: '1.4',                             resolved: '1.4',          desc: '行高' },
+    ],
+    shape: [
+      { token: '--mt-sys-shape-corner-button',      value: 'var(--mt-ref-shape-corner-sm)',   resolved: '4px',    desc: '按鈕預設圓角' },
+      { token: '--mt-sys-shape-corner-button-pill', value: 'var(--mt-ref-shape-corner-full)', resolved: '9999px', desc: 'Pill 形按鈕' },
+    ],
+    elevation: [
+      { token: '--mt-sys-elevation-button',      value: 'var(--mt-ref-elevation-shadow-brand)', resolved: '0 4px 16px rgba(33,116,70,0.20)', desc: '按鈕預設陰影' },
+      { token: '--mt-sys-elevation-button-none', value: 'var(--mt-ref-elevation-shadow-none)',  resolved: 'none', desc: '無陰影（flat style）' },
+    ],
+    state: [
+      { token: '--mt-sys-state-hover-opacity',    value: 'var(--mt-ref-state-hover-opacity)',    resolved: '0.08', desc: 'Hover overlay' },
+      { token: '--mt-sys-state-focus-opacity',    value: 'var(--mt-ref-state-focus-opacity)',    resolved: '0.12', desc: 'Focus overlay' },
+      { token: '--mt-sys-state-pressed-opacity',  value: 'var(--mt-ref-state-pressed-opacity)',  resolved: '0.16', desc: 'Pressed overlay' },
+      { token: '--mt-sys-state-disabled-opacity', value: 'var(--mt-ref-state-disabled-opacity)', resolved: '0.38', desc: 'Disabled opacity' },
+    ],
+  },
+
+  compTokens: {
+    container: [
+      { token: '--mt-comp-btn-primary-container-color',     value: 'var(--mt-sys-color-primary)',       resolved: '#217446', desc: '預設底色' },
+      { token: '--mt-comp-btn-primary-container-height',    value: '40px',                              resolved: '40px',    desc: 'MD 尺寸高度' },
+      { token: '--mt-comp-btn-primary-container-shape',     value: 'var(--mt-sys-shape-corner-button)', resolved: '4px',     desc: '圓角半徑' },
+      { token: '--mt-comp-btn-primary-container-elevation', value: 'var(--mt-sys-elevation-button)',    resolved: 'shadow',  desc: '預設陰影' },
+    ],
+    label: [
+      { token: '--mt-comp-btn-primary-label-color',       value: 'var(--mt-sys-color-on-primary)',           resolved: '#ffffff',      desc: '文字顏色' },
+      { token: '--mt-comp-btn-primary-label-font',        value: 'var(--mt-sys-typescale-label-lg-font)',    resolved: 'Noto Sans TC', desc: '字型' },
+      { token: '--mt-comp-btn-primary-label-size',        value: 'var(--mt-sys-typescale-label-lg-size)',    resolved: '15px',         desc: '字級 (MD)' },
+      { token: '--mt-comp-btn-primary-label-weight',      value: 'var(--mt-sys-typescale-label-lg-weight)',  resolved: '500',          desc: '字重' },
+      { token: '--mt-comp-btn-primary-label-tracking',    value: 'var(--mt-sys-typescale-label-lg-tracking)',resolved: '0.01em',       desc: '字距' },
+      { token: '--mt-comp-btn-primary-label-line-height', value: 'var(--mt-sys-typescale-label-lg-line-height)', resolved: '1.4',    desc: '行高' },
+    ],
+    icon: [
+      { token: '--mt-comp-btn-primary-icon-color', value: 'var(--mt-sys-color-on-primary)', resolved: '#ffffff', desc: '圖示顏色' },
+      { token: '--mt-comp-btn-primary-icon-size',  value: '18px', resolved: '18px', desc: '圖示大小' },
+    ],
+    spacing: [
+      { token: '--mt-comp-btn-primary-leading-space',            value: '24px', resolved: '24px', desc: '左側 padding（無 icon）' },
+      { token: '--mt-comp-btn-primary-trailing-space',           value: '24px', resolved: '24px', desc: '右側 padding（無 icon）' },
+      { token: '--mt-comp-btn-primary-with-icon-leading-space',  value: '16px', resolved: '16px', desc: '有 icon 時左側 padding' },
+      { token: '--mt-comp-btn-primary-with-icon-trailing-space', value: '24px', resolved: '24px', desc: '有 icon 時右側 padding' },
+      { token: '--mt-comp-btn-primary-icon-label-space',         value: '8px',  resolved: '8px',  desc: 'Icon 與 Label 間距' },
+    ],
+    size: [
+      { token: '--mt-comp-btn-primary-sm-height',        value: '32px',  resolved: '32px',  desc: 'SM 高度' },
+      { token: '--mt-comp-btn-primary-sm-leading-space', value: '14px',  resolved: '14px',  desc: 'SM 水平 padding' },
+      { token: '--mt-comp-btn-primary-sm-label-size',    value: 'var(--mt-sys-typescale-label-lg-size-sm)', resolved: '13px', desc: 'SM 字級' },
+      { token: '--mt-comp-btn-primary-md-height',        value: '40px',  resolved: '40px',  desc: 'MD 高度（預設）' },
+      { token: '--mt-comp-btn-primary-lg-height',        value: '48px',  resolved: '48px',  desc: 'LG 高度' },
+      { token: '--mt-comp-btn-primary-lg-leading-space', value: '32px',  resolved: '32px',  desc: 'LG 水平 padding' },
+      { token: '--mt-comp-btn-primary-lg-label-size',    value: 'var(--mt-sys-typescale-label-lg-size-lg)', resolved: '17px', desc: 'LG 字級' },
+    ],
+    stateHover: [
+      { token: '--mt-comp-btn-primary-hover-container-color',     value: 'var(--mt-sys-color-primary-hover)',  resolved: '#144529', desc: 'Hover 底色（深一階）' },
+      { token: '--mt-comp-btn-primary-hover-label-color',         value: 'var(--mt-sys-color-on-primary)',     resolved: '#ffffff', desc: 'Hover 文字色' },
+      { token: '--mt-comp-btn-primary-hover-state-layer-opacity', value: 'var(--mt-sys-state-hover-opacity)', resolved: '0.08', desc: 'State layer 透明度' },
+    ],
+    stateFocus: [
+      { token: '--mt-comp-btn-primary-focus-container-color',     value: 'var(--mt-sys-color-primary)',        resolved: '#217446', desc: 'Focus 底色（不變）' },
+      { token: '--mt-comp-btn-primary-focus-state-layer-opacity', value: 'var(--mt-sys-state-focus-opacity)', resolved: '0.12', desc: 'State layer 透明度' },
+      { token: '--mt-comp-btn-primary-focus-outline-color',       value: 'var(--mt-sys-color-outline)',        resolved: '#217446', desc: 'Focus ring 顏色' },
+      { token: '--mt-comp-btn-primary-focus-outline-width',       value: '3px',  resolved: '3px', desc: 'Focus ring 寬度' },
+      { token: '--mt-comp-btn-primary-focus-outline-offset',      value: '2px',  resolved: '2px', desc: 'Focus ring 偏移' },
+    ],
+    statePressed: [
+      { token: '--mt-comp-btn-primary-pressed-container-color',     value: 'var(--mt-sys-color-primary-pressed)', resolved: '#0d2e1b', desc: 'Pressed 底色（最深）' },
+      { token: '--mt-comp-btn-primary-pressed-state-layer-opacity', value: 'var(--mt-sys-state-pressed-opacity)', resolved: '0.16', desc: 'State layer 透明度' },
+    ],
+    stateDisabled: [
+      { token: '--mt-comp-btn-primary-disabled-container-color',  value: 'rgba(0,0,0,0.12)',                   resolved: 'rgba(0,0,0,0.12)', desc: 'Disabled 底色' },
+      { token: '--mt-comp-btn-primary-disabled-label-opacity',    value: 'var(--mt-sys-state-disabled-opacity)', resolved: '0.38', desc: 'Disabled 文字透明度' },
+    ],
+    dark: [
+      { token: '--mt-comp-btn-primary-dark-container-color',       value: '#73ffb2', resolved: '#73ffb2', desc: '深色主題底色（螢光綠）' },
+      { token: '--mt-comp-btn-primary-dark-label-color',           value: '#0d1a13', resolved: '#0d1a13', desc: '深色主題文字（深底）' },
+      { token: '--mt-comp-btn-primary-dark-container-elevation',   value: '0 0 20px rgba(115,255,178,0.30)', resolved: 'neon glow', desc: '深色主題發光陰影' },
+      { token: '--mt-comp-btn-primary-dark-hover-container-color', value: '#52e89a', resolved: '#52e89a', desc: '深色 Hover（螢光綠深一階）' },
+      { token: '--mt-comp-btn-primary-dark-focus-outline-color',   value: '#73ffb2', resolved: '#73ffb2', desc: '深色 Focus ring' },
+    ],
+  },
+
+  outlineTokens: {
+    container: [
+      { token: '--mt-comp-btn-outline-container-color',        value: 'transparent',                     resolved: 'transparent',         desc: '預設底色（透明）' },
+      { token: '--mt-comp-btn-outline-container-bg-hover',     value: 'rgba(33,116,70,0.06)',             resolved: 'rgba(33,116,70,0.06)', desc: 'Hover 時輕染主色' },
+      { token: '--mt-comp-btn-outline-container-border-color', value: 'var(--mt-sys-color-primary)',      resolved: '#217446',              desc: '邊框色 = 主色' },
+      { token: '--mt-comp-btn-outline-container-border-width', value: '1px',                             resolved: '1px',                  desc: '邊框寬度' },
+      { token: '--mt-comp-btn-outline-container-shape',        value: 'var(--mt-sys-shape-corner-button)',resolved: '4px',                  desc: '圓角半徑' },
+      { token: '--mt-comp-btn-outline-container-height',       value: '40px',                            resolved: '40px',                 desc: 'MD 尺寸高度' },
+    ],
+    label: [
+      { token: '--mt-comp-btn-outline-label-color',   value: 'var(--mt-sys-color-primary)',           resolved: '#217446',      desc: '文字色 = 主色' },
+      { token: '--mt-comp-btn-outline-label-font',    value: 'var(--mt-sys-typescale-label-lg-font)', resolved: 'Noto Sans TC', desc: '字型' },
+      { token: '--mt-comp-btn-outline-label-size',    value: '14px',                                  resolved: '14px',         desc: '字級（Figma 規格）' },
+      { token: '--mt-comp-btn-outline-label-weight',  value: '600',                                   resolved: 'Semi Bold 600',desc: '字重' },
+      { token: '--mt-comp-btn-outline-label-tracking',value: 'var(--mt-sys-typescale-label-lg-tracking)', resolved: '0.01em', desc: '字距' },
+    ],
+    spacing: [
+      { token: '--mt-comp-btn-outline-leading-space',  value: '24px', resolved: '24px', desc: '左側 padding' },
+      { token: '--mt-comp-btn-outline-trailing-space', value: '24px', resolved: '24px', desc: '右側 padding' },
+      { token: '--mt-comp-btn-outline-vertical-space', value: '8px',  resolved: '8px',  desc: '上下 padding' },
+    ],
+    stateHover: [
+      { token: '--mt-comp-btn-outline-hover-container-color',     value: 'rgba(33,116,70,0.06)', resolved: 'rgba(33,116,70,0.06)', desc: 'Hover 底色' },
+      { token: '--mt-comp-btn-outline-hover-state-layer-opacity', value: 'var(--mt-sys-state-hover-opacity)', resolved: '0.08', desc: 'State layer 透明度' },
+    ],
+    stateFocus: [
+      { token: '--mt-comp-btn-outline-focus-container-color',  value: 'rgba(33,116,70,0.08)', resolved: 'rgba(33,116,70,0.08)', desc: 'Focus 底色' },
+      { token: '--mt-comp-btn-outline-focus-outline-color',    value: 'var(--mt-sys-color-outline)',           resolved: '#217446', desc: 'Focus ring 顏色' },
+      { token: '--mt-comp-btn-outline-focus-outline-width',    value: '3px', resolved: '3px', desc: 'Focus ring 寬度' },
+    ],
+    statePressed: [
+      { token: '--mt-comp-btn-outline-pressed-container-color', value: 'rgba(33,116,70,0.12)', resolved: 'rgba(33,116,70,0.12)', desc: 'Pressed 底色' },
+      { token: '--mt-comp-btn-outline-pressed-label-color',     value: 'var(--mt-sys-color-primary-hover)',    resolved: '#144529', desc: 'Pressed 文字色（深一階）' },
+    ],
+    stateDisabled: [
+      { token: '--mt-comp-btn-outline-disabled-container-border-color', value: 'rgba(0,0,0,0.12)', resolved: 'rgba(0,0,0,0.12)', desc: 'Disabled 邊框色' },
+      { token: '--mt-comp-btn-outline-disabled-label-opacity',          value: 'var(--mt-sys-state-disabled-opacity)', resolved: '0.38', desc: 'Disabled 透明度' },
+    ],
+  },
+
+  btnStateConfigs: {
+    primary: {
+      default:  { bg: '#217446',           text: '#ffffff',              shadow: '0 4px 16px rgba(33,116,70,0.20)', label: 'Default'    },
+      hover:    { bg: '#144529',           text: '#ffffff',              shadow: '0 4px 16px rgba(33,116,70,0.25)', label: 'Hover'      },
+      focus:    { bg: '#217446',           text: '#ffffff',              shadow: '0 4px 16px rgba(33,116,70,0.20)', outline: '3px solid #217446', label: 'Focus' },
+      pressed:  { bg: '#0d2e1b',           text: '#ffffff',              shadow: 'none', label: 'Pressed'  },
+      disabled: { bg: 'rgba(0,0,0,0.12)', text: 'rgba(29,27,27,0.38)', shadow: 'none', label: 'Disabled' },
+      dark:     { bg: '#73ffb2',           text: '#0d1a13',              shadow: '0 0 20px rgba(115,255,178,0.30)', label: 'Dark Theme' },
+    },
+    outline: {
+      default:  { bg: 'transparent',            text: '#217446',              shadow: 'none', border: '1px solid #217446', label: 'Default'    },
+      hover:    { bg: 'rgba(33,116,70,0.06)',    text: '#217446',              shadow: 'none', border: '1px solid #217446', label: 'Hover'      },
+      focus:    { bg: 'rgba(33,116,70,0.08)',    text: '#217446',              shadow: 'none', border: '1px solid #217446', outline: '3px solid #217446', label: 'Focus' },
+      pressed:  { bg: 'rgba(33,116,70,0.12)',    text: '#144529',              shadow: 'none', border: '1px solid #217446', label: 'Pressed'  },
+      disabled: { bg: 'transparent',            text: 'rgba(29,27,27,0.38)', shadow: 'none', border: '1px solid rgba(0,0,0,0.12)', label: 'Disabled' },
+      dark:     { bg: 'transparent',            text: '#73ffb2',              shadow: 'none', border: '1px solid #73ffb2', label: 'Dark Theme' },
+    },
+  },
+
+  btnTabs: [
+    { id: 'naming',   label: '命名規則' },
+    { id: 'diagram',  label: '繼承架構' },
+    { id: 'ref',      label: 'Ref Tokens' },
+    { id: 'sys',      label: 'Sys Tokens' },
+    { id: 'comp',     label: 'Comp Tokens' },
+    { id: 'preview',  label: '互動預覽' },
+    { id: 'code',     label: 'CSS Code' },
+  ],
+
+};
+
+/* ══════════════════════════════════════════════
+   RENDER
+══════════════════════════════════════════════ */
+function renderApp() {
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <div class="flex min-h-screen">
+      ${Sidebar()}
+      <div class="flex-1 flex flex-col min-w-0">
+        ${MobileTopBar()}
+        ${MobileNav()}
+        <main class="flex-1 px-4 py-6 md:px-8 md:py-8 max-w-4xl">
+          ${SectionContent()}
+        </main>
+      </div>
+    </div>
+  `;
+}
+
+function SectionContent() {
+  switch (S.section) {
+    case 'color':         return SectionColor();
+    case 'typography':    return SectionTypography();
+    case 'spacing':       return SectionSpacing();
+    case 'zindex':        return SectionZIndex();
+    case 'components':    return SectionComponents();
+    case 'button-tokens': return SectionButtonTokens();
+    default:              return SectionColor();
+  }
+}
+
+/* ══════════════════════════════════════════════
+   LAYOUT COMPONENTS
+══════════════════════════════════════════════ */
+function Sidebar() {
+  const items = DATA.nav.map(n => `
+    <div class="nav-item ${S.section === n.id ? 'active' : ''}" data-action="nav" data-val="${n.id}">
+      ${icon(n.icon, 16)}
+      <span>${n.label}</span>
+    </div>`).join('');
+
+  return `
+    <aside class="ds-sidebar fixed top-0 left-0 h-full overflow-y-auto flex flex-col z-[200]">
+      <div class="px-4 pt-6 pb-4">
+        <div class="flex items-center gap-2 mb-6 px-1">
+          ${icon('logo', 22, '')}
+          <span class="ds-logo">Design System</span>
+        </div>
+        <nav class="flex flex-col gap-1">
+          ${items}
+        </nav>
+      </div>
+      <div class="mt-auto px-4 pb-6">
+        <div class="dark-toggle" data-action="dark">
+          <div class="flex items-center gap-2">
+            ${icon(S.dark ? 'moon' : 'sun', 14)}
+            <span>${S.dark ? '深色模式' : '淺色模式'}</span>
+          </div>
+          <div class="toggle-track"><div class="toggle-thumb"></div></div>
+        </div>
+      </div>
+    </aside>
+    <div style="width:240px;flex-shrink:0" class="hidden md:block"></div>`;
+}
+
+function MobileTopBar() {
+  return `
+    <div class="mobile-topbar sticky top-0 z-[200] flex items-center justify-between px-4 py-3 border-b"
+         style="background:var(--sidebar-bg);border-color:var(--border-color)">
+      <div class="flex items-center gap-2">
+        ${icon('logo', 20)}
+        <span class="ds-logo text-[14px]">Design System</span>
+      </div>
+      <button class="p-2 rounded-lg" data-action="dark" style="color:var(--text-muted)">
+        ${icon(S.dark ? 'moon' : 'sun', 18)}
+      </button>
+    </div>`;
+}
+
+function MobileNav() {
+  const items = DATA.nav.map(n => `
+    <div class="mobile-nav-item ${S.section === n.id ? 'active' : ''}" data-action="nav" data-val="${n.id}">
+      ${icon(n.icon, 18)}
+      <span>${n.label}</span>
+    </div>`).join('');
+
+  return `
+    <div class="mobile-nav sticky top-[53px] z-[200] flex overflow-x-auto border-b py-2 px-3 gap-1"
+         style="background:var(--sidebar-bg);border-color:var(--border-color);scrollbar-width:none">
+      ${items}
+    </div>`;
+}
+/* ══════════════════════════════════════════════
+   HELPER: isLightColor
+══════════════════════════════════════════════ */
+function isLightColor(hex) {
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return (r*299 + g*587 + b*114)/1000 > 128;
+}
+
+/* ══════════════════════════════════════════════
+   HELPER: ColorDot
+══════════════════════════════════════════════ */
+function ColorDot(color) {
+  if (!color || (!color.startsWith('#') && !color.startsWith('rgba') && !color.startsWith('rgb'))) return '';
+  return `<span class="inline-block w-3 h-3 rounded-full flex-shrink-0" style="background:${color};border:1px solid rgba(0,0,0,0.1)"></span>`;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: Color
+══════════════════════════════════════════════ */
+function SectionColor() {
+  const groups = DATA.colorGroups.map(g => {
+    const swatches = DATA.colors[g.key].map(s => {
+      const light = isLightColor(s.hex);
+      const textCls = light ? 'text-black/70' : 'text-white/80';
+      return `
+        <div class="swatch-card" data-action="copy-hex" data-val="${s.hex}" title="點擊複製 ${s.hex}">
+          <div class="h-[60px] w-full flex items-end justify-end p-1" style="background-color:${s.hex}">
+            <div class="swatch-overlay rounded-[8px]">
+              <span class="swatch-copy-icon">${icon('copy', 14)}</span>
+            </div>
+          </div>
+          <div class="px-2 py-1.5" style="background:var(--card-bg)">
+            <p class="text-[11px] font-semibold leading-tight" style="color:var(--text-main);font-family:Inter">${s.name}</p>
+            <p class="text-[10px] font-mono mt-0.5 leading-tight" style="color:var(--text-meta)">${s.token}</p>
+          </div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="mb-8">
+        <p class="text-[13px] font-medium mb-3" style="color:var(--text-muted);font-family:Inter">${g.label}</p>
+        <div class="grid gap-2" style="grid-template-columns:repeat(auto-fill,minmax(72px,1fr))">
+          ${swatches}
+        </div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div>
+      <h1 class="ds-section-title mb-1">色彩系統</h1>
+      <p class="text-[14px] mb-8" style="color:var(--text-muted)">點擊色票可複製 HEX 值。色盤永遠以淺色模式顯示以確保準確度。</p>
+      ${groups}
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: Typography
+══════════════════════════════════════════════ */
+function SectionTypography() {
+  const families = DATA.typography.families.map(f => `
+    <div class="p-4 rounded-lg" style="background:var(--card-bg);box-shadow:var(--shadow-sm)">
+      <p class="text-[11px] mb-1" style="color:var(--text-meta);font-family:Inter">${f.role}</p>
+      <p class="text-[11px] font-mono mb-2" style="color:var(--mt-green)">${f.name}</p>
+      <p style="font-family:'${f.name}';font-size:24px;font-weight:${f.italic?700:500};font-style:${f.italic?'italic':'normal'};color:var(--text-main)">${f.sample}</p>
+    </div>`).join('');
+
+  const scale = DATA.typography.scale.map(s => `
+    <div class="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 py-4 border-b" style="border-color:var(--border-color)">
+      <div class="min-w-[150px] flex-shrink-0">
+        <span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono" style="background:var(--mt-green-light);color:var(--mt-green)">${s.token}</span>
+        <p class="text-[11px] mt-1" style="color:var(--text-meta);font-family:Inter">${s.size} · ${s.weight} · ${s.family}</p>
+      </div>
+      <p style="font-size:${s.size};font-weight:${s.weight};font-family:'${s.family}';line-height:1.3;color:var(--text-main)">${s.sample}</p>
+    </div>`).join('');
+
+  return `
+    <div>
+      <h1 class="ds-section-title mb-1">字型規範</h1>
+      <p class="text-[14px] mb-8" style="color:var(--text-muted)">品牌字型系統：中文 Noto Sans TC、英數 Inter、排名數字 Fira Sans Condensed。</p>
+      <div class="grid md:grid-cols-3 gap-4 mb-8 p-5 rounded-xl" style="background:var(--mt-green-light)">
+        ${families}
+      </div>
+      <div>${scale}</div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: Spacing
+══════════════════════════════════════════════ */
+function SectionSpacing() {
+  const spacingRows = DATA.spacing.map(s => {
+    const px = parseInt(s.value);
+    const w  = Math.min(px * 2, 280);
+    return `
+      <div class="flex items-center gap-4 py-2 border-b" style="border-color:var(--border-color)">
+        <div style="width:170px;flex-shrink:0">
+          <span class="text-[10px] font-mono" style="color:var(--mt-green)">${s.token}</span>
+          <p class="text-[11px] mt-0.5" style="color:var(--text-muted);font-family:Inter">${s.label}</p>
+        </div>
+        <div class="spacing-bar flex-shrink-0" style="width:${w}px;opacity:0.85"></div>
+        <span class="text-[12px] font-mono flex-shrink-0" style="color:var(--text-muted)">${s.value}</span>
+      </div>`;
+  }).join('');
+
+  const radiusBoxes = DATA.radius.map(r => `
+    <div class="flex flex-col items-center gap-2 p-4 rounded-lg" style="background:var(--mt-green-light)">
+      <div style="width:56px;height:56px;border-radius:${r.value};background:rgba(33,116,70,0.12);border:2px solid rgba(33,116,70,0.3)"></div>
+      <p class="text-[11px] font-medium text-center" style="color:var(--text-main);font-family:Inter">${r.label}</p>
+      <p class="text-[10px] font-mono" style="color:var(--text-muted)">${r.value}</p>
+    </div>`).join('');
+
+  const shadowCards = DATA.shadows.map(s => `
+    <div class="p-5 rounded-lg flex flex-col gap-3" style="background:var(--card-bg);box-shadow:${s.value}">
+      <p class="text-[12px] font-semibold" style="color:var(--text-main);font-family:Inter">${s.label}</p>
+      <span class="text-[10px] font-mono break-all" style="color:var(--mt-green)">${s.token}</span>
+    </div>`).join('');
+
+  return `
+    <div class="space-y-12">
+      <div>
+        <h1 class="ds-section-title mb-1">間距 / 圓角</h1>
+        <p class="text-[14px] mb-8" style="color:var(--text-muted)">4px 倍數系統，Spacing Scale + Border Radius + Shadow Tokens。</p>
+      </div>
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Spacing Scale</p>
+        <div>${spacingRows}</div>
+      </div>
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Border Radius</p>
+        <div class="flex flex-wrap gap-4">${radiusBoxes}</div>
+      </div>
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Shadow Tokens</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">${shadowCards}</div>
+      </div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: Z-Index
+══════════════════════════════════════════════ */
+function SectionZIndex() {
+  const maxZ = 700;
+  const zRows = DATA.zindex.map((z, i) => {
+    const pct = Math.max((parseInt(z.value) / maxZ) * 100, 2);
+    const opacity = 0.4 + (i / DATA.zindex.length) * 0.6;
+    return `
+      <div class="flex items-center gap-4 py-2 border-b" style="border-color:var(--border-color)">
+        <div style="width:190px;flex-shrink:0">
+          <span class="text-[10px] font-mono" style="color:var(--mt-green)">${z.token}</span>
+          <p class="text-[11px] mt-0.5" style="color:var(--text-muted);font-family:Inter">${z.label}</p>
+        </div>
+        <div class="flex-1 h-[18px] rounded-full overflow-hidden" style="background:var(--mt-green-light)">
+          <div class="h-full rounded-full" style="width:${pct}%;background:var(--mt-green);opacity:${opacity}"></div>
+        </div>
+        <span class="text-[12px] font-mono w-10 text-right flex-shrink-0" style="color:var(--text-muted)">${z.value}</span>
+      </div>`;
+  }).join('');
+
+  const maxBp = 1440;
+  const bpCards = DATA.breakpoints.map(b => {
+    const pct = (parseInt(b.value) / maxBp) * 100;
+    return `
+      <div class="p-4 rounded-lg" style="background:var(--mt-green-light)">
+        <p class="text-[13px] font-semibold mb-1" style="color:var(--text-main);font-family:Inter">${b.label}</p>
+        <p class="text-[11px] mb-3" style="color:var(--text-muted);font-family:Inter">${b.desc}</p>
+        <div class="h-[6px] rounded-full mb-2" style="background:rgba(33,116,70,0.15)">
+          <div class="h-full rounded-full" style="width:${pct}%;background:var(--mt-green)"></div>
+        </div>
+        <span class="text-[12px] font-mono" style="color:var(--mt-green)">${b.value}</span>
+      </div>`;
+  }).join('');
+
+  const transCards = DATA.transitions.map(t => `
+    <div class="p-4 rounded-lg" style="background:var(--mt-green-light)">
+      <p class="text-[11px] font-mono mb-1" style="color:var(--mt-green)">${t.token}</p>
+      <p class="text-[13px] font-semibold mb-1" style="color:var(--text-main);font-family:Inter">${t.value}</p>
+      <p class="text-[11px]" style="color:var(--text-muted);font-family:Inter">${t.label}</p>
+    </div>`).join('');
+
+  return `
+    <div class="space-y-12">
+      <div>
+        <h1 class="ds-section-title mb-1">Z-Index / 動態</h1>
+        <p class="text-[14px] mb-8" style="color:var(--text-muted)">層疊順序、斷點系統與過場動畫 Token。</p>
+      </div>
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Z-Index Stack</p>
+        <div>${zRows}</div>
+      </div>
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Breakpoints & Layout</p>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">${bpCards}</div>
+      </div>
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Transition Tokens</p>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">${transCards}</div>
+      </div>
+    </div>`;
+}
+/* ══════════════════════════════════════════════
+   COMPONENT HELPERS
+══════════════════════════════════════════════ */
+function CompBadge(variant, text) {
+  return `<span class="badge badge-${variant}">${text}</span>`;
+}
+
+function CompSectionHeader(label, title, brand = 'mt') {
+  const accent = brand === 'mt' ? 'var(--mt-green)' : 'var(--8m-brown)';
+  return `
+    <div class="flex items-end justify-between mb-4">
+      <div>
+        ${label ? `<span class="block text-[11px] font-semibold mb-1 tracking-widest uppercase" style="color:${accent};font-family:Inter">${label}</span>` : ''}
+        <div class="flex items-center gap-2">
+          <div class="w-[3px] h-[22px] rounded-full flex-shrink-0" style="background:${accent}"></div>
+          <h3 style="color:var(--text-main);font-size:20px;font-weight:700;line-height:1.3;font-family:'Noto Sans TC',sans-serif">${title}</h3>
+        </div>
+      </div>
+      <button class="flex items-center gap-1 text-[14px] font-medium" style="color:${accent};font-family:'Noto Sans TC',sans-serif">
+        看更多 ${icon('arrow', 15)}
+      </button>
+    </div>`;
+}
+
+function CompArticleRank(rank, title, brand = 'mt') {
+  const rankColor = brand === 'mt' ? 'var(--8m-brown)' : 'var(--8m-brown)';
+  const isTop = rank <= 3;
+  return `
+    <div class="flex items-center gap-3 py-3 border-b cursor-pointer" style="border-color:var(--border-color)">
+      <span class="flex-shrink-0 w-8 text-center" style="font-family:'Fira Sans Condensed',Inter;font-size:${isTop?'26px':'20px'};font-weight:700;font-style:italic;color:${rankColor};line-height:1">${rank}</span>
+      <p class="flex-1 min-w-0" style="font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:400;color:var(--text-main);line-height:1.4">${title}</p>
+    </div>`;
+}
+
+function CompArticleThumb(article) {
+  return `
+    <div class="flex items-center gap-3 py-3 border-b cursor-pointer" style="border-color:var(--border-color)">
+      <div class="flex-shrink-0 w-[72px] h-[54px] rounded overflow-hidden" style="background:#e8e8e8">
+        <img src="${article.image}" alt="" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <p class="flex-1 min-w-0" style="font-family:'Noto Sans TC',sans-serif;font-size:15px;font-weight:400;color:var(--text-main);line-height:1.4">${article.title}</p>
+    </div>`;
+}
+
+function CompCard(article, featured = false) {
+  if (featured) {
+    return `
+      <div class="relative rounded-xl overflow-hidden cursor-pointer" style="min-height:240px;background:#1d1b1b;box-shadow:var(--shadow-md)">
+        <img src="https://picsum.photos/seed/feat1/600/300" alt="" class="absolute inset-0 w-full h-full object-cover opacity-50"/>
+        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(13,26,19,0.95) 0%,rgba(13,26,19,0.4) 60%,transparent 100%)"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-5">
+          <span class="inline-block px-2 py-0.5 rounded text-[11px] font-semibold mb-2" style="background:rgba(115,255,178,0.15);color:#73ffb2">數位轉型</span>
+          <p style="font-size:18px;font-weight:600;color:#fff;line-height:1.4;font-family:'Noto Sans TC',sans-serif">AI 時代的決策框架：數據與直覺如何並用</p>
+          <span class="flex items-center gap-1 mt-2 text-[12px]" style="color:rgba(255,255,255,0.5);font-family:Inter">${icon('eye',10)} 6 分鐘閱讀</span>
+        </div>
+      </div>`;
+  }
+  return `
+    <div class="rounded-lg overflow-hidden cursor-pointer" style="background:var(--card-bg);box-shadow:var(--shadow-sm)">
+      <div class="w-full h-[140px] overflow-hidden" style="background:#e8e8e8">
+        <img src="${article.image}" alt="" class="w-full h-full object-cover" loading="lazy"/>
+      </div>
+      <div class="p-4">
+        <span class="inline-block px-2 py-0.5 rounded-full text-[11px] font-semibold mb-2" style="background:var(--mt-green-light);color:var(--mt-green)">${article.meta.split('·')[1]?.trim() || '商業'}</span>
+        <p class="mb-2" style="font-size:15px;font-weight:600;color:var(--text-main);line-height:1.4;font-family:'Noto Sans TC',sans-serif">${article.title}</p>
+        <span class="text-[11px]" style="color:var(--text-meta);font-family:Inter">${article.meta}</span>
+      </div>
+    </div>`;
+}
+
+function CompSearchBar() {
+  return `
+    <div class="flex items-center gap-2 px-4 py-3 rounded-lg" style="background:var(--card-bg);border:1px solid var(--border-color)">
+      <span style="color:var(--text-muted)">${icon('search', 16)}</span>
+      <span style="font-family:'Noto Sans TC',sans-serif;font-size:15px;color:var(--text-meta)">搜尋文章、主題、作者…</span>
+    </div>`;
+}
+
+function CompDarkFeatureBlock() {
+  return `
+    <div class="dark-feature-block p-6" style="background:#0d1a13">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="text-[11px] font-semibold tracking-widest uppercase" style="color:#73ffb2;font-family:Inter">FEATURED</span>
+      </div>
+      <h3 style="font-size:20px;font-weight:700;color:#fff;line-height:1.3;font-family:'Noto Sans TC',sans-serif;margin-bottom:8px">深色模式元件展示</h3>
+      <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;font-family:'Noto Sans TC',sans-serif;margin-bottom:16px">在深色背景下螢光綠作為強調色，確保可讀性與品牌一致性。</p>
+      <div class="flex items-center gap-6 mb-4">
+        <span class="flex items-center gap-1 text-[12px]" style="color:rgba(255,255,255,0.5);font-family:Inter">${icon('eye',12)} 12,483</span>
+        <span class="flex items-center gap-1 text-[12px]" style="color:rgba(255,255,255,0.5);font-family:Inter">${icon('star',12)} 843</span>
+        <span class="flex items-center gap-1 text-[12px]" style="color:#73ffb2;font-family:Inter">${icon('trending',12)} 熱門</span>
+      </div>
+      <button class="ds-btn ds-btn-neon ds-btn-md">立即閱讀 ${icon('arrow',14)}</button>
+    </div>`;
+}
+
+function CompCategoryNav() {
+  return `
+    <div class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width:none">
+      ${DATA.categories.slice(0,6).map(c => `
+        <div class="cat-nav-item ${c === S.catActive ? 'active' : ''}" data-action="cat" data-val="${c}">${c}</div>
+      `).join('')}
+    </div>`;
+}
+
+function CompRankingTabs() {
+  const articles = S.rankingTab === 'mt' ? DATA.sampleArticles : DATA.rankingArticles8m;
+  const brand = S.rankingTab === 'mt' ? 'mt' : '8m';
+  const mtActive = S.rankingTab === 'mt';
+
+  const rows = articles.map(a => CompArticleRank(a.rank, a.title, brand)).join('');
+
+  return `
+    <div class="rounded-lg overflow-hidden" style="background:var(--card-bg);box-shadow:var(--shadow-sm)">
+      <div class="flex">
+        <button class="flex-1 py-2.5 text-[14px] font-semibold" data-action="ranking-tab" data-val="mt"
+          style="background:${mtActive ? '#217446' : 'var(--mt-green-light)'};color:${mtActive ? '#fff' : 'var(--mt-green)'};font-family:'Noto Sans TC',sans-serif">
+          經理人熱門
+        </button>
+        <button class="flex-1 py-2.5 text-[14px] font-semibold" data-action="ranking-tab" data-val="8m"
+          style="background:${!mtActive ? 'var(--8m-brown)' : '#f0e8d9'};color:${!mtActive ? '#fff' : 'var(--8m-brown)'};font-family:'Noto Sans TC',sans-serif">
+          八分生活熱門
+        </button>
+      </div>
+      <div class="px-4">${rows}</div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: Components
+══════════════════════════════════════════════ */
+function SectionComponents() {
+  const btnVariants = [
+    { cls: 'ds-btn-primary',  label: 'Primary'   },
+    { cls: 'ds-btn-outline',  label: 'Outline'   },
+    { cls: 'ds-btn-ghost',    label: 'Ghost'     },
+    { cls: 'ds-btn-dark',     label: 'Dark'      },
+    { cls: 'ds-btn-brown',    label: '8m Brown'  },
+    { cls: 'ds-btn-blue-8m',  label: '8m Blue'   },
+    { cls: 'ds-btn-neon',     label: 'Neon'      },
+  ];
+  const btnGrid = btnVariants.map(v => `
+    <div class="flex flex-col items-start gap-2">
+      <span class="text-[10px] font-mono" style="color:var(--text-meta)">${v.label}</span>
+      <div class="flex gap-2 flex-wrap">
+        <button class="ds-btn ds-btn-sm ${v.cls}">${v.label}</button>
+        <button class="ds-btn ds-btn-md ${v.cls}">${v.label} ${icon('arrow',13)}</button>
+        <button class="ds-btn ds-btn-lg ${v.cls}">${v.label}</button>
+      </div>
+    </div>`).join('');
+
+  const badges = [
+    { cls: 'mt',       label: '經理人' },
+    { cls: 'brown',    label: '八分生活' },
+    { cls: 'blue',     label: '科技' },
+    { cls: 'dark',     label: '深色模式' },
+    { cls: 'neutral',  label: '中性' },
+    { cls: 'pr',       label: 'PR' },
+  ].map(b => CompBadge(b.cls, b.label)).join(' ');
+
+  const thumbCards = DATA.sampleArticles.slice(0,3).map(a => CompCard(a)).join('');
+  const thumbList  = DATA.sampleArticles.map(a => CompArticleThumb(a)).join('');
+
+  return `
+    <div class="space-y-16">
+      <div>
+        <h1 class="ds-section-title mb-1">元件展示</h1>
+        <p class="text-[14px] mb-0" style="color:var(--text-muted)">所有 UI 元件的視覺規格與變化展示。</p>
+      </div>
+
+      <!-- Badges -->
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Badges / Tags</p>
+        <div class="flex flex-wrap gap-2 p-5 rounded-xl" style="background:var(--mt-green-light)">${badges}</div>
+      </div>
+
+      <!-- Buttons -->
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Buttons — 7 Variants × 3 Sizes</p>
+        <div class="space-y-4 p-5 rounded-xl" style="background:var(--mt-green-light)">${btnGrid}</div>
+      </div>
+
+      <!-- Category Nav -->
+      <div>
+        <p class="text-[13px] font-semibold mb-3" style="color:var(--text-main);font-family:Inter">Category Nav</p>
+        ${CompCategoryNav()}
+      </div>
+
+      <!-- Search Bar -->
+      <div>
+        <p class="text-[13px] font-semibold mb-3" style="color:var(--text-main);font-family:Inter">Search Bar</p>
+        ${CompSearchBar()}
+      </div>
+
+      <!-- Section Headers -->
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Section Header</p>
+        <div class="p-5 rounded-xl space-y-6" style="background:var(--mt-green-light)">
+          ${CompSectionHeader('MANAGEMENT', '管理趨勢週報', 'mt')}
+          ${CompSectionHeader('LIFESTYLE', '八分生活精選', '8m')}
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div>
+        <p class="text-[13px] font-semibold mb-4" style="color:var(--text-main);font-family:Inter">Cards</p>
+        ${CompCard(null, true)}
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">${thumbCards}</div>
+      </div>
+
+      <!-- Article List (thumb) -->
+      <div>
+        <p class="text-[13px] font-semibold mb-3" style="color:var(--text-main);font-family:Inter">Article List — Thumb Variant</p>
+        <div class="p-4 rounded-xl" style="background:var(--card-bg);box-shadow:var(--shadow-sm)">${thumbList}</div>
+      </div>
+
+      <!-- Ranking Tabs -->
+      <div>
+        <p class="text-[13px] font-semibold mb-3" style="color:var(--text-main);font-family:Inter">Ranking Tabs</p>
+        ${CompRankingTabs()}
+      </div>
+
+      <!-- Dark Feature Block -->
+      <div>
+        <p class="text-[13px] font-semibold mb-3" style="color:var(--text-main);font-family:Inter">Dark Feature Block</p>
+        ${CompDarkFeatureBlock()}
+      </div>
+    </div>`;
+}
+/* ══════════════════════════════════════════════
+   BUTTON TOKENS HELPERS
+══════════════════════════════════════════════ */
+function TokenTableHtml(title, rows, tier) {
+  const isOpen = S.expandedTables.has(title);
+  const tierDot = { ref: '#3ea97a', sys: '#3ca9e3', comp: '#a78662' }[tier] || '#999';
+  const tierBg  = { ref: 'rgba(62,169,122,0.05)', sys: 'rgba(60,169,227,0.05)', comp: 'rgba(167,134,98,0.06)' }[tier] || 'transparent';
+
+  const rowsHtml = rows.map(r => {
+    const dot = ColorDot(r.resolved);
+    return `
+      <tr style="border-bottom:1px solid var(--border-color);background:${tierBg}">
+        <td class="py-2.5 pl-3 pr-2 w-5"><span class="inline-block w-1.5 h-1.5 rounded-full" style="background:${tierDot}"></span></td>
+        <td class="py-2.5 pr-4">
+          <div class="flex items-center gap-1.5">
+            <code class="text-[11px] font-mono break-all" style="color:var(--text-main)">${r.token}</code>
+            <button class="copy-badge text-[10px]" data-action="copy-token" data-val="${r.token}">${icon('copy',9)} 複製</button>
+          </div>
+        </td>
+        <td class="py-2.5 pr-4 hidden md:table-cell">
+          <code class="text-[10px] font-mono break-all" style="color:var(--text-muted);max-width:260px;display:block">${r.value}</code>
+        </td>
+        <td class="py-2.5 pr-4 hidden lg:table-cell">
+          <div class="flex items-center gap-1.5">${dot}<code class="text-[10px] font-mono" style="color:var(--text-muted)">${r.resolved}</code></div>
+        </td>
+        <td class="py-2.5 pr-3"><span class="text-[11px]" style="color:var(--text-meta)">${r.desc}</span></td>
+      </tr>`;
+  }).join('');
+
+  return `
+    <div class="mb-4 rounded-lg overflow-hidden" style="border:1px solid var(--border-color)">
+      <button class="w-full flex items-center justify-between px-4 py-3 text-left"
+              style="background:var(--mt-green-light)" data-action="expand-table" data-val="${title}">
+        <span class="text-[12px] font-semibold" style="color:var(--text-main);font-family:Inter">
+          ${title} <span class="ml-2 text-[10px] font-normal" style="color:var(--text-muted)">${rows.length} tokens</span>
+        </span>
+        <span style="color:var(--text-meta);transition:transform 200ms;display:inline-block;transform:${isOpen?'rotate(90deg)':'none'}">
+          ${icon('chevron',14)}
+        </span>
+      </button>
+      ${isOpen ? `
+      <div class="overflow-x-auto">
+        <table class="w-full border-collapse">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border-color)">
+              <th class="w-5"></th>
+              <th class="py-2 text-left text-[10px] font-semibold tracking-widest uppercase pr-4" style="color:var(--text-meta);font-family:Inter">Token Name</th>
+              <th class="py-2 text-left text-[10px] font-semibold tracking-widest uppercase pr-4 hidden md:table-cell" style="color:var(--text-meta);font-family:Inter">Value</th>
+              <th class="py-2 text-left text-[10px] font-semibold tracking-widest uppercase pr-4 hidden lg:table-cell" style="color:var(--text-meta);font-family:Inter">Resolved</th>
+              <th class="py-2 text-left text-[10px] font-semibold tracking-widest uppercase pr-4" style="color:var(--text-meta);font-family:Inter">說明</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      </div>` : ''}
+    </div>`;
+}
+
+function BtnTabNaming() {
+  const rules = [
+    { pattern: '--mt-ref-[category]-[property]', tier: 'Ref', tierCls: 'diagram-ref', desc: '原始值層（Primitive）：存放設計系統最基礎的原始值，不含語意，只有顏色代號、尺寸數字。不直接用於元件。' },
+    { pattern: '--mt-sys-[role]-[property]', tier: 'Sys', tierCls: 'diagram-sys', desc: '語義層（Semantic）：為原始值賦予設計語意，如 primary、on-primary。可跨元件共用，支援 theme 切換。' },
+    { pattern: '--mt-comp-btn-[type]-[part]-[property]', tier: 'Comp', tierCls: 'diagram-comp', desc: '元件層（Component）：元件專屬 token，參照 sys token。規格最精確，最貼近實作。' },
+  ];
+  return rules.map(r => `
+    <div class="flex flex-col sm:flex-row sm:items-start gap-4 p-5 rounded-xl mb-4" style="background:var(--mt-green-light);border:1px solid var(--mt-green-border)">
+      <div class="flex-shrink-0">
+        <span class="diagram-box ${r.tierCls} text-[12px] px-3 py-1.5">${r.tier}</span>
+      </div>
+      <div class="flex-1">
+        <code class="text-[13px] font-mono block mb-2" style="color:var(--text-main)">${r.pattern}</code>
+        <p class="text-[13px]" style="color:var(--text-muted);font-family:'Noto Sans TC',sans-serif">${r.desc}</p>
+      </div>
+    </div>`).join('');
+}
+
+function BtnTabDiagram() {
+  return `
+    <div class="flex flex-col md:flex-row items-center gap-4 justify-center py-8">
+      <div class="diagram-box diagram-ref text-center" style="min-width:160px">
+        <p class="text-[12px] font-bold mb-1">Tier 1 — Ref</p>
+        <p class="text-[11px] font-mono">--mt-ref-palette-*</p>
+        <p class="text-[10px] mt-1">原始色值、尺寸</p>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-box diagram-sys text-center" style="min-width:160px">
+        <p class="text-[12px] font-bold mb-1">Tier 2 — Sys</p>
+        <p class="text-[11px] font-mono">--mt-sys-color-*</p>
+        <p class="text-[10px] mt-1">語意角色賦值</p>
+      </div>
+      <div class="diagram-arrow">→</div>
+      <div class="diagram-box diagram-comp text-center" style="min-width:160px">
+        <p class="text-[12px] font-bold mb-1">Tier 3 — Comp</p>
+        <p class="text-[11px] font-mono">--mt-comp-btn-*</p>
+        <p class="text-[10px] mt-1">元件專屬規格</p>
+      </div>
+    </div>
+    <div class="p-4 rounded-lg text-[13px]" style="background:var(--mt-green-light);color:var(--text-muted);font-family:'Noto Sans TC',sans-serif">
+      繼承鏈：<code class="font-mono text-[12px]" style="color:var(--mt-green)">--mt-comp-btn-primary-container-color</code>
+      → <code class="font-mono text-[12px]" style="color:var(--8m-blue)">var(--mt-sys-color-primary)</code>
+      → <code class="font-mono text-[12px]" style="color:var(--8m-brown)">var(--mt-ref-palette-primary40)</code>
+      → <strong>#217446</strong>
+    </div>`;
+}
+
+function BtnTabTokens(tier) {
+  if (tier === 'ref') {
+    const d = DATA.refTokens;
+    return [
+      TokenTableHtml('Palette', d.palette, 'ref'),
+      TokenTableHtml('Typeface', d.typeface, 'ref'),
+      TokenTableHtml('Spacing', d.spacing, 'ref'),
+      TokenTableHtml('Shape', d.shape, 'ref'),
+      TokenTableHtml('Elevation', d.elevation, 'ref'),
+      TokenTableHtml('State Opacity', d.state, 'ref'),
+    ].join('');
+  }
+  if (tier === 'sys') {
+    const d = DATA.sysTokens;
+    return [
+      TokenTableHtml('Color Roles', d.color, 'sys'),
+      TokenTableHtml('Typescale', d.typescale, 'sys'),
+      TokenTableHtml('Shape', d.shape, 'sys'),
+      TokenTableHtml('Elevation', d.elevation, 'sys'),
+      TokenTableHtml('State', d.state, 'sys'),
+    ].join('');
+  }
+  if (tier === 'comp') {
+    const d = DATA.compTokens;
+    return [
+      TokenTableHtml('Container', d.container, 'comp'),
+      TokenTableHtml('Label', d.label, 'comp'),
+      TokenTableHtml('Icon', d.icon, 'comp'),
+      TokenTableHtml('Spacing', d.spacing, 'comp'),
+      TokenTableHtml('Size Variants', d.size, 'comp'),
+      TokenTableHtml('State — Hover', d.stateHover, 'comp'),
+      TokenTableHtml('State — Focus', d.stateFocus, 'comp'),
+      TokenTableHtml('State — Pressed', d.statePressed, 'comp'),
+      TokenTableHtml('State — Disabled', d.stateDisabled, 'comp'),
+      TokenTableHtml('Dark Theme', d.dark, 'comp'),
+    ].join('') + `
+      <p class="text-[13px] font-semibold mt-8 mb-4" style="color:var(--text-main);font-family:Inter">Outline Button Tokens</p>
+      ${[
+        TokenTableHtml('Outline Container', DATA.outlineTokens.container, 'comp'),
+        TokenTableHtml('Outline Label', DATA.outlineTokens.label, 'comp'),
+        TokenTableHtml('Outline Spacing', DATA.outlineTokens.spacing, 'comp'),
+        TokenTableHtml('Outline State — Hover', DATA.outlineTokens.stateHover, 'comp'),
+        TokenTableHtml('Outline State — Focus', DATA.outlineTokens.stateFocus, 'comp'),
+        TokenTableHtml('Outline State — Pressed', DATA.outlineTokens.statePressed, 'comp'),
+        TokenTableHtml('Outline State — Disabled', DATA.outlineTokens.stateDisabled, 'comp'),
+      ].join('')}`;
+  }
+  return '';
+}
+
+function BtnTabPreview() {
+  const stateConfigs = DATA.btnStateConfigs[S.btnVariant];
+  const s = stateConfigs[S.btnState];
+  const sizeMap = { sm: { h:'32px', px:'14px', fs:'13px', is:14 }, md: { h:'40px', px:'24px', fs:'15px', is:18 }, lg: { h:'48px', px:'32px', fs:'17px', is:20 } };
+  const sz = sizeMap[S.btnSize];
+  const previewBg = S.btnState === 'dark' ? '#0d1a13' : 'var(--mt-green-light)';
+
+  const stateList = ['default','hover','focus','pressed','disabled','dark'];
+  const sizeList  = ['sm','md','lg'];
+
+  const stateCtrl = stateList.map(st => `
+    <button class="preview-control-btn ${S.btnState === st ? 'active' : ''}" data-action="btn-state" data-val="${st}">
+      ${stateConfigs[st].label}
+    </button>`).join('');
+
+  const sizeCtrl = sizeList.map(sz => `
+    <button class="preview-control-btn ${S.btnSize === sz ? 'active' : ''}" data-action="btn-size" data-val="${sz}">
+      ${sz.toUpperCase()}
+    </button>`).join('');
+
+  const btnStyle = S.btnVariant === 'primary'
+    ? `background:${s.bg};color:${s.text};box-shadow:${s.shadow};${s.outline ? `outline:${s.outline};outline-offset:2px;` : ''}`
+    : `background:${s.bg};color:${s.text};border:${s.border || '1px solid var(--mt-green)'};${s.outline ? `outline:${s.outline};outline-offset:2px;` : ''}`;
+
+  const previewBtn = `
+    <button style="display:inline-flex;align-items:center;gap:${S.btnIcon?'8px':'0'};height:${sz.h};padding-left:${S.btnIcon?'16px':sz.px};padding-right:${sz.px};font-size:${sz.fs};font-weight:${S.btnVariant==='outline'?600:500};font-family:'Noto Sans TC',sans-serif;border-radius:4px;letter-spacing:0.01em;cursor:${S.btnState==='disabled'?'not-allowed':'pointer'};${btnStyle}">
+      ${S.btnIcon ? icon('arrow', parseInt(sz.is)) : ''}
+      立即閱讀
+    </button>`;
+
+  const liveTokens = S.btnVariant === 'primary'
+    ? [
+        { label: 'container-color', value: s.bg },
+        { label: 'label-color',     value: s.text },
+        { label: 'elevation',       value: s.shadow === 'none' ? 'none' : 'shadow' },
+        { label: 'shape',           value: '4px' },
+        { label: 'label-size',      value: sz.fs },
+        { label: 'height',          value: sz.h },
+        { label: 'leading-space',   value: S.btnIcon ? '16px' : sz.px },
+      ]
+    : [
+        { label: 'container-color',        value: s.bg },
+        { label: 'container-border-color', value: s.border || '1px solid #217446' },
+        { label: 'label-color',            value: s.text },
+        { label: 'label-size',             value: '14px' },
+        { label: 'label-weight',           value: '600' },
+        { label: 'shape',                  value: '4px' },
+      ];
+
+  const inspector = liveTokens.map((t,i) => `
+    <div class="flex items-center justify-between px-4 py-2.5 ${i<liveTokens.length-1?'border-b':''}" style="border-color:var(--border-color)">
+      <code class="text-[11px] font-mono" style="color:var(--text-muted)">${t.label}</code>
+      <div class="flex items-center gap-2">
+        ${ColorDot(t.value)}
+        <code class="text-[11px] font-mono" style="color:var(--mt-green)">${t.value}</code>
+      </div>
+    </div>`).join('');
+
+  const stateDesc = {
+    'primary-default':  'Primary Default：使用 --mt-sys-color-primary 作為底色，帶品牌綠陰影',
+    'primary-hover':    'Primary Hover：container-color 切換至 primary-hover（#30），疊加 8% white state layer',
+    'primary-focus':    'Primary Focus：底色不變，疊加 12% white state layer + 3px focus ring',
+    'primary-pressed':  'Primary Pressed：切換至最深 primary-pressed（#20），陰影消失',
+    'primary-disabled': 'Primary Disabled：底色改為 rgba(0,0,0,0.12)，文字透明度 38%',
+    'primary-dark':     'Primary Dark Theme：螢光綠 #73ffb2 底色 + 深底文字 + neon glow 陰影',
+    'outline-default':  'Outline Default：透明底 + 1px #217446 邊框 + 主綠文字，Semi Bold 600',
+    'outline-hover':    'Outline Hover：底色染上 6% 主綠 tint，邊框與文字色不變',
+    'outline-focus':    'Outline Focus：底色改為 8% 主綠 tint + 3px focus ring，邊框不變',
+    'outline-pressed':  'Outline Pressed：底色加深為 12% 主綠 tint，文字色深一階 #144529',
+    'outline-disabled': 'Outline Disabled：邊框改為 rgba(0,0,0,0.12)，文字透明度 38%',
+    'outline-dark':     'Outline Dark Theme：透明底 + 螢光綠 #73ffb2 邊框與文字',
+  }[`${S.btnVariant}-${S.btnState}`] || '';
+
+  return `
+    <div class="grid lg:grid-cols-[1fr_300px] gap-4">
+      <div>
+        <div class="flex flex-wrap gap-4 mb-4">
+          <div>
+            <p class="text-[10px] font-semibold tracking-widest uppercase mb-2" style="color:var(--text-meta);font-family:Inter">Variant</p>
+            <div class="preview-control-group">
+              <button class="preview-control-btn ${S.btnVariant==='primary'?'active':''}" data-action="btn-variant" data-val="primary">Primary</button>
+              <button class="preview-control-btn ${S.btnVariant==='outline'?'active':''}" data-action="btn-variant" data-val="outline">Outline</button>
+            </div>
+          </div>
+          <div>
+            <p class="text-[10px] font-semibold tracking-widest uppercase mb-2" style="color:var(--text-meta);font-family:Inter">State</p>
+            <div class="preview-control-group">${stateCtrl}</div>
+          </div>
+          <div>
+            <p class="text-[10px] font-semibold tracking-widest uppercase mb-2" style="color:var(--text-meta);font-family:Inter">Size</p>
+            <div class="preview-control-group">${sizeCtrl}</div>
+          </div>
+          <div>
+            <p class="text-[10px] font-semibold tracking-widest uppercase mb-2" style="color:var(--text-meta);font-family:Inter">Icon</p>
+            <button class="preview-control-btn ${S.btnIcon?'active':''}" data-action="btn-icon" data-val="toggle">
+              ${S.btnIcon ? 'With Icon ✓' : 'No Icon'}
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center justify-center rounded-xl" style="background:${previewBg};min-height:160px;border:1px solid var(--border-color);padding:24px">
+          ${previewBtn}
+        </div>
+        ${stateDesc ? `<div class="mt-3 px-3 py-2.5 rounded-lg" style="background:var(--mt-green-light);border:1px solid var(--mt-green-border)">
+          <p class="text-[12px]" style="color:var(--mt-green);font-family:'Noto Sans TC',sans-serif">${stateDesc}</p>
+        </div>` : ''}
+      </div>
+      <div class="rounded-xl overflow-hidden" style="border:1px solid var(--border-color)">
+        <div class="px-4 py-3" style="background:var(--mt-green-light)">
+          <p class="text-[11px] font-semibold" style="color:var(--text-muted);font-family:Inter">Live Token Inspector</p>
+          <p class="text-[10px] mt-0.5" style="color:var(--text-meta);font-family:Inter">
+            <span style="color:var(--mt-green)">${S.btnVariant === 'primary' ? 'btn-primary' : 'btn-outline'}</span>
+            · ${stateConfigs[S.btnState].label} · <span style="color:var(--mt-green)">${S.btnSize.toUpperCase()}</span>
+          </p>
+        </div>
+        <div style="background:var(--card-bg)">${inspector}</div>
+      </div>
+    </div>`;
+}
+
+function BtnTabCode() {
+  const css = `/* Primary Button — Default State */
+.btn-primary {
+  background:    var(--mt-comp-btn-primary-container-color);
+  color:         var(--mt-comp-btn-primary-label-color);
+  font-size:     var(--mt-comp-btn-primary-label-size);
+  font-weight:   var(--mt-comp-btn-primary-label-weight);
+  font-family:   var(--mt-comp-btn-primary-label-font);
+  letter-spacing:var(--mt-comp-btn-primary-label-tracking);
+  line-height:   var(--mt-comp-btn-primary-label-line-height);
+  height:        var(--mt-comp-btn-primary-container-height);
+  padding-left:  var(--mt-comp-btn-primary-leading-space);
+  padding-right: var(--mt-comp-btn-primary-trailing-space);
+  border-radius: var(--mt-comp-btn-primary-container-shape);
+  box-shadow:    var(--mt-comp-btn-primary-container-elevation);
+  border:        none;
+}
+/* Hover */
+.btn-primary:hover {
+  background: var(--mt-comp-btn-primary-hover-container-color);
+}
+/* Focus */
+.btn-primary:focus-visible {
+  outline:        var(--mt-comp-btn-primary-focus-outline-width) solid
+                  var(--mt-comp-btn-primary-focus-outline-color);
+  outline-offset: var(--mt-comp-btn-primary-focus-outline-offset);
+}
+/* Pressed */
+.btn-primary:active {
+  background:  var(--mt-comp-btn-primary-pressed-container-color);
+  box-shadow:  none;
+}
+/* Disabled */
+.btn-primary:disabled {
+  background:  var(--mt-comp-btn-primary-disabled-container-color);
+  color:       var(--mt-comp-btn-primary-disabled-label-color);
+  opacity:     var(--mt-comp-btn-primary-disabled-label-opacity);
+  box-shadow:  none;
+  cursor:      not-allowed;
+}`;
+
+  return `
+    <div class="code-block relative">
+      <button class="code-copy-btn" data-action="copy-css" data-val="${encodeURIComponent(css)}">
+        ${icon('copy',12)} 複製
+      </button>
+      <pre class="m-0 overflow-x-auto"><code>${css
+        .replace(/\/\*.*?\*\//g, m => `<span class="code-comment">${m}</span>`)
+        .replace(/([\w-]+)(?=:)/g, '<span class="code-prop">$1</span>')
+        .replace(/(?<=:\s*)([\w#(),.% \/]+)/g, '<span class="code-value">$1</span>')
+      }</code></pre>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION: Button Tokens
+══════════════════════════════════════════════ */
+function SectionButtonTokens() {
+  const tabs = DATA.btnTabs;
+  const tabBar = tabs.map(t => `
+    <button class="btn-tab ${S.btnTab === t.id ? 'active' : ''}" data-action="btn-tab" data-val="${t.id}">
+      ${t.label}
+    </button>`).join('');
+
+  let content = '';
+  switch (S.btnTab) {
+    case 'naming':  content = BtnTabNaming();        break;
+    case 'diagram': content = BtnTabDiagram();       break;
+    case 'ref':     content = BtnTabTokens('ref');   break;
+    case 'sys':     content = BtnTabTokens('sys');   break;
+    case 'comp':    content = BtnTabTokens('comp');  break;
+    case 'preview': content = BtnTabPreview();       break;
+    case 'code':    content = BtnTabCode();          break;
+  }
+
+  return `
+    <div>
+      <h1 class="ds-section-title mb-1">Primary Button Tokens</h1>
+      <p class="text-[14px] mb-6" style="color:var(--text-muted)">三層 Token 繼承架構：Ref → Sys → Comp，完整規格與互動預覽。</p>
+      <div class="flex gap-1 overflow-x-auto pb-2 mb-6 flex-wrap">${tabBar}</div>
+      <div>${content}</div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════
+   EVENTS
+══════════════════════════════════════════════ */
+function handleClick(e) {
+  const t = e.target.closest('[data-action]');
+  if (!t) return;
+  const action = t.dataset.action;
+  const val    = t.dataset.val;
+
+  if (action === 'nav')       { S.section = val; renderApp(); }
+  if (action === 'dark')      { S.dark = !S.dark; document.documentElement.toggleAttribute('data-dark', S.dark); renderApp(); }
+  if (action === 'btn-tab')   { S.btnTab = val; renderApp(); }
+  if (action === 'btn-state') { S.btnState = val; renderApp(); }
+  if (action === 'btn-size')  { S.btnSize = val; renderApp(); }
+  if (action === 'btn-variant'){S.btnVariant = val; renderApp(); }
+  if (action === 'btn-icon')  { S.btnIcon = !S.btnIcon; renderApp(); }
+  if (action === 'cat')       { S.catActive = val; renderApp(); }
+  if (action === 'ranking-tab'){ S.rankingTab = val; renderApp(); }
+  if (action === 'expand-table'){
+    if (S.expandedTables.has(val)) S.expandedTables.delete(val);
+    else S.expandedTables.add(val);
+    renderApp();
+  }
+  if (action === 'copy-hex')  { handleCopy(t, val); }
+  if (action === 'copy-token'){ handleCopy(t, val); }
+  if (action === 'copy-css')  { handleCopy(t, decodeURIComponent(val)); }
+}
+
+function handleCopy(el, text) {
+  navigator.clipboard.writeText(text).catch(() => {});
+  const orig = el.innerHTML;
+  el.innerHTML = icon('check', 12) + ' 已複製';
+  el.classList.add('copied');
+  setTimeout(() => { el.innerHTML = orig; el.classList.remove('copied'); }, 1500);
+}
+
+function init() {
+  document.addEventListener('click', handleClick);
+  renderApp();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
